@@ -1,0 +1,28 @@
+{
+  "name": "nexaroute-logistics",
+  "version": "2.5.0",
+  "description": "High-performance marketing website and tech-enabled B2B express freight platform for Indian MSMEs and enterprises.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "node -e \"console.log('Testing server syntax...'); require('./server.js'); setTimeout(() => process.exit(0), 500);\""
+  },
+  "keywords": [
+    "logistics",
+    "freight",
+    "supply-chain",
+    "b2b",
+    "india",
+    "ptl",
+    "ftl",
+    "warehousing",
+    "dashboard",
+    "tracking"
+  ],
+  "author": "NexaRoute Logistics Private Limited",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>B2B Logistics Services & Rate Calculator | NexaRoute Logistics</title>
+  <meta name="description" content="Explore NexaRoute's comprehensive B2B freight solutions: Express PTL, Full Truckload (FTL), 3PL Warehousing, Cold Chain, and instant transit cost calculator.">
+  <meta name="keywords" content="Logistics services India, PTL cargo, FTL trucking, cold chain transport, warehousing 3PL, freight rate calculator">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.nexaroute.example.com/services.html">
+  <meta property="og:title" content="B2B Logistics Services | NexaRoute Logistics">
+  <meta property="og:description" content="End-to-end freight, container transport, warehousing, and live rate estimation across India.">
+  <meta property="og:image" content="assets/images/services-hero.jpg">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#fff7ed',
+              100: '#ffedd5',
+              500: '#f97316',
+              600: '#ea580c',
+              700: '#c2410c',
+            },
+            navy: {
+              800: '#1e293b',
+              900: '#0f172a',
+              950: '#020617',
+            }
+          },
+          fontFamily: {
+            heading: ['Poppins', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts & Custom CSS -->
+  <link rel="stylesheet" href="css/custom.css">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen antialiased selection:bg-orange-500 selection:text-white transition-colors duration-200">
+
+  <!-- ==================== HEADER / NAVBAR ==================== -->
+  <header id="main-navbar" class="glass-nav fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-orange-500 rounded-lg p-1">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-orange-600 to-amber-500 flex items-center justify-center text-white shadow-md shadow-orange-500/20 group-hover:scale-105 transition-transform">
+            <i data-lucide="truck" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <span class="text-xl font-bold tracking-tight text-white font-heading">Nexa<span class="text-orange-500">Route</span></span>
+            <span class="block text-[10px] tracking-wider uppercase text-slate-400 font-semibold">Logistics India</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden md:flex items-center space-x-1" aria-label="Main Navigation">
+          <a href="index.html" data-nav-link class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors">Home</a>
+          <a href="about.html" data-nav-link class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors">About Us</a>
+          <a href="services.html" data-nav-link class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-200 hover:text-white hover:bg-slate-800/60 transition-colors">Services</a>
+          <a href="track.html" data-nav-link class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors">Tracking</a>
+          <a href="contact.html" data-nav-link class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors">Contact</a>
+        </nav>
+
+        <!-- Header Actions: Theme Toggle, Shipper Portal & Quote CTA -->
+        <div class="hidden lg:flex items-center gap-3">
+          <button class="theme-toggle-btn p-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 transition-colors" title="Toggle Dark/Light Mode">
+            <i data-lucide="moon" class="w-5 h-5"></i>
+          </button>
+          <a href="portal.html" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-lg text-xs font-semibold transition-colors flex items-center gap-1.5">
+            <i data-lucide="layout-dashboard" class="w-4 h-4 text-orange-400"></i>
+            <span>Shipper Portal</span>
+          </a>
+          <button data-open-quote-modal class="inline-flex items-center gap-1.5 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white text-xs font-semibold px-3.5 py-2 rounded-lg shadow-sm hover:shadow-orange-500/20 transition-all">
+            <span>Get a Quote</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+
+        <!-- Mobile Buttons (Theme Toggle + Hamburger) -->
+        <div class="flex items-center gap-2 md:hidden">
+          <button class="theme-toggle-btn p-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800" title="Toggle Dark/Light Mode">
+            <i data-lucide="moon" class="w-5 h-5"></i>
+          </button>
+          <button id="mobile-menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-drawer" aria-label="Open mobile navigation menu" class="p-2.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-orange-500">
+            <i data-lucide="menu" class="w-6 h-6"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Off-Canvas Drawer -->
+  <div id="drawer-backdrop" class="fixed inset-0 bg-slate-950/70 z-50 hidden backdrop-blur-sm transition-opacity" aria-hidden="true"></div>
+  <aside id="mobile-drawer" class="fixed top-0 right-0 bottom-0 w-80 max-w-[85vw] bg-slate-900 border-l border-slate-800 z-50 p-6 flex flex-col justify-between transform translate-x-full invisible mobile-drawer" aria-label="Mobile Navigation Drawer">
+    <div>
+      <div class="flex items-center justify-between pb-6 border-b border-slate-800">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-orange-500 flex items-center justify-center text-white">
+            <i data-lucide="truck" class="w-5 h-5"></i>
+          </div>
+          <span class="text-lg font-bold text-white">NexaRoute</span>
+        </div>
+        <button id="mobile-drawer-close" aria-label="Close navigation menu" class="p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800">
+          <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+      </div>
+
+      <nav class="mt-6 space-y-2" aria-label="Mobile Menu Links">
+        <a href="index.html" data-nav-link class="block px-4 py-3 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-orange-400 transition-colors">Home</a>
+        <a href="about.html" data-nav-link class="block px-4 py-3 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-orange-400 transition-colors">About Us</a>
+        <a href="services.html" data-nav-link class="block px-4 py-3 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-orange-400 transition-colors">Services</a>
+        <a href="track.html" data-nav-link class="block px-4 py-3 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-orange-400 transition-colors">Live Tracking</a>
+        <a href="portal.html" class="block px-4 py-3 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-orange-400 transition-colors">Shipper Portal</a>
+        <a href="contact.html" data-nav-link class="block px-4 py-3 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-orange-400 transition-colors">Contact</a>
+      </nav>
+    </div>
+
+    <div class="pt-6 border-t border-slate-800 space-y-4">
+      <a href="tel:18002669900" class="flex items-center gap-3 text-slate-300 text-sm py-2">
+        <i data-lucide="phone" class="w-5 h-5 text-orange-500"></i>
+        <span>1800-266-9900 (Toll Free)</span>
+      </a>
+      <button data-open-quote-modal class="w-full py-3 bg-orange-500 hover:bg-orange-600 text-white text-sm font-semibold rounded-lg flex items-center justify-center gap-2 shadow-lg shadow-orange-500/20">
+        <span>Request Instant Quote</span>
+        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <main class="flex-grow pt-20">
+
+    <!-- PAGE HERO -->
+    <section class="bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 text-white py-16 sm:py-20 relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 text-[11px] sm:text-xs font-semibold uppercase tracking-normal sm:tracking-wider mb-4">
+          Integrated B2B Freight Portfolio
+        </div>
+        <h1 class="text-2xl sm:text-4xl md:text-5xl font-extrabold font-heading tracking-tight max-w-4xl mx-auto">
+          Tailored Freight &amp; Warehousing For <span class="gradient-text-accent">Every Stage of Growth</span>.
+        </h1>
+        <p class="text-sm sm:text-lg text-slate-300 max-w-2xl mx-auto mt-4 leading-relaxed font-normal">
+          From single-pallet express dispatches to pan-India dedicated container lines and ambient cold storage, choose the right service level for your enterprise.
+        </p>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE RATE & TRANSIT ESTIMATOR WIDGET -->
+    <section id="rate-calculator" class="py-12 bg-slate-900 text-white border-b border-slate-800">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="bg-slate-800/90 border border-slate-700 rounded-3xl p-6 sm:p-8 shadow-2xl relative">
+          <div class="max-w-2xl mx-auto text-center mb-8">
+            <span class="text-xs font-bold uppercase tracking-wider text-orange-400 bg-orange-500/10 px-3 py-1 rounded-full border border-orange-500/30">Instant Estimation Tool</span>
+            <h2 class="text-2xl sm:text-3xl font-bold font-heading text-white mt-3">Calculate B2B Freight Cost &amp; Transit Time</h2>
+            <p class="text-xs sm:text-sm text-slate-300 mt-2">Get an immediate indicative quote between major commercial freight corridors in India.</p>
+          </div>
+
+          <form id="rate-calculator-form" class="space-y-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              
+              <div>
+                <label for="calc-origin" class="block text-xs font-semibold text-slate-300 mb-2">Origin Hub</label>
+                <select id="calc-origin" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-orange-500">
+                  <option value="DEL">Delhi NCR (Cyber City / Okhla)</option>
+                  <option value="BOM" selected>Mumbai (Bhiwandi Hub)</option>
+                  <option value="BLR">Bengaluru (Peenya Hub)</option>
+                  <option value="CCU">Kolkata (Dankuni Hub)</option>
+                  <option value="AMD">Ahmedabad (Changodar Hub)</option>
+                  <option value="MAA">Chennai (Sriperumbudur)</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="calc-destination" class="block text-xs font-semibold text-slate-300 mb-2">Destination Hub</label>
+                <select id="calc-destination" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-orange-500">
+                  <option value="DEL" selected>Delhi NCR (Cyber City / Okhla)</option>
+                  <option value="BOM">Mumbai (Bhiwandi Hub)</option>
+                  <option value="BLR">Bengaluru (Peenya Hub)</option>
+                  <option value="CCU">Kolkata (Dankuni Hub)</option>
+                  <option value="AMD">Ahmedabad (Changodar Hub)</option>
+                  <option value="MAA">Chennai (Sriperumbudur)</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="calc-weight" class="block text-xs font-semibold text-slate-300 mb-2">Estimated Cargo Weight (kg)</label>
+                <input type="number" id="calc-weight" min="10" max="25000" value="120" placeholder="e.g. 150" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-orange-500" required>
+              </div>
+
+            </div>
+
+            <!-- Service Speed Tier -->
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-2 border-t border-slate-700/60">
+              <div class="flex items-center gap-6">
+                <span class="text-xs font-semibold text-slate-300">Speed Tier:</span>
+                <label class="inline-flex items-center gap-2 text-xs text-slate-200 cursor-pointer">
+                  <input type="radio" name="calc-speed" value="express" checked class="text-orange-500 focus:ring-orange-500 bg-slate-900 border-slate-700">
+                  <span>Express Line-Haul (Fastest)</span>
+                </label>
+                <label class="inline-flex items-center gap-2 text-xs text-slate-200 cursor-pointer">
+                  <input type="radio" name="calc-speed" value="standard" class="text-orange-500 focus:ring-orange-500 bg-slate-900 border-slate-700">
+                  <span>Standard Surface (Economy)</span>
+                </label>
+              </div>
+
+              <button type="submit" class="w-full sm:w-auto px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 shadow-lg shadow-orange-500/20">
+                <i data-lucide="calculator" class="w-4 h-4"></i>
+                <span>Calculate Rate &amp; ETA</span>
+              </button>
+            </div>
+          </form>
+
+          <!-- Result Display Card -->
+          <div id="rate-result-card" class="mt-6 hidden bg-slate-900/90 border border-orange-500/40 rounded-2xl p-6 text-center animate-fade-in">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 items-center">
+              <div>
+                <span class="text-xs text-slate-400 block uppercase font-semibold">Estimated Freight Cost</span>
+                <span id="est-price-display" class="text-3xl font-extrabold text-orange-400 font-heading">₹2,840</span>
+                <span class="text-[11px] text-slate-500 block mt-1">+ applicable GST (18%)</span>
+              </div>
+              <div class="border-y sm:border-y-0 sm:border-x border-slate-800 py-4 sm:py-0">
+                <span class="text-xs text-slate-400 block uppercase font-semibold">Guaranteed SLA Transit</span>
+                <span id="est-time-display" class="text-xl font-bold text-white font-heading">48 - 60 Hours</span>
+                <span id="est-distance-display" class="text-[11px] text-slate-400 block mt-1">1,420 km road transit</span>
+              </div>
+              <div>
+                <a href="contact.html" class="inline-flex items-center gap-2 px-5 py-2.5 bg-orange-500 hover:bg-orange-600 text-white rounded-xl text-xs font-bold transition-colors">
+                  <span>Book Consignment Now</span>
+                  <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 6 DETAILED SERVICES CARDS SECTION -->
+    <section class="py-16 sm:py-24 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+          <span class="text-xs font-bold uppercase tracking-wider text-orange-600 bg-orange-50 px-3 py-1 rounded-full border border-orange-200">Catalog of Offerings</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 font-heading">
+            Six Specialized Services Built for Indian Commerce
+          </h2>
+          <p class="text-base text-slate-600">
+            Engineered to handle varied cargo types, SLAs, temperature tolerances, and multi-hub distribution requirements.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          
+          <!-- Service 1 -->
+          <div class="bg-slate-50 border border-slate-200/80 rounded-2xl p-7 flex flex-col justify-between card-hover">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center mb-5">
+                <i data-lucide="package" class="w-6 h-6"></i>
+              </div>
+              <h3 class="text-xl font-bold text-slate-900 font-heading mb-3">1. Express Part Truckload (PTL)</h3>
+              <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                Ship cargo between 50 kg and 3,000 kg without paying for an entire vehicle. Scheduled departures leave daily on fixed line-haul schedules.
+              </p>
+              <div class="space-y-2 mb-6 text-xs text-slate-600">
+                <div class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> <strong>SLA:</strong> 24 to 72 hrs intercity transit</div>
+                <div class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> <strong>Best For:</strong> Textiles, electronics, auto spare parts</div>
+                <div class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> <strong>Bonus:</strong> Doorstep pickup and digital ePOD</div>
+              </div>
+            </div>
+            <button data-open-quote-modal class="w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-semibold transition-colors flex items-center justify-center gap-2">
+              <span>Book PTL Cargo</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+
+          <!-- Service 2 -->
+          <div class="bg-slate-50 border border-slate-200/80 rounded-2xl p-7 flex flex-col justify-between card-hover">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center mb-5">
+                <i data-lucide="container" class="w-6 h-6"></i>
+              </div>
+              <h3 class="text-xl font-bold text-slate-900 font-heading mb-3">2. Full Truckload (FTL) Pan-India</h3>
+              <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                Dedicated containerized vehicles exclusively for your consignment. Point-to-point transit eliminates sorting dock risks and handling damages.
+              </p>
+              <div class="space-y-2 mb-6 text-xs text-slate-600">
+                <div class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> <strong>Fleet:</strong> 14ft, 20ft, 32ft MXL containers</div>
+                <div class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> <strong>Security:</strong> Smart GPS electronic lock &amp; geo-fencing</div>
+                <div class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> <strong>Best For:</strong> Bulk industrial, FMCG, machinery</div>
+              </div>
+            </div>
+            <button data-open-quote-modal class="w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-semibold transition-colors flex items-center justify-center gap-2">
+              <span>Book Dedicated FTL</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+
+          <!-- Service 3 -->
+          <div class="bg-slate-50 border border-slate-200/80 rounded-2xl p-7 flex flex-col justify-between card-hover">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center mb-5">
+                <i data-lucide="warehouse" class="w-6 h-6"></i>
+              </div>
+              <h3 class="text-xl font-bold text-slate-900 font-heading mb-3">3. Warehousing &amp; 3PL Fulfillment</h3>
+              <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                Store inventory closer to your regional buyers in our Grade-A fulfillment hubs across Delhi NCR, Mumbai, Bengaluru, and Kolkata.
+              </p>
+              <div class="space-y-2 mb-6 text-xs text-slate-600">
+                <div class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> <strong>Features:</strong> WMS integration, pallet storage, barcoding</div>
+                <div class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> <strong>Operations:</strong> Pick, pack, kit, and dispatch within 4 hours</div>
+                <div class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> <strong>Best For:</strong> D2C brands, omnichannel distributors</div>
+              </div>
+            </div>
+            <button data-open-quote-modal class="w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-semibold transition-colors flex items-center justify-center gap-2">
+              <span>Explore 3PL Space</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+
+          <!-- Service 4 -->
+          <div class="bg-slate-50 border border-slate-200/80 rounded-2xl p-7 flex flex-col justify-between card-hover">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-cyan-100 text-cyan-600 flex items-center justify-center mb-5">
+                <i data-lucide="snowflake" class="w-6 h-6"></i>
+              </div>
+              <h3 class="text-xl font-bold text-slate-900 font-heading mb-3">4. Cold Chain &amp; Pharma Freight</h3>
+              <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                Refrigerated containers equipped with IoT temperature telemetry and live alerts for sensitive pharmaceuticals and perishable foodstuffs.
+              </p>
+              <div class="space-y-2 mb-6 text-xs text-slate-600">
+                <div class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> <strong>Temp Ranges:</strong> Chilled (2°C - 8°C) &amp; Frozen (-18°C)</div>
+                <div class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> <strong>Assurance:</strong> Continuous data logger reports on delivery</div>
+                <div class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> <strong>Best For:</strong> Vaccines, biologics, dairy, frozen goods</div>
+              </div>
+            </div>
+            <button data-open-quote-modal class="w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-semibold transition-colors flex items-center justify-center gap-2">
+              <span>Book Cold Chain</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+
+          <!-- Service 5 -->
+          <div class="bg-slate-50 border border-slate-200/80 rounded-2xl p-7 flex flex-col justify-between card-hover">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center mb-5">
+                <i data-lucide="zap" class="w-6 h-6"></i>
+              </div>
+              <h3 class="text-xl font-bold text-slate-900 font-heading mb-3">5. Hyperlocal Urban B2B Dispatch</h3>
+              <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                Same-day and 24-hour intra-city freight transfer connecting factory gates directly to wholesale dealer shops and retail points.
+              </p>
+              <div class="space-y-2 mb-6 text-xs text-slate-600">
+                <div class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> <strong>Speed:</strong> 4-6 hour guaranteed urban transit windows</div>
+                <div class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> <strong>Green Fleet:</strong> 35% electric commercial vehicles (EV)</div>
+                <div class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> <strong>Best For:</strong> Kirana store replenishment, spare parts</div>
+              </div>
+            </div>
+            <button data-open-quote-modal class="w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-semibold transition-colors flex items-center justify-center gap-2">
+              <span>Book Urban Freight</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+
+          <!-- Service 6 -->
+          <div class="bg-slate-50 border border-slate-200/80 rounded-2xl p-7 flex flex-col justify-between card-hover">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center mb-5">
+                <i data-lucide="rotate-ccw" class="w-6 h-6"></i>
+              </div>
+              <h3 class="text-xl font-bold text-slate-900 font-heading mb-3">6. Reverse Logistics &amp; Returns</h3>
+              <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                Structured B2B reverse pickups for defective inventory, warranty refurbishments, and end-of-season retail inventory recalls.
+              </p>
+              <div class="space-y-2 mb-6 text-xs text-slate-600">
+                <div class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> <strong>Quality Check:</strong> On-spot barcode verification and QC tag</div>
+                <div class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> <strong>Reconciliation:</strong> Automated credit note matching</div>
+                <div class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> <strong>Best For:</strong> Consumer durables, fashion recalls</div>
+              </div>
+            </div>
+            <button data-open-quote-modal class="w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-semibold transition-colors flex items-center justify-center gap-2">
+              <span>Setup Reverse Logistics</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FLEET SPECIFICATIONS & INFRASTRUCTURE -->
+    <section class="py-16 sm:py-24 bg-slate-900 text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div class="lg:col-span-6 space-y-6">
+            <span class="text-xs font-bold uppercase tracking-wider text-orange-400 bg-orange-500/10 px-3 py-1 rounded-full border border-orange-500/30">Fleet Capabilities</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold font-heading">
+              A Modern, Calibrated Fleet Built for Indian Highways
+            </h2>
+            <p class="text-slate-300 text-sm leading-relaxed">
+              Every vehicle in the NexaRoute network is 100% containerized, eliminating tarpaulin tearing, water leakage during monsoons, and highway pilferage.
+            </p>
+
+            <div class="space-y-4">
+              <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
+                <h4 class="text-sm font-bold text-white flex items-center justify-between">
+                  <span>32ft Multi-Axle Container (MXL)</span>
+                  <span class="text-orange-400 text-xs">Payload: Up to 18 Tons</span>
+                </h4>
+                <p class="text-xs text-slate-400 mt-1">Ideal for high-volume consumer goods, textiles, and cross-corridor long-distance freight.</p>
+              </div>
+
+              <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
+                <h4 class="text-sm font-bold text-white flex items-center justify-between">
+                  <span>24ft Single Axle Container</span>
+                  <span class="text-orange-400 text-xs">Payload: Up to 9 Tons</span>
+                </h4>
+                <p class="text-xs text-slate-400 mt-1">Optimized for regional arterial routes and industrial spare parts delivery.</p>
+              </div>
+
+              <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700">
+                <h4 class="text-sm font-bold text-white flex items-center justify-between">
+                  <span>14ft City Feeder &amp; Electric Vans</span>
+                  <span class="text-orange-400 text-xs">Payload: Up to 3.5 Tons</span>
+                </h4>
+                <p class="text-xs text-slate-400 mt-1">Zero-emission intra-city last-mile distribution navigating dense urban trade zones.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-6">
+            <div class="bg-slate-800 border border-slate-700 rounded-3xl p-8 relative overflow-hidden shadow-2xl">
+              <div class="img-placeholder-tag">Placeholder: High-Tech Container Fleet Visual</div>
+              <h3 class="text-xl font-bold font-heading text-white mb-4">Safety &amp; Compliance Standards</h3>
+              <ul class="space-y-4 text-xs text-slate-300">
+                <li class="flex items-start gap-3">
+                  <div class="w-6 h-6 rounded-md bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
+                    <i data-lucide="check" class="w-4 h-4"></i>
+                  </div>
+                  <div>
+                    <strong class="text-white">AIS-140 GPS Compliance:</strong> Real-time satellite telematics providing accurate breadcrumbs every 10 seconds.
+                  </div>
+                </li>
+                <li class="flex items-start gap-3">
+                  <div class="w-6 h-6 rounded-md bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
+                    <i data-lucide="check" class="w-4 h-4"></i>
+                  </div>
+                  <div>
+                    <strong class="text-white">Smart Electronic Locks:</strong> Containers only unlock upon geo-fenced arrival at authorized destination docks.
+                  </div>
+                </li>
+                <li class="flex items-start gap-3">
+                  <div class="w-6 h-6 rounded-md bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
+                    <i data-lucide="check" class="w-4 h-4"></i>
+                  </div>
+                  <div>
+                    <strong class="text-white">Driver Fatigue Monitoring:</strong> AI-powered cameras alert pilots and central command if drowsiness is detected.
+                  </div>
+                </li>
+                <li class="flex items-start gap-3">
+                  <div class="w-6 h-6 rounded-md bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
+                    <i data-lucide="check" class="w-4 h-4"></i>
+                  </div>
+                  <div>
+                    <strong class="text-white">Full Transit Cargo Insurance:</strong> All commercial consignments covered by comprehensive marine cargo protection.
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="bg-slate-950 text-slate-400 text-xs border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+        
+        <!-- Company Bio -->
+        <div class="lg:col-span-2 space-y-4">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-lg bg-orange-500 flex items-center justify-center text-white">
+              <i data-lucide="truck" class="w-5 h-5"></i>
+            </div>
+            <span class="text-lg font-bold text-white font-heading">Nexa<span class="text-orange-500">Route</span></span>
+          </div>
+          <p class="text-slate-400 text-xs leading-relaxed max-w-sm">
+            NexaRoute Logistics Private Limited is India’s fast-growing tech-enabled supply chain partner, connecting factories, warehouses, and merchants across 19,000+ pin codes.
+          </p>
+          <div class="space-y-1 text-slate-500 text-[11px]">
+            <p>CIN: U63090HR2021PTC098231 &bull; GSTIN: 06AAACN9921B1ZM</p>
+            <p>Headquarters: Cyber City, Tower B, Sector 24, Gurugram, Haryana - 122002</p>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="space-y-3">
+          <h4 class="text-sm font-semibold text-white uppercase tracking-wider">Company &amp; Platform</h4>
+          <ul class="space-y-2">
+            <li><a href="index.html" class="hover:text-orange-400 transition-colors">Home</a></li>
+            <li><a href="about.html" class="hover:text-orange-400 transition-colors">About NexaRoute</a></li>
+            <li><a href="services.html" class="hover:text-orange-400 transition-colors">All Logistics Services</a></li>
+            <li><a href="track.html" class="hover:text-orange-400 transition-colors">Live Consignment Tracking</a></li>
+            <li><a href="portal.html" class="hover:text-orange-400 transition-colors">Shipper Central Dashboard</a></li>
+            <li><a href="api-docs.html" class="hover:text-orange-400 transition-colors">Developer API Explorer</a></li>
+            <li><a href="contact.html" class="hover:text-orange-400 transition-colors">Contact &amp; Hub Directory</a></li>
+          </ul>
+        </div>
+
+        <!-- Services -->
+        <div class="space-y-3">
+          <h4 class="text-sm font-semibold text-white uppercase tracking-wider">Services</h4>
+          <ul class="space-y-2">
+            <li><a href="services.html" class="hover:text-orange-400 transition-colors">Express Surface Cargo (PTL)</a></li>
+            <li><a href="services.html" class="hover:text-orange-400 transition-colors">Full Truckload (FTL)</a></li>
+            <li><a href="services.html" class="hover:text-orange-400 transition-colors">Warehousing & 3PL</a></li>
+            <li><a href="services.html" class="hover:text-orange-400 transition-colors">Cold Chain Freight</a></li>
+            <li><a href="services.html" class="hover:text-orange-400 transition-colors">Hyperlocal City Dispatch</a></li>
+            <li><a href="#rate-calculator" class="hover:text-orange-400 transition-colors text-orange-400">Freight Tariff Estimator &rarr;</a></li>
+          </ul>
+        </div>
+
+        <!-- Support & Hotline -->
+        <div class="space-y-3">
+          <h4 class="text-sm font-semibold text-white uppercase tracking-wider">Support Desk</h4>
+          <div class="space-y-2">
+            <p class="text-slate-300 font-medium">Toll-Free Helpline:</p>
+            <a href="tel:18002669900" class="text-orange-400 hover:text-orange-300 font-semibold text-sm block">1800-266-9900</a>
+            <p class="text-slate-300 font-medium pt-1">Commercial Inquiries:</p>
+            <a href="mailto:corporate@nexaroute.example.com" class="text-slate-400 hover:text-white block">corporate@nexaroute.example.com</a>
+            <div class="pt-2">
+              <a href="api-docs.html" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-[11px] text-emerald-400 hover:border-emerald-500/40">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                <span>API Status: Online (v2.5)</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="mt-12 pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-500 text-[11px]">
+        <p>&copy; 2026 NexaRoute Logistics Private Limited. All rights reserved.</p>
+        <div class="flex flex-wrap items-center gap-4">
+          <a href="api-docs.html" class="hover:text-slate-400">Developer APIs</a>
+          <a href="#" class="hover:text-slate-400">Privacy Policy</a>
+          <a href="#" class="hover:text-slate-400">Terms of Carriage</a>
+          <a href="#" class="hover:text-slate-400">Cargo Insurance Terms</a>
+          <a href="#" class="hover:text-slate-400">Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Global Quick Quote Modal -->
+  <div id="global-quote-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-md w-full p-6 shadow-2xl relative text-left text-white">
+      <button id="quote-modal-close" class="absolute top-4 right-4 text-slate-400 hover:text-white p-1 rounded-lg">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      
+      <div class="mb-5">
+        <span class="text-xs font-semibold px-2.5 py-1 rounded bg-orange-500/10 text-orange-400 border border-orange-500/30">Quick Freight Quote</span>
+        <h3 class="text-xl font-bold font-heading mt-2">Get Instant Pricing</h3>
+        <p class="text-xs text-slate-300">Submit your cargo details for an instant commercial rate.</p>
+      </div>
+
+      <div id="quick-quote-success" class="hidden bg-emerald-950/80 border border-emerald-500/40 p-4 rounded-xl text-center space-y-2 mb-4">
+        <i data-lucide="check-circle" class="w-8 h-8 text-emerald-400 mx-auto"></i>
+        <h4 class="text-sm font-bold text-emerald-200">Quote Request Received!</h4>
+        <p class="text-xs text-emerald-300">Our regional dispatch manager will call you within 15 minutes with customized slab rates.</p>
+      </div>
+
+      <form id="quick-quote-form" class="space-y-4">
+        <div>
+          <label class="block text-xs font-medium text-slate-300 mb-1">Company / Contact Name *</label>
+          <input type="text" required placeholder="e.g. Acme Industries / Rajesh Kumar" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-orange-500">
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-medium text-slate-300 mb-1">Phone Number (+91) *</label>
+            <input type="tel" required placeholder="9876543210" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-orange-500">
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-slate-300 mb-1">Service Type *</label>
+            <select class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-orange-500">
+              <option>Express Surface (PTL)</option>
+              <option>Full Truckload (FTL)</option>
+              <option>Warehousing & 3PL</option>
+              <option>Cold Chain Freight</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-medium text-slate-300 mb-1">Pickup City / Pincode</label>
+            <input type="text" required placeholder="e.g. Mumbai / 400001" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-orange-500">
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-slate-300 mb-1">Delivery City / Pincode</label>
+            <input type="text" required placeholder="e.g. Delhi / 110001" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-orange-500">
+          </div>
+        </div>
+        <button type="submit" class="w-full py-2.5 bg-orange-500 hover:bg-orange-600 font-semibold text-xs text-white rounded-lg transition-colors flex items-center justify-center gap-1.5 shadow-md shadow-orange-500/20">
+          <span>Calculate My Rate</span>
+          <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/services.js"></script>
+</body>
+</html>

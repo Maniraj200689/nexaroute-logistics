@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us &amp; Regional Hub Directory | NexaRoute Logistics</title>
+  <meta name="description" content="Contact NexaRoute Logistics for commercial freight rates, hub visits, and 24/7 shipment tracking support. Regional hubs in Gurugram, Mumbai, Bengaluru, and Kolkata.">
+  <meta name="keywords" content="Contact NexaRoute, logistics quote, freight booking India, logistics helpline, Gurgaon freight hub, Bhiwandi logistics">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.nexaroute.example.com/contact.html">
+  <meta property="og:title" content="Contact NexaRoute Logistics | Hub Directory &amp; Support">
+  <meta property="og:description" content="Reach our 24/7 operations desk or request customized MSME freight tariffs.">
+  <meta property="og:image" content="assets/images/contact-hero.jpg">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#fff7ed',
+              100: '#ffedd5',
+              500: '#f97316',
+              600: '#ea580c',
+              700: '#c2410c',
+            },
+            navy: {
+              800: '#1e293b',
+              900: '#0f172a',
+              950: '#020617',
+            }
+          },
+          fontFamily: {
+            heading: ['Poppins', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts & Custom CSS -->
+  <link rel="stylesheet" href="css/custom.css">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen antialiased selection:bg-orange-500 selection:text-white transition-colors duration-200">
+
+  <!-- ==================== HEADER / NAVBAR ==================== -->
+  <header id="main-navbar" class="glass-nav fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-orange-500 rounded-lg p-1">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-orange-600 to-amber-500 flex items-center justify-center text-white shadow-md shadow-orange-500/20 group-hover:scale-105 transition-transform">
+            <i data-lucide="truck" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <span class="text-xl font-bold tracking-tight text-white font-heading">Nexa<span class="text-orange-500">Route</span></span>
+            <span class="block text-[10px] tracking-wider uppercase text-slate-400 font-semibold">Logistics India</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden md:flex items-center space-x-1" aria-label="Main Navigation">
+          <a href="index.html" data-nav-link class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors">Home</a>
+          <a href="about.html" data-nav-link class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors">About Us</a>
+          <a href="services.html" data-nav-link class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors">Services</a>
+          <a href="track.html" data-nav-link class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors">Tracking</a>
+          <a href="contact.html" data-nav-link class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-200 hover:text-white hover:bg-slate-800/60 transition-colors">Contact</a>
+        </nav>
+
+        <!-- Header Actions: Theme Toggle, Shipper Portal & Quote CTA -->
+        <div class="hidden lg:flex items-center gap-3">
+          <button class="theme-toggle-btn p-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 transition-colors" title="Toggle Dark/Light Mode">
+            <i data-lucide="moon" class="w-5 h-5"></i>
+          </button>
+          <a href="portal.html" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-lg text-xs font-semibold transition-colors flex items-center gap-1.5">
+            <i data-lucide="layout-dashboard" class="w-4 h-4 text-orange-400"></i>
+            <span>Shipper Portal</span>
+          </a>
+          <button data-open-quote-modal class="inline-flex items-center gap-1.5 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white text-xs font-semibold px-3.5 py-2 rounded-lg shadow-sm hover:shadow-orange-500/20 transition-all">
+            <span>Get a Quote</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+
+        <!-- Mobile Buttons (Theme Toggle + Hamburger) -->
+        <div class="flex items-center gap-2 md:hidden">
+          <button class="theme-toggle-btn p-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800" title="Toggle Dark/Light Mode">
+            <i data-lucide="moon" class="w-5 h-5"></i>
+          </button>
+          <button id="mobile-menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-drawer" aria-label="Open mobile navigation menu" class="p-2.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-orange-500">
+            <i data-lucide="menu" class="w-6 h-6"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Off-Canvas Drawer -->
+  <div id="drawer-backdrop" class="fixed inset-0 bg-slate-950/70 z-50 hidden backdrop-blur-sm transition-opacity" aria-hidden="true"></div>
+  <aside id="mobile-drawer" class="fixed top-0 right-0 bottom-0 w-80 max-w-[85vw] bg-slate-900 border-l border-slate-800 z-50 p-6 flex flex-col justify-between transform translate-x-full invisible mobile-drawer" aria-label="Mobile Navigation Drawer">
+    <div>
+      <div class="flex items-center justify-between pb-6 border-b border-slate-800">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-orange-500 flex items-center justify-center text-white">
+            <i data-lucide="truck" class="w-5 h-5"></i>
+          </div>
+          <span class="text-lg font-bold text-white">NexaRoute</span>
+        </div>
+        <button id="mobile-drawer-close" aria-label="Close navigation menu" class="p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800">
+          <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+      </div>
+
+      <nav class="mt-6 space-y-2" aria-label="Mobile Menu Links">
+        <a href="index.html" data-nav-link class="block px-4 py-3 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-orange-400 transition-colors">Home</a>
+        <a href="about.html" data-nav-link class="block px-4 py-3 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-orange-400 transition-colors">About Us</a>
+        <a href="services.html" data-nav-link class="block px-4 py-3 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-orange-400 transition-colors">Services</a>
+        <a href="track.html" data-nav-link class="block px-4 py-3 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-orange-400 transition-colors">Live Tracking</a>
+        <a href="portal.html" class="block px-4 py-3 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-orange-400 transition-colors">Shipper Portal</a>
+        <a href="contact.html" data-nav-link class="block px-4 py-3 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-orange-400 transition-colors">Contact</a>
+      </nav>
+    </div>
+
+    <div class="pt-6 border-t border-slate-800 space-y-4">
+      <a href="tel:18002669900" class="flex items-center gap-3 text-slate-300 text-sm py-2">
+        <i data-lucide="phone" class="w-5 h-5 text-orange-500"></i>
+        <span>1800-266-9900 (Toll Free)</span>
+      </a>
+      <button data-open-quote-modal class="w-full py-3 bg-orange-500 hover:bg-orange-600 text-white text-sm font-semibold rounded-lg flex items-center justify-center gap-2 shadow-lg shadow-orange-500/20">
+        <span>Request Instant Quote</span>
+        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <main class="flex-grow pt-20">
+
+    <!-- PAGE HERO -->
+    <section class="bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 text-white py-16 sm:py-20 relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 text-[11px] sm:text-xs font-semibold uppercase tracking-normal sm:tracking-wider mb-4">
+          24/7 Freight Operations &amp; Support
+        </div>
+        <h1 class="text-2xl sm:text-4xl md:text-5xl font-extrabold font-heading tracking-tight max-w-4xl mx-auto">
+          Connect With Our <span class="gradient-text-accent">Supply Chain Desk</span>.
+        </h1>
+        <p class="text-sm sm:text-lg text-slate-300 max-w-2xl mx-auto mt-4 leading-relaxed font-normal">
+          Whether you need a custom corporate tariff, warehouse site inspection, or emergency freight booking, our logistics specialists respond within 15 minutes.
+        </p>
+      </div>
+    </section>
+
+    <!-- CONTACT FORM & HUB DIRECTORY GRID -->
+    <section class="py-16 sm:py-24 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          
+          <!-- LEFT COLUMN: INTERACTIVE FORM (7 cols) -->
+          <div class="lg:col-span-7">
+            <div class="bg-slate-50 border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-sm">
+              
+              <div class="mb-8">
+                <span class="text-xs font-bold uppercase tracking-wider text-orange-600 bg-orange-100/80 px-3 py-1 rounded-full border border-orange-200">Corporate Inquiries</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 font-heading mt-3">Request a Proposal or Rate Contract</h2>
+                <p class="text-xs sm:text-sm text-slate-500 mt-2">Fill in your requirements below and our regional business lead will get in touch immediately.</p>
+              </div>
+
+              <!-- Success Alert Banner (Initially Hidden) -->
+              <div id="contact-success-banner" class="hidden bg-emerald-50 border border-emerald-300 rounded-2xl p-6 mb-8 text-center space-y-3">
+                <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto">
+                  <i data-lucide="check-circle-2" class="w-7 h-7"></i>
+                </div>
+                <h3 class="text-lg font-bold text-emerald-900 font-heading">Inquiry Submitted Successfully!</h3>
+                <p class="text-xs sm:text-sm text-emerald-700 max-w-md mx-auto">
+                  Your reference ticket number is <strong id="ticket-number-display" class="font-mono text-emerald-950 font-bold">NX-778219</strong>. A dedicated relationship manager will call you within 15 minutes.
+                </p>
+                <button onclick="location.reload()" class="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-semibold transition-colors">Submit Another Request</button>
+              </div>
+
+              <!-- Contact Form -->
+              <form id="contact-form" class="space-y-5" novalidate>
+                
+                <!-- Name & Company -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div>
+                    <label for="contact-name" class="block text-xs font-semibold text-slate-700 mb-1.5">
+                      Full Name <span class="text-rose-500">*</span>
+                    </label>
+                    <input type="text" id="contact-name" required placeholder="e.g. Ramesh Chandra" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-orange-500 transition-colors" aria-describedby="error-name">
+                    <p id="error-name" class="text-xs text-rose-500 mt-1 hidden"></p>
+                  </div>
+                  <div>
+                    <label for="contact-company" class="block text-xs font-semibold text-slate-700 mb-1.5">
+                      Business / Company Name
+                    </label>
+                    <input type="text" id="contact-company" placeholder="e.g. Chandra Engineering Works" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-orange-500 transition-colors">
+                  </div>
+                </div>
+
+                <!-- Email & Phone -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div>
+                    <label for="contact-email" class="block text-xs font-semibold text-slate-700 mb-1.5">
+                      Work Email <span class="text-rose-500">*</span>
+                    </label>
+                    <input type="email" id="contact-email" required placeholder="ramesh@chandraeng.com" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-orange-500 transition-colors" aria-describedby="error-email">
+                    <p id="error-email" class="text-xs text-rose-500 mt-1 hidden"></p>
+                  </div>
+                  <div>
+                    <label for="contact-phone" class="block text-xs font-semibold text-slate-700 mb-1.5">
+                      Phone Number (+91) <span class="text-rose-500">*</span>
+                    </label>
+                    <input type="tel" id="contact-phone" required placeholder="98100 12345" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-orange-500 transition-colors" aria-describedby="error-phone">
+                    <p id="error-phone" class="text-xs text-rose-500 mt-1 hidden"></p>
+                  </div>
+                </div>
+
+                <!-- Service Required & Monthly Cargo Volume -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div>
+                    <label for="contact-service" class="block text-xs font-semibold text-slate-700 mb-1.5">
+                      Primary Service Needed <span class="text-rose-500">*</span>
+                    </label>
+                    <select id="contact-service" required class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:border-orange-500 transition-colors" aria-describedby="error-service">
+                      <option value="" disabled selected>Select a Service</option>
+                      <option value="PTL">Express Surface Freight (Part Truckload / PTL)</option>
+                      <option value="FTL">Full Truckload (FTL Dedicated Fleet)</option>
+                      <option value="Warehousing">3PL Warehousing &amp; Fulfillment</option>
+                      <option value="ColdChain">Cold Chain &amp; Pharma Transport</option>
+                      <option value="Hyperlocal">Hyperlocal Urban Distribution</option>
+                      <option value="Reverse">Reverse Logistics &amp; Returns</option>
+                    </select>
+                    <p id="error-service" class="text-xs text-rose-500 mt-1 hidden"></p>
+                  </div>
+                  <div>
+                    <label for="contact-volume" class="block text-xs font-semibold text-slate-700 mb-1.5">
+                      Approx. Monthly Volume
+                    </label>
+                    <select id="contact-volume" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:border-orange-500 transition-colors">
+                      <option>Under 1 Ton per month</option>
+                      <option selected>1 to 10 Tons per month</option>
+                      <option>10 to 50 Tons per month</option>
+                      <option>50+ Tons (Enterprise Contract)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Message -->
+                <div>
+                  <label for="contact-message" class="block text-xs font-semibold text-slate-700 mb-1.5">
+                    Shipment Details &amp; Key Routes <span class="text-rose-500">*</span>
+                  </label>
+                  <textarea id="contact-message" rows="4" required placeholder="Please mention origin/destination cities, cargo nature, packaging type, and any specific delivery timelines..." class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-orange-500 transition-colors" aria-describedby="error-message"></textarea>
+                  <p id="error-message" class="text-xs text-rose-500 mt-1 hidden"></p>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="pt-2">
+                  <button type="submit" id="contact-submit-btn" class="w-full py-4 bg-orange-500 hover:bg-orange-600 text-white rounded-xl text-sm font-bold shadow-lg shadow-orange-500/20 transition-all flex items-center justify-center gap-2 transform active:scale-98">
+                    <span>Submit Request for Quotation</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                  </button>
+                  <p class="text-[11px] text-slate-400 text-center mt-3">We respect your privacy. No spam. Data protected under Indian digital privacy guidelines.</p>
+                </div>
+
+              </form>
+
+            </div>
+          </div>
+
+          <!-- RIGHT COLUMN: ADDRESSES, PHONE & MAP (5 cols) -->
+          <div class="lg:col-span-5 space-y-8">
+            
+            <!-- Quick Contact Channels Card -->
+            <div class="bg-slate-900 text-white rounded-3xl p-6 sm:p-8 space-y-6 border border-slate-800 shadow-xl">
+              <h3 class="text-xl font-bold font-heading">Direct Hotlines</h3>
+              
+              <div class="space-y-4">
+                <a href="tel:18002669900" class="flex items-start gap-4 p-3.5 rounded-2xl bg-slate-800/80 hover:bg-slate-800 border border-slate-700/60 transition-colors">
+                  <div class="w-10 h-10 rounded-xl bg-orange-500/20 text-orange-400 flex items-center justify-center shrink-0">
+                    <i data-lucide="phone-call" class="w-5 h-5"></i>
+                  </div>
+                  <div>
+                    <span class="text-xs text-slate-400 block font-medium">Toll-Free Pan-India Helpline</span>
+                    <strong class="text-base text-white font-mono">1800-266-9900</strong>
+                    <span class="text-[11px] text-emerald-400 block mt-0.5">Available 24 Hours / 7 Days</span>
+                  </div>
+                </a>
+
+                <a href="mailto:corporate@nexaroute.example.com" class="flex items-start gap-4 p-3.5 rounded-2xl bg-slate-800/80 hover:bg-slate-800 border border-slate-700/60 transition-colors">
+                  <div class="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center shrink-0">
+                    <i data-lucide="mail" class="w-5 h-5"></i>
+                  </div>
+                  <div>
+                    <span class="text-xs text-slate-400 block font-medium">Commercial Rate Desk</span>
+                    <strong class="text-sm text-white">corporate@nexaroute.example.com</strong>
+                    <span class="text-[11px] text-slate-400 block mt-0.5">Average response under 15 minutes</span>
+                  </div>
+                </a>
+
+                <div class="flex items-start gap-4 p-3.5 rounded-2xl bg-slate-800/80 border border-slate-700/60">
+                  <div class="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center shrink-0">
+                    <i data-lucide="message-square" class="w-5 h-5"></i>
+                  </div>
+                  <div>
+                    <span class="text-xs text-slate-400 block font-medium">WhatsApp Dispatch Helpdesk</span>
+                    <strong class="text-sm text-white font-mono">+91 98110 54321</strong>
+                    <span class="text-[11px] text-slate-400 block mt-0.5">Instant live location sharing</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Regional Hub Directory -->
+            <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 space-y-5">
+              <h3 class="text-lg font-bold font-heading text-slate-900">Regional Operating Hubs</h3>
+              
+              <div class="space-y-4 text-xs text-slate-600">
+                
+                <div class="pb-3 border-b border-slate-100">
+                  <span class="font-bold text-slate-900 block flex items-center gap-1.5">
+                    <i data-lucide="building-2" class="w-3.5 h-3.5 text-orange-600"></i> Corporate HQ - North Hub (Delhi NCR)
+                  </span>
+                  <p class="text-slate-500 mt-1">Cyber City, Tower B, 8th Floor, Sector 24, Gurugram, Haryana - 122002</p>
+                </div>
+
+                <div class="pb-3 border-b border-slate-100">
+                  <span class="font-bold text-slate-900 block flex items-center gap-1.5">
+                    <i data-lucide="map-pin" class="w-3.5 h-3.5 text-blue-600"></i> Western Consolidation Hub (Mumbai)
+                  </span>
+                  <p class="text-slate-500 mt-1">Bhiwandi Logistics Park, Unit 14-16, NH-48 Gateway, Thane, Maharashtra - 421302</p>
+                </div>
+
+                <div class="pb-3 border-b border-slate-100">
+                  <span class="font-bold text-slate-900 block flex items-center gap-1.5">
+                    <i data-lucide="map-pin" class="w-3.5 h-3.5 text-emerald-600"></i> Southern Regional Hub (Bengaluru)
+                  </span>
+                  <p class="text-slate-500 mt-1">Peenya Industrial Area, Phase II, 4th Cross, Bengaluru, Karnataka - 560058</p>
+                </div>
+
+                <div>
+                  <span class="font-bold text-slate-900 block flex items-center gap-1.5">
+                    <i data-lucide="map-pin" class="w-3.5 h-3.5 text-purple-600"></i> Eastern Regional Hub (Kolkata)
+                  </span>
+                  <p class="text-slate-500 mt-1">Dankuni Integrated Freight Terminal, Durgapur Expressway, Hooghly, West Bengal - 712311</p>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- INTERACTIVE MAP PLACEHOLDER -->
+            <div class="bg-slate-900 text-white rounded-3xl p-6 relative overflow-hidden shadow-xl border border-slate-800">
+              <div class="img-placeholder-tag">Placeholder: Interactive GIS Map</div>
+              
+              <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-2">
+                  <i data-lucide="map" class="w-5 h-5 text-orange-400"></i>
+                  <h4 class="text-sm font-bold text-white font-heading">Pan-India Freight Grid</h4>
+                </div>
+                <span class="text-[10px] font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/30 flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Live Telematics
+                </span>
+              </div>
+
+              <!-- Styled Map Graphic Representation -->
+              <div class="relative bg-slate-950 rounded-2xl h-60 w-full overflow-hidden border border-slate-800 flex items-center justify-center p-4">
+                <!-- Grid Lines -->
+                <div class="absolute inset-0 opacity-15 bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                
+                <!-- Major Highway Corridor Lines -->
+                <svg class="absolute inset-0 w-full h-full pointer-events-none opacity-40" viewBox="0 0 300 240">
+                  <path d="M120 40 L100 130 L130 200 L210 110 Z" fill="none" stroke="#f97316" stroke-width="2" stroke-dasharray="4 2" />
+                  <path d="M120 40 L210 110" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="2 2" />
+                  <path d="M100 130 L210 110" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="2 2" />
+                </svg>
+
+                <!-- Delhi Hub Pin -->
+                <div class="absolute top-[35px] left-[110px] group cursor-pointer text-center">
+                  <div class="w-3.5 h-3.5 rounded-full bg-orange-500 border-2 border-white radar-pin mx-auto"></div>
+                  <span class="text-[10px] font-bold text-slate-200 mt-1 block drop-shadow">DELHI HQ</span>
+                </div>
+
+                <!-- Mumbai Hub Pin -->
+                <div class="absolute top-[125px] left-[85px] group cursor-pointer text-center">
+                  <div class="w-3.5 h-3.5 rounded-full bg-orange-500 border-2 border-white radar-pin mx-auto"></div>
+                  <span class="text-[10px] font-bold text-slate-200 mt-1 block drop-shadow">MUMBAI HUB</span>
+                </div>
+
+                <!-- Bengaluru Hub Pin -->
+                <div class="absolute top-[190px] left-[115px] group cursor-pointer text-center">
+                  <div class="w-3.5 h-3.5 rounded-full bg-orange-500 border-2 border-white radar-pin mx-auto"></div>
+                  <span class="text-[10px] font-bold text-slate-200 mt-1 block drop-shadow">BENGALURU HUB</span>
+                </div>
+
+                <!-- Kolkata Hub Pin -->
+                <div class="absolute top-[105px] left-[200px] group cursor-pointer text-center">
+                  <div class="w-3.5 h-3.5 rounded-full bg-orange-500 border-2 border-white radar-pin mx-auto"></div>
+                  <span class="text-[10px] font-bold text-slate-200 mt-1 block drop-shadow">KOLKATA HUB</span>
+                </div>
+
+                <div class="absolute bottom-2 left-2 right-2 bg-slate-900/90 backdrop-blur-sm rounded-lg p-2 text-[10px] text-slate-300 flex justify-between border border-slate-800">
+                  <span>Golden Quadrilateral Covered</span>
+                  <span class="text-orange-400 font-semibold">45 Transit Points Active</span>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FREQUENTLY ASKED QUESTIONS SECTION -->
+    <section class="py-16 sm:py-20 bg-slate-50 border-t border-slate-200/60">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center mb-12">
+          <span class="text-xs font-bold uppercase tracking-wider text-orange-600 bg-orange-100/80 px-3 py-1 rounded-full border border-orange-200">Got Questions?</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 font-heading mt-3">Frequently Asked Questions</h2>
+        </div>
+
+        <div class="space-y-4">
+          
+          <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
+            <button data-faq-toggle="faq-1" class="w-full px-6 py-4 text-left flex items-center justify-between text-sm font-bold text-slate-900 focus:outline-none">
+              <span>How fast can NexaRoute pick up our first shipment after registration?</span>
+              <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 transition-transform faq-icon"></i>
+            </button>
+            <div id="faq-1" class="faq-answer hidden px-6 pb-5 text-xs text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
+              We offer same-day first-mile pickup in all Tier-1 and Tier-2 industrial zones (Delhi NCR, Mumbai MMR, Pune, Surat, Bengaluru, Chennai) if your booking is placed before 2:00 PM. Account setup takes less than 10 minutes with GSTIN verification.
+            </div>
+          </div>
+
+          <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
+            <button data-faq-toggle="faq-2" class="w-full px-6 py-4 text-left flex items-center justify-between text-sm font-bold text-slate-900 focus:outline-none">
+              <span>What documentation is required for interstate B2B freight?</span>
+              <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 transition-transform faq-icon"></i>
+            </button>
+            <div id="faq-2" class="faq-answer hidden px-6 pb-5 text-xs text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
+              For interstate cargo above ₹50,000 value, you need a Tax Invoice and a valid GST E-Way Bill with NexaRoute’s Transporter ID (06AAACN9921B1ZM). Our dispatch portal automatically generates and attaches the consignment note (bilty/AWB).
+            </div>
+          </div>
+
+          <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
+            <button data-faq-toggle="faq-3" class="w-full px-6 py-4 text-left flex items-center justify-between text-sm font-bold text-slate-900 focus:outline-none">
+              <span>How do you calculate volumetric weight versus actual weight?</span>
+              <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 transition-transform faq-icon"></i>
+            </button>
+            <div id="faq-3" class="faq-answer hidden px-6 pb-5 text-xs text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
+              We use the standard industry volumetric factor: (Length × Width × Height in cm) ÷ 5000. You are billed on whichever is higher between actual gross weight and volumetric weight. All our sortation hubs feature automated 3D dimensional scanners with photo proof to ensure 100% dispute-free billing.
+            </div>
+          </div>
+
+          <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
+            <button data-faq-toggle="faq-4" class="w-full px-6 py-4 text-left flex items-center justify-between text-sm font-bold text-slate-900 focus:outline-none">
+              <span>Is our cargo insured against theft or transit accident damages?</span>
+              <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 transition-transform faq-icon"></i>
+            </button>
+            <div id="faq-4" class="faq-answer hidden px-6 pb-5 text-xs text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
+              Yes, all shipments carried on the NexaRoute network are covered by Carrier’s Legal Liability (CLL). Additionally, shippers can opt for comprehensive All-Risk Marine Cargo Insurance at a nominal premium (0.05% of declared invoice value) directly during booking.
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="bg-slate-950 text-slate-400 text-xs border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+        
+        <!-- Company Bio -->
+        <div class="lg:col-span-2 space-y-4">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-lg bg-orange-500 flex items-center justify-center text-white">
+              <i data-lucide="truck" class="w-5 h-5"></i>
+            </div>
+            <span class="text-lg font-bold text-white font-heading">Nexa<span class="text-orange-500">Route</span></span>
+          </div>
+          <p class="text-slate-400 text-xs leading-relaxed max-w-sm">
+            NexaRoute Logistics Private Limited is India’s fast-growing tech-enabled supply chain partner, connecting factories, warehouses, and merchants across 19,000+ pin codes.
+          </p>
+          <div class="space-y-1 text-slate-500 text-[11px]">
+            <p>CIN: U63090HR2021PTC098231 &bull; GSTIN: 06AAACN9921B1ZM</p>
+            <p>Headquarters: Cyber City, Tower B, Sector 24, Gurugram, Haryana - 122002</p>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="space-y-3">
+          <h4 class="text-sm font-semibold text-white uppercase tracking-wider">Company &amp; Platform</h4>
+          <ul class="space-y-2">
+            <li><a href="index.html" class="hover:text-orange-400 transition-colors">Home</a></li>
+            <li><a href="about.html" class="hover:text-orange-400 transition-colors">About NexaRoute</a></li>
+            <li><a href="services.html" class="hover:text-orange-400 transition-colors">All Logistics Services</a></li>
+            <li><a href="track.html" class="hover:text-orange-400 transition-colors">Live Consignment Tracking</a></li>
+            <li><a href="portal.html" class="hover:text-orange-400 transition-colors">Shipper Central Dashboard</a></li>
+            <li><a href="api-docs.html" class="hover:text-orange-400 transition-colors">Developer API Explorer</a></li>
+            <li><a href="contact.html" class="hover:text-orange-400 transition-colors">Contact &amp; Hub Directory</a></li>
+          </ul>
+        </div>
+
+        <!-- Services -->
+        <div class="space-y-3">
+          <h4 class="text-sm font-semibold text-white uppercase tracking-wider">Services</h4>
+          <ul class="space-y-2">
+            <li><a href="services.html" class="hover:text-orange-400 transition-colors">Express Surface Cargo (PTL)</a></li>
+            <li><a href="services.html" class="hover:text-orange-400 transition-colors">Full Truckload (FTL)</a></li>
+            <li><a href="services.html" class="hover:text-orange-400 transition-colors">Warehousing & 3PL</a></li>
+            <li><a href="services.html" class="hover:text-orange-400 transition-colors">Cold Chain Freight</a></li>
+            <li><a href="services.html" class="hover:text-orange-400 transition-colors">Hyperlocal City Dispatch</a></li>
+            <li><a href="services.html#rate-calculator" class="hover:text-orange-400 transition-colors text-orange-400">Freight Tariff Estimator &rarr;</a></li>
+          </ul>
+        </div>
+
+        <!-- Support & Hotline -->
+        <div class="space-y-3">
+          <h4 class="text-sm font-semibold text-white uppercase tracking-wider">Support Desk</h4>
+          <div class="space-y-2">
+            <p class="text-slate-300 font-medium">Toll-Free Helpline:</p>
+            <a href="tel:18002669900" class="text-orange-400 hover:text-orange-300 font-semibold text-sm block">1800-266-9900</a>
+            <p class="text-slate-300 font-medium pt-1">Commercial Inquiries:</p>
+            <a href="mailto:corporate@nexaroute.example.com" class="text-slate-400 hover:text-white block">corporate@nexaroute.example.com</a>
+            <div class="pt-2">
+              <a href="api-docs.html" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-[11px] text-emerald-400 hover:border-emerald-500/40">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                <span>API Status: Online (v2.5)</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="mt-12 pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-500 text-[11px]">
+        <p>&copy; 2026 NexaRoute Logistics Private Limited. All rights reserved.</p>
+        <div class="flex flex-wrap items-center gap-4">
+          <a href="api-docs.html" class="hover:text-slate-400">Developer APIs</a>
+          <a href="#" class="hover:text-slate-400">Privacy Policy</a>
+          <a href="#" class="hover:text-slate-400">Terms of Carriage</a>
+          <a href="#" class="hover:text-slate-400">Cargo Insurance Terms</a>
+          <a href="#" class="hover:text-slate-400">Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Global Quick Quote Modal -->
+  <div id="global-quote-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-md w-full p-6 shadow-2xl relative text-left text-white">
+      <button id="quote-modal-close" class="absolute top-4 right-4 text-slate-400 hover:text-white p-1 rounded-lg">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      
+      <div class="mb-5">
+        <span class="text-xs font-semibold px-2.5 py-1 rounded bg-orange-500/10 text-orange-400 border border-orange-500/30">Quick Freight Quote</span>
+        <h3 class="text-xl font-bold font-heading mt-2">Get Instant Pricing</h3>
+        <p class="text-xs text-slate-300">Submit your cargo details for an instant commercial rate.</p>
+      </div>
+
+      <div id="quick-quote-success" class="hidden bg-emerald-950/80 border border-emerald-500/40 p-4 rounded-xl text-center space-y-2 mb-4">
+        <i data-lucide="check-circle" class="w-8 h-8 text-emerald-400 mx-auto"></i>
+        <h4 class="text-sm font-bold text-emerald-200">Quote Request Received!</h4>
+        <p class="text-xs text-emerald-300">Our regional dispatch manager will call you within 15 minutes with customized slab rates.</p>
+      </div>
+
+      <form id="quick-quote-form" class="space-y-4">
+        <div>
+          <label class="block text-xs font-medium text-slate-300 mb-1">Company / Contact Name *</label>
+          <input type="text" required placeholder="e.g. Acme Industries / Rajesh Kumar" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-orange-500">
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-medium text-slate-300 mb-1">Phone Number (+91) *</label>
+            <input type="tel" required placeholder="9876543210" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-orange-500">
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-slate-300 mb-1">Service Type *</label>
+            <select class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-orange-500">
+              <option>Express Surface (PTL)</option>
+              <option>Full Truckload (FTL)</option>
+              <option>Warehousing & 3PL</option>
+              <option>Cold Chain Freight</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-medium text-slate-300 mb-1">Pickup City / Pincode</label>
+            <input type="text" required placeholder="e.g. Mumbai / 400001" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-orange-500">
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-slate-300 mb-1">Delivery City / Pincode</label>
+            <input type="text" required placeholder="e.g. Delhi / 110001" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-orange-500">
+          </div>
+        </div>
+        <button type="submit" class="w-full py-2.5 bg-orange-500 hover:bg-orange-600 font-semibold text-xs text-white rounded-lg transition-colors flex items-center justify-center gap-1.5 shadow-md shadow-orange-500/20">
+          <span>Calculate My Rate</span>
+          <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/contact.js"></script>
+</body>
+</html>

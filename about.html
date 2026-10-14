@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About NexaRoute Logistics | Our Mission, Journey & Leadership</title>
+  <meta name="description" content="Learn about NexaRoute Logistics, our journey since 2021, our mission to empower Indian businesses with transparent freight, and our leadership team.">
+  <meta name="keywords" content="About NexaRoute, Indian logistics company, logistics leadership, freight mission India, B2B supply chain story">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.nexaroute.example.com/about.html">
+  <meta property="og:title" content="About NexaRoute Logistics | Our Story & Leadership">
+  <meta property="og:description" content="Building India's most dependable, transparent B2B logistics network.">
+  <meta property="og:image" content="assets/images/team-hero.jpg">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#fff7ed',
+              100: '#ffedd5',
+              500: '#f97316',
+              600: '#ea580c',
+              700: '#c2410c',
+            },
+            navy: {
+              800: '#1e293b',
+              900: '#0f172a',
+              950: '#020617',
+            }
+          },
+          fontFamily: {
+            heading: ['Poppins', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts & Custom CSS -->
+  <link rel="stylesheet" href="css/custom.css">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen antialiased selection:bg-orange-500 selection:text-white transition-colors duration-200">
+
+  <!-- ==================== HEADER / NAVBAR ==================== -->
+  <header id="main-navbar" class="glass-nav fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-orange-500 rounded-lg p-1">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-orange-600 to-amber-500 flex items-center justify-center text-white shadow-md shadow-orange-500/20 group-hover:scale-105 transition-transform">
+            <i data-lucide="truck" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <span class="text-xl font-bold tracking-tight text-white font-heading">Nexa<span class="text-orange-500">Route</span></span>
+            <span class="block text-[10px] tracking-wider uppercase text-slate-400 font-semibold">Logistics India</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden md:flex items-center space-x-1" aria-label="Main Navigation">
+          <a href="index.html" data-nav-link class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors">Home</a>
+          <a href="about.html" data-nav-link class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors">About Us</a>
+          <a href="services.html" data-nav-link class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors">Services</a>
+          <a href="track.html" data-nav-link class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors">Tracking</a>
+          <a href="contact.html" data-nav-link class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors">Contact</a>
+        </nav>
+
+        <!-- Header Actions: Theme Toggle, Shipper Portal & Quote CTA -->
+        <div class="hidden lg:flex items-center gap-3">
+          <button class="theme-toggle-btn p-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 transition-colors" title="Toggle Dark/Light Mode">
+            <i data-lucide="moon" class="w-5 h-5"></i>
+          </button>
+          <a href="portal.html" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-lg text-xs font-semibold transition-colors flex items-center gap-1.5">
+            <i data-lucide="layout-dashboard" class="w-4 h-4 text-orange-400"></i>
+            <span>Shipper Portal</span>
+          </a>
+          <button data-open-quote-modal class="inline-flex items-center gap-1.5 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white text-xs font-semibold px-3.5 py-2 rounded-lg shadow-sm hover:shadow-orange-500/20 transition-all">
+            <span>Get a Quote</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+
+        <!-- Mobile Buttons (Theme Toggle + Hamburger) -->
+        <div class="flex items-center gap-2 md:hidden">
+          <button class="theme-toggle-btn p-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800" title="Toggle Dark/Light Mode">
+            <i data-lucide="moon" class="w-5 h-5"></i>
+          </button>
+          <button id="mobile-menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-drawer" aria-label="Open mobile navigation menu" class="p-2.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-orange-500">
+            <i data-lucide="menu" class="w-6 h-6"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Off-Canvas Drawer -->
+  <div id="drawer-backdrop" class="fixed inset-0 bg-slate-950/70 z-50 hidden backdrop-blur-sm transition-opacity" aria-hidden="true"></div>
+  <aside id="mobile-drawer" class="fixed top-0 right-0 bottom-0 w-80 max-w-[85vw] bg-slate-900 border-l border-slate-800 z-50 p-6 flex flex-col justify-between transform translate-x-full invisible mobile-drawer" aria-label="Mobile Navigation Drawer">
+    <div>
+      <div class="flex items-center justify-between pb-6 border-b border-slate-800">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-orange-500 flex items-center justify-center text-white">
+            <i data-lucide="truck" class="w-5 h-5"></i>
+          </div>
+          <span class="text-lg font-bold text-white">NexaRoute</span>
+        </div>
+        <button id="mobile-drawer-close" aria-label="Close navigation menu" class="p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800">
+          <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+      </div>
+
+      <nav class="mt-6 space-y-2" aria-label="Mobile Menu Links">
+        <a href="index.html" data-nav-link class="block px-4 py-3 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-orange-400 transition-colors">Home</a>
+        <a href="about.html" data-nav-link class="block px-4 py-3 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-orange-400 transition-colors">About Us</a>
+        <a href="services.html" data-nav-link class="block px-4 py-3 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-orange-400 transition-colors">Services</a>
+        <a href="track.html" data-nav-link class="block px-4 py-3 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-orange-400 transition-colors">Live Tracking</a>
+        <a href="portal.html" class="block px-4 py-3 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-orange-400 transition-colors">Shipper Portal</a>
+        <a href="contact.html" data-nav-link class="block px-4 py-3 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800 hover:text-orange-400 transition-colors">Contact</a>
+      </nav>
+    </div>
+
+    <div class="pt-6 border-t border-slate-800 space-y-4">
+      <a href="tel:18002669900" class="flex items-center gap-3 text-slate-300 text-sm py-2">
+        <i data-lucide="phone" class="w-5 h-5 text-orange-500"></i>
+        <span>1800-266-9900 (Toll Free)</span>
+      </a>
+      <button data-open-quote-modal class="w-full py-3 bg-orange-500 hover:bg-orange-600 text-white text-sm font-semibold rounded-lg flex items-center justify-center gap-2 shadow-lg shadow-orange-500/20">
+        <span>Request Instant Quote</span>
+        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <main class="flex-grow pt-20">
+
+    <!-- PAGE HERO -->
+    <section class="bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 text-white py-16 sm:py-20 relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 text-[11px] sm:text-xs font-semibold uppercase tracking-normal sm:tracking-wider mb-4">
+          Our Story &amp; Vision
+        </div>
+        <h1 class="text-2xl sm:text-4xl md:text-5xl font-extrabold font-heading tracking-tight max-w-4xl mx-auto">
+          Built to Solve India’s Toughest <span class="gradient-text-accent">Middle-Mile Logistics</span> Puzzles.
+        </h1>
+        <p class="text-sm sm:text-lg text-slate-300 max-w-2xl mx-auto mt-4 leading-relaxed font-normal">
+          We founded NexaRoute to bring transparency, predictability, and tech-driven speed to the millions of small manufacturers and distributors driving Bharat’s economy.
+        </p>
+      </div>
+    </section>
+
+    <!-- OUR STORY SECTION -->
+    <section class="py-16 sm:py-24 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <div class="lg:col-span-6 space-y-6">
+            <span class="text-xs font-bold uppercase tracking-wider text-orange-600 bg-orange-50 px-3 py-1 rounded-full border border-orange-200">The Journey</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 font-heading">
+              From 10 Trucks in 2021 to a Pan-India Freight Network
+            </h2>
+            <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+              In 2021, when small manufacturers in industrial clusters like Surat, Pune, and Ludhiana wanted to send medium-sized consignments (100 kg to 2 tons) across state lines, they faced unpredictable transit delays, opaque weighment disputes, and zero digital tracking.
+            </p>
+            <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+              We started NexaRoute with a single conviction: <strong>India’s MSMEs deserve the same punctuality and technological transparency as global e-commerce giants.</strong> By investing in containerized fleets, scheduled multi-city departures, and proprietary IoT telemetry, we removed the intermediate middleman chaos.
+            </p>
+
+            <!-- Milestones Progress -->
+            <div class="space-y-4 pt-4 border-t border-slate-100">
+              <div class="flex items-start gap-4">
+                <span class="px-2.5 py-1 rounded-md bg-orange-100 text-orange-700 text-xs font-bold font-mono">2021</span>
+                <div>
+                  <h4 class="text-sm font-bold text-slate-900">Delhi-Mumbai Dedicated Corridor</h4>
+                  <p class="text-xs text-slate-500">Launched with 10 container trucks, reaching 99% on-time delivery across North-West freight lanes.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <span class="px-2.5 py-1 rounded-md bg-orange-100 text-orange-700 text-xs font-bold font-mono">2023</span>
+                <div>
+                  <h4 class="text-sm font-bold text-slate-900">Automated E-Way Bill & IoT Integration</h4>
+                  <p class="text-xs text-slate-500">Eliminated weighment discrepancies with digital scales and introduced real-time GPS client portal.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <span class="px-2.5 py-1 rounded-md bg-orange-100 text-orange-700 text-xs font-bold font-mono">2026</span>
+                <div>
+                  <h4 class="text-sm font-bold text-slate-900">19,000+ Pin Codes & 45 Sortation Hubs</h4>
+                  <p class="text-xs text-slate-500">Covering Tier-1 through Tier-4 commercial clusters with 1,200+ dedicated multi-axle freight vehicles.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Story Visual Card -->
+          <div class="lg:col-span-6">
+            <div class="bg-slate-900 text-white rounded-3xl p-8 relative shadow-2xl overflow-hidden border border-slate-800">
+              <div class="img-placeholder-tag">Placeholder: Modern Sortation Center & Fleet</div>
+              
+              <div class="relative z-10 space-y-6">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/20 text-orange-400 text-xs font-semibold">
+                  <i data-lucide="award" class="w-4 h-4"></i>
+                  <span>Certified ISO 9001:2015 &amp; TAPA Freight Compliant</span>
+                </div>
+
+                <h3 class="text-2xl font-bold font-heading">
+                  Logistics Infrastructure Backed by Real Assets
+                </h3>
+                
+                <p class="text-slate-300 text-sm leading-relaxed">
+                  Unlike asset-light broker platforms that outsource every stage of transit to third parties, NexaRoute operates dedicated automated hubs and calibrated vehicles with full chain-of-custody control.
+                </p>
+
+                <!-- 4 Metrics Counter -->
+                <div class="grid grid-cols-2 gap-4 pt-4 border-t border-slate-800">
+                  <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700/60">
+                    <p class="text-3xl font-extrabold text-orange-400 font-heading">45+</p>
+                    <p class="text-xs text-slate-300 mt-1">Multi-Modal Hubs</p>
+                  </div>
+                  <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700/60">
+                    <p class="text-3xl font-extrabold text-white font-heading">1,200+</p>
+                    <p class="text-xs text-slate-300 mt-1">Dedicated Fleet</p>
+                  </div>
+                  <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700/60">
+                    <p class="text-3xl font-extrabold text-white font-heading">150k</p>
+                    <p class="text-xs text-slate-300 mt-1">Sq. Ft. Warehousing</p>
+                  </div>
+                  <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700/60">
+                    <p class="text-3xl font-extrabold text-emerald-400 font-heading">99.4%</p>
+                    <p class="text-xs text-slate-300 mt-1">On-Time Deliveries</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- MISSION, VISION & VALUES -->
+    <section class="py-16 sm:py-24 bg-slate-900 text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+          <div class="bg-slate-800/80 border border-slate-700 p-8 rounded-2xl space-y-4">
+            <div class="w-12 h-12 rounded-xl bg-orange-500/20 text-orange-400 flex items-center justify-center">
+              <i data-lucide="target" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-2xl font-bold font-heading text-white">Our Mission</h3>
+            <p class="text-slate-300 text-sm leading-relaxed">
+              To democratize enterprise-grade logistics infrastructure for small and medium businesses across Bharat, providing predictable transit times, transparent pricing, and instant digital proof of delivery.
+            </p>
+          </div>
+
+          <div class="bg-slate-800/80 border border-slate-700 p-8 rounded-2xl space-y-4">
+            <div class="w-12 h-12 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center">
+              <i data-lucide="compass" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-2xl font-bold font-heading text-white">Our Vision</h3>
+            <p class="text-slate-300 text-sm leading-relaxed">
+              To build South Asia’s most efficient, sustainable B2B freight ecosystem, cutting logistics friction and helping lower India’s national logistics cost through technology and green fleet innovation.
+            </p>
+          </div>
+        </div>
+
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <span class="text-xs font-bold uppercase tracking-wider text-orange-400 bg-orange-500/10 px-3 py-1 rounded-full border border-orange-500/30">Guiding Principles</span>
+          <h2 class="text-3xl font-extrabold font-heading text-white mt-3">Values That Steer Every Consignment</h2>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="bg-slate-800/50 border border-slate-700/60 p-6 rounded-xl space-y-3">
+            <div class="w-9 h-9 rounded-lg bg-orange-500/20 text-orange-400 flex items-center justify-center">
+              <i data-lucide="shield" class="w-5 h-5"></i>
+            </div>
+            <h4 class="text-base font-bold text-white">Radical Reliability</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">We honor transit deadlines. If a truck encounters highway delays, our dynamic routing reroutes the cargo immediately.</p>
+          </div>
+
+          <div class="bg-slate-800/50 border border-slate-700/60 p-6 rounded-xl space-y-3">
+            <div class="w-9 h-9 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
+              <i data-lucide="eye" class="w-5 h-5"></i>
+            </div>
+            <h4 class="text-base font-bold text-white">Transparent Invoicing</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">No arbitrary docket surcharges or unexpected dimensional weight inflations. What we quote is what appears on your GST bill.</p>
+          </div>
+
+          <div class="bg-slate-800/50 border border-slate-700/60 p-6 rounded-xl space-y-3">
+            <div class="w-9 h-9 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center">
+              <i data-lucide="heart" class="w-5 h-5"></i>
+            </div>
+            <h4 class="text-base font-bold text-white">Driver Dignity &amp; Safety</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">Our long-haul pilots enjoy ergonomic rest stations across all 45 hubs, fair wages, healthcare cover, and fatigue sensors.</p>
+          </div>
+
+          <div class="bg-slate-800/50 border border-slate-700/60 p-6 rounded-xl space-y-3">
+            <div class="w-9 h-9 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center">
+              <i data-lucide="cpu" class="w-5 h-5"></i>
+            </div>
+            <h4 class="text-base font-bold text-white">Tech for Human Ease</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">We build intuitive dispatch portals so any dispatch manager can book, track, and reconcile 50 consignments in under 3 minutes.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- LEADERSHIP & OPERATIONS TEAM -->
+    <section class="py-16 sm:py-24 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+          <span class="text-xs font-bold uppercase tracking-wider text-orange-600 bg-orange-50 px-3 py-1 rounded-full border border-orange-200">Our Leadership</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 font-heading">
+            Experienced Minds Behind the Wheels
+          </h2>
+          <p class="text-base text-slate-600">
+            Led by veterans from Indian supply chain pioneers, tech scale-ups, and multimodal logistics corridors.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          
+          <!-- Leader 1 -->
+          <div class="bg-slate-50 border border-slate-200/80 rounded-2xl overflow-hidden card-hover text-center p-6 flex flex-col justify-between">
+            <div>
+              <div class="relative w-28 h-28 mx-auto mb-5 rounded-2xl bg-gradient-to-tr from-slate-800 to-slate-700 flex items-center justify-center text-white shadow-inner">
+                <span class="text-2xl font-extrabold font-heading text-orange-400">VS</span>
+                <span class="img-placeholder-tag">Placeholder: Photo</span>
+              </div>
+              <h3 class="text-lg font-bold text-slate-900 font-heading">Vikram Singhania</h3>
+              <p class="text-xs font-semibold text-orange-600 mb-2">Founder &amp; Chief Executive Officer</p>
+              <p class="text-xs text-slate-500 leading-relaxed">
+                Ex-IIT Delhi &amp; IIM Ahmedabad. 16+ years orchestrating industrial supply chains and fleet networks across India.
+              </p>
+            </div>
+            <div class="pt-4 border-t border-slate-200/60 mt-4 flex justify-center gap-3">
+              <span class="text-xs font-medium text-slate-400 hover:text-slate-700 cursor-pointer flex items-center gap-1">
+                <i data-lucide="linkedin" class="w-4 h-4 text-blue-600"></i> LinkedIn
+              </span>
+            </div>
+          </div>
+
+          <!-- Leader 2 -->
+          <div class="bg-slate-50 border border-slate-200/80 rounded-2xl overflow-hidden card-hover text-center p-6 flex flex-col justify-between">
+            <div>
+              <div class="relative w-28 h-28 mx-auto mb-5 rounded-2xl bg-gradient-to-tr from-slate-800 to-slate-700 flex items-center justify-center text-white shadow-inner">
+                <span class="text-2xl font-extrabold font-heading text-orange-400">AD</span>
+                <span class="img-placeholder-tag">Placeholder: Photo</span>
+              </div>
+              <h3 class="text-lg font-bold text-slate-900 font-heading">Ananya Deshmukh</h3>
+              <p class="text-xs font-semibold text-orange-600 mb-2">Chief Operating Officer</p>
+              <p class="text-xs text-slate-500 leading-relaxed">
+                Former VP Fleet Logistics at Concor partner. Expert in intermodal freight consolidation and cross-docking operations.
+              </p>
+            </div>
+            <div class="pt-4 border-t border-slate-200/60 mt-4 flex justify-center gap-3">
+              <span class="text-xs font-medium text-slate-400 hover:text-slate-700 cursor-pointer flex items-center gap-1">
+                <i data-lucide="linkedin" class="w-4 h-4 text-blue-600"></i> LinkedIn
+              </span>
+            </div>
+          </div>
+
+          <!-- Leader 3 -->
+          <div class="bg-slate-50 border border-slate-200/80 rounded-2xl overflow-hidden card-hover text-center p-6 flex flex-col justify-between">
+            <div>
+              <div class="relative w-28 h-28 mx-auto mb-5 rounded-2xl bg-gradient-to-tr from-slate-800 to-slate-700 flex items-center justify-center text-white shadow-inner">
+                <span class="text-2xl font-extrabold font-heading text-orange-400">RM</span>
+                <span class="img-placeholder-tag">Placeholder: Photo</span>
+              </div>
+              <h3 class="text-lg font-bold text-slate-900 font-heading">Rohan Mathur</h3>
+              <p class="text-xs font-semibold text-orange-600 mb-2">Chief Technology Officer</p>
+              <p class="text-xs text-slate-500 leading-relaxed">
+                Architect of NexaRoute’s dynamic dispatch telematics, automated weighing sensors, and live GPS routing engines.
+              </p>
+            </div>
+            <div class="pt-4 border-t border-slate-200/60 mt-4 flex justify-center gap-3">
+              <span class="text-xs font-medium text-slate-400 hover:text-slate-700 cursor-pointer flex items-center gap-1">
+                <i data-lucide="linkedin" class="w-4 h-4 text-blue-600"></i> LinkedIn
+              </span>
+            </div>
+          </div>
+
+          <!-- Leader 4 -->
+          <div class="bg-slate-50 border border-slate-200/80 rounded-2xl overflow-hidden card-hover text-center p-6 flex flex-col justify-between">
+            <div>
+              <div class="relative w-28 h-28 mx-auto mb-5 rounded-2xl bg-gradient-to-tr from-slate-800 to-slate-700 flex items-center justify-center text-white shadow-inner">
+                <span class="text-2xl font-extrabold font-heading text-orange-400">HS</span>
+                <span class="img-placeholder-tag">Placeholder: Photo</span>
+              </div>
+              <h3 class="text-lg font-bold text-slate-900 font-heading">Harpreet Singh</h3>
+              <p class="text-xs font-semibold text-orange-600 mb-2">Head of Pan-India Hub Operations</p>
+              <p class="text-xs text-slate-500 leading-relaxed">
+                Oversees 45 sortation centers, safety compliance, 24/7 hotline dispatch desks, and 1,200+ trained pilots.
+              </p>
+            </div>
+            <div class="pt-4 border-t border-slate-200/60 mt-4 flex justify-center gap-3">
+              <span class="text-xs font-medium text-slate-400 hover:text-slate-700 cursor-pointer flex items-center gap-1">
+                <i data-lucide="linkedin" class="w-4 h-4 text-blue-600"></i> LinkedIn
+              </span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CALL TO ACTION BANNER -->
+    <section class="py-14 bg-slate-900 text-white border-t border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+        <h3 class="text-2xl sm:text-3xl font-bold font-heading">Want to partner with NexaRoute for your business freight?</h3>
+        <p class="text-sm text-slate-400 max-w-xl mx-auto">Join 5,000+ businesses saving time and logistics overheads every month.</p>
+        <div class="pt-2 flex flex-col sm:flex-row gap-4 justify-center">
+          <button data-open-quote-modal class="px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-xl text-xs font-semibold shadow-md shadow-orange-500/20">Request Corporate Rates</button>
+          <a href="contact.html" class="px-6 py-3 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 rounded-xl text-xs font-semibold">Contact Our Operations Desk</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="bg-slate-950 text-slate-400 text-xs border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+        
+        <!-- Company Bio -->
+        <div class="lg:col-span-2 space-y-4">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-lg bg-orange-500 flex items-center justify-center text-white">
+              <i data-lucide="truck" class="w-5 h-5"></i>
+            </div>
+            <span class="text-lg font-bold text-white font-heading">Nexa<span class="text-orange-500">Route</span></span>
+          </div>
+          <p class="text-slate-400 text-xs leading-relaxed max-w-sm">
+            NexaRoute Logistics Private Limited is India’s fast-growing tech-enabled supply chain partner, connecting factories, warehouses, and merchants across 19,000+ pin codes.
+          </p>
+          <div class="space-y-1 text-slate-500 text-[11px]">
+            <p>CIN: U63090HR2021PTC098231 &bull; GSTIN: 06AAACN9921B1ZM</p>
+            <p>Headquarters: Cyber City, Tower B, Sector 24, Gurugram, Haryana - 122002</p>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="space-y-3">
+          <h4 class="text-sm font-semibold text-white uppercase tracking-wider">Company &amp; Platform</h4>
+          <ul class="space-y-2">
+            <li><a href="index.html" class="hover:text-orange-400 transition-colors">Home</a></li>
+            <li><a href="about.html" class="hover:text-orange-400 transition-colors">About NexaRoute</a></li>
+            <li><a href="services.html" class="hover:text-orange-400 transition-colors">All Logistics Services</a></li>
+            <li><a href="track.html" class="hover:text-orange-400 transition-colors">Live Consignment Tracking</a></li>
+            <li><a href="portal.html" class="hover:text-orange-400 transition-colors">Shipper Central Dashboard</a></li>
+            <li><a href="api-docs.html" class="hover:text-orange-400 transition-colors">Developer API Explorer</a></li>
+            <li><a href="contact.html" class="hover:text-orange-400 transition-colors">Contact &amp; Hub Directory</a></li>
+          </ul>
+        </div>
+
+        <!-- Services -->
+        <div class="space-y-3">
+          <h4 class="text-sm font-semibold text-white uppercase tracking-wider">Services</h4>
+          <ul class="space-y-2">
+            <li><a href="services.html" class="hover:text-orange-400 transition-colors">Express Surface Cargo (PTL)</a></li>
+            <li><a href="services.html" class="hover:text-orange-400 transition-colors">Full Truckload (FTL)</a></li>
+            <li><a href="services.html" class="hover:text-orange-400 transition-colors">Warehousing & 3PL</a></li>
+            <li><a href="services.html" class="hover:text-orange-400 transition-colors">Cold Chain Freight</a></li>
+            <li><a href="services.html" class="hover:text-orange-400 transition-colors">Hyperlocal City Dispatch</a></li>
+            <li><a href="services.html#rate-calculator" class="hover:text-orange-400 transition-colors text-orange-400">Freight Tariff Estimator &rarr;</a></li>
+          </ul>
+        </div>
+
+        <!-- Support & Hotline -->
+        <div class="space-y-3">
+          <h4 class="text-sm font-semibold text-white uppercase tracking-wider">Support Desk</h4>
+          <div class="space-y-2">
+            <p class="text-slate-300 font-medium">Toll-Free Helpline:</p>
+            <a href="tel:18002669900" class="text-orange-400 hover:text-orange-300 font-semibold text-sm block">1800-266-9900</a>
+            <p class="text-slate-300 font-medium pt-1">Commercial Inquiries:</p>
+            <a href="mailto:corporate@nexaroute.example.com" class="text-slate-400 hover:text-white block">corporate@nexaroute.example.com</a>
+            <div class="pt-2">
+              <a href="api-docs.html" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-[11px] text-emerald-400 hover:border-emerald-500/40">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                <span>API Status: Online (v2.5)</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="mt-12 pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-500 text-[11px]">
+        <p>&copy; 2026 NexaRoute Logistics Private Limited. All rights reserved.</p>
+        <div class="flex flex-wrap items-center gap-4">
+          <a href="api-docs.html" class="hover:text-slate-400">Developer APIs</a>
+          <a href="#" class="hover:text-slate-400">Privacy Policy</a>
+          <a href="#" class="hover:text-slate-400">Terms of Carriage</a>
+          <a href="#" class="hover:text-slate-400">Cargo Insurance Terms</a>
+          <a href="#" class="hover:text-slate-400">Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Global Quick Quote Modal -->
+  <div id="global-quote-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-md w-full p-6 shadow-2xl relative text-left text-white">
+      <button id="quote-modal-close" class="absolute top-4 right-4 text-slate-400 hover:text-white p-1 rounded-lg">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      
+      <div class="mb-5">
+        <span class="text-xs font-semibold px-2.5 py-1 rounded bg-orange-500/10 text-orange-400 border border-orange-500/30">Quick Freight Quote</span>
+        <h3 class="text-xl font-bold font-heading mt-2">Get Instant Pricing</h3>
+        <p class="text-xs text-slate-300">Submit your cargo details for an instant commercial rate.</p>
+      </div>
+
+      <div id="quick-quote-success" class="hidden bg-emerald-950/80 border border-emerald-500/40 p-4 rounded-xl text-center space-y-2 mb-4">
+        <i data-lucide="check-circle" class="w-8 h-8 text-emerald-400 mx-auto"></i>
+        <h4 class="text-sm font-bold text-emerald-200">Quote Request Received!</h4>
+        <p class="text-xs text-emerald-300">Our regional dispatch manager will call you within 15 minutes with customized slab rates.</p>
+      </div>
+
+      <form id="quick-quote-form" class="space-y-4">
+        <div>
+          <label class="block text-xs font-medium text-slate-300 mb-1">Company / Contact Name *</label>
+          <input type="text" required placeholder="e.g. Acme Industries / Rajesh Kumar" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-orange-500">
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-medium text-slate-300 mb-1">Phone Number (+91) *</label>
+            <input type="tel" required placeholder="9876543210" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-orange-500">
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-slate-300 mb-1">Service Type *</label>
+            <select class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-orange-500">
+              <option>Express Surface (PTL)</option>
+              <option>Full Truckload (FTL)</option>
+              <option>Warehousing & 3PL</option>
+              <option>Cold Chain Freight</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-medium text-slate-300 mb-1">Pickup City / Pincode</label>
+            <input type="text" required placeholder="e.g. Mumbai / 400001" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-orange-500">
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-slate-300 mb-1">Delivery City / Pincode</label>
+            <input type="text" required placeholder="e.g. Delhi / 110001" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-orange-500">
+          </div>
+        </div>
+        <button type="submit" class="w-full py-2.5 bg-orange-500 hover:bg-orange-600 font-semibold text-xs text-white rounded-lg transition-colors flex items-center justify-center gap-1.5 shadow-md shadow-orange-500/20">
+          <span>Calculate My Rate</span>
+          <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

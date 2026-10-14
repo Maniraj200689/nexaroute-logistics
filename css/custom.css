@@ -1,0 +1,242 @@
+/* ==========================================================================
+   NexaRoute Logistics - Modern Marketing Website Custom Styles
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap');
+
+:root {
+  --color-primary: #0f172a;
+  --color-primary-light: #1e293b;
+  --color-accent: #f97316;
+  --color-accent-hover: #ea580c;
+  --color-corporate-blue: #1e3a8a;
+  --color-surface-light: #f8fafc;
+  --font-heading: 'Poppins', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-body);
+  color: #1e293b;
+  background-color: #f8fafc;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+}
+
+/* Accessible focus ring */
+:focus-visible {
+  outline: 2px solid #f97316 !important;
+  outline-offset: 3px !important;
+}
+
+/* Glassmorphism Sticky Nav */
+.glass-nav {
+  background: rgba(15, 23, 42, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.glass-nav.scrolled {
+  background: rgba(15, 23, 42, 0.98);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+}
+
+/* Mobile Off-canvas Drawer */
+.mobile-drawer {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s;
+  transform: translateX(100%);
+  visibility: hidden;
+}
+
+.mobile-drawer.open,
+.mobile-drawer.translate-x-0 {
+  transform: translateX(0%);
+  visibility: visible;
+}
+
+/* Interactive Card Elevation & Hover Glow */
+.card-hover {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+  border-color: rgba(249, 115, 22, 0.4);
+}
+
+/* Subtle Floating Badge Animation */
+@keyframes softFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-float {
+  animation: softFloat 4s ease-in-out infinite;
+}
+
+/* Radar pulse for live hub / map pins */
+@keyframes radarPulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 14px rgba(249, 115, 22, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(249, 115, 22, 0);
+  }
+}
+
+.radar-pin {
+  animation: radarPulse 2s infinite;
+}
+
+/* Interactive Badge & Accent Borders */
+.badge-accent {
+  background: rgba(249, 115, 22, 0.1);
+  color: #ea580c;
+  border: 1px solid rgba(249, 115, 22, 0.25);
+}
+
+/* Gradient text utility */
+.gradient-text-accent {
+  background: linear-gradient(135deg, #f97316 0%, #fb923c 50%, #facc15 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-blue {
+  background: linear-gradient(135deg, #38bdf8 0%, #3b82f6 50%, #6366f1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Placeholder image indicator styling */
+.img-placeholder-tag {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: rgba(15, 23, 42, 0.85);
+  color: #e2e8f0;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 8px;
+  border-radius: 4px;
+  backdrop-filter: blur(4px);
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Modal Dialog Backdrop */
+dialog::backdrop {
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(4px);
+}
+
+/* ==========================================================================
+   Dark Mode Overrides
+   ========================================================================== */
+html.dark {
+  background-color: #0b1120;
+  color: #f8fafc;
+}
+
+html.dark body {
+  background-color: #0b1120;
+  color: #f8fafc;
+}
+
+html.dark .bg-white {
+  background-color: #1e293b !important;
+}
+
+html.dark .bg-slate-50 {
+  background-color: #0f172a !important;
+}
+
+html.dark .border-slate-200,
+html.dark .border-slate-200\/80,
+html.dark .border-slate-100 {
+  border-color: #334155 !important;
+}
+
+html.dark .text-slate-900,
+html.dark .text-slate-800 {
+  color: #f8fafc !important;
+}
+
+html.dark .text-slate-700,
+html.dark .text-slate-600 {
+  color: #cbd5e1 !important;
+}
+
+html.dark .text-slate-500 {
+  color: #94a3b8 !important;
+}
+
+html.dark .bg-slate-100 {
+  background-color: #334155 !important;
+  color: #f8fafc !important;
+}
+
+/* ==========================================================================
+   Printable ePOD Receipt Styling
+   ========================================================================== */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #epod-printable, #epod-printable * {
+    visibility: visible;
+  }
+  #epod-printable {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background: white !important;
+    color: black !important;
+    border: none !important;
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "consignments": [
+    { "awb": "NX-IND-99218", "origin": "Bhiwandi (MH)", "dest": "Peenya (KA)", "consignee": "Organica Naturals Hub", "service": "Express Surface (PTL)", "pkgs": "14 Boxes", "weight": "340 kg", "status": "In Transit", "statusClass": "in-transit", "createdAt": "2026-10-05T14:20:00Z" },
+    { "awb": "NX-SUR-40812", "origin": "Surat (GJ)", "dest": "Okhla (DL)", "consignee": "TrendCraft Retail", "service": "Express Surface (PTL)", "pkgs": "22 Boxes", "weight": "580 kg", "status": "Delivered", "statusClass": "delivered", "createdAt": "2026-10-04T11:00:00Z" },
+    { "awb": "NX-DEL-88102", "origin": "Gurugram (HR)", "dest": "Noida Sec 63 (UP)", "consignee": "SpeedTech Assemblies", "service": "Hyperlocal EV Van", "pkgs": "8 Crates", "weight": "210 kg", "status": "Out for Delivery", "statusClass": "out-for-delivery", "createdAt": "2026-10-06T09:30:00Z" },
+    { "awb": "NX-PUN-77291", "origin": "Pune (MH)", "dest": "Sriperumbudur (TN)", "consignee": "DynoParts Tamil Nadu", "service": "Full Truckload (FTL)", "pkgs": "32ft Container", "weight": "9,200 kg", "status": "In Transit", "statusClass": "in-transit", "createdAt": "2026-10-05T08:00:00Z" },
+    { "awb": "NX-AMD-33921", "origin": "Ahmedabad (GJ)", "dest": "Bhiwandi (MH)", "consignee": "WestCoast Logistics Park", "service": "Express Surface (PTL)", "pkgs": "30 Boxes", "weight": "750 kg", "status": "In Transit", "statusClass": "in-transit", "createdAt": "2026-10-05T16:45:00Z" },
+    { "awb": "NX-BLR-66512", "origin": "Peenya (KA)", "dest": "Hyderabad (TG)", "consignee": "Deccan Retailers Pvt Ltd", "service": "Express Surface (PTL)", "pkgs": "16 Cartons", "weight": "420 kg", "status": "Out for Delivery", "statusClass": "out-for-delivery", "createdAt": "2026-10-06T06:15:00Z" },
+    { "awb": "NX-KOL-11029", "origin": "Dankuni (WB)", "dest": "Patna (BR)", "consignee": "Bihar FastFreight Hub", "service": "Express Surface (PTL)", "pkgs": "45 Cartons", "weight": "1,100 kg", "status": "In Transit", "statusClass": "in-transit", "createdAt": "2026-10-05T19:00:00Z" },
+    { "awb": "NX-CHE-88219", "origin": "Chennai (TN)", "dest": "Coimbatore (TN)", "consignee": "Kovai Industrial Spares", "service": "Express Surface (PTL)", "pkgs": "12 Crates", "weight": "310 kg", "status": "Delivered", "statusClass": "delivered", "createdAt": "2026-10-03T10:00:00Z" },
+    { "awb": "NX-LUD-90412", "origin": "Ludhiana (PB)", "dest": "Gurugram (HR)", "consignee": "NorthStar Garments", "service": "Express Surface (PTL)", "pkgs": "28 Boxes", "weight": "640 kg", "status": "In Transit", "statusClass": "in-transit", "createdAt": "2026-10-05T21:30:00Z" },
+    { "awb": "NX-HYD-55102", "origin": "Hyderabad (TG)", "dest": "Vijayawada (AP)", "consignee": "Krishna Valley Dealers", "service": "Hyperlocal Feeder", "pkgs": "6 Crates", "weight": "180 kg", "status": "Out for Delivery", "statusClass": "out-for-delivery", "createdAt": "2026-10-06T08:00:00Z" },
+    { "awb": "NX-BOM-88741", "origin": "Bhiwandi (MH)", "dest": "Ahmedabad (GJ)", "consignee": "Gujarat Pharma Distrib.", "service": "Cold Chain (2-8°C)", "pkgs": "10 Reefers", "weight": "290 kg", "status": "In Transit", "statusClass": "in-transit", "createdAt": "2026-10-05T12:00:00Z" },
+    { "awb": "NX-DEL-66291", "origin": "Okhla (DL)", "dest": "Jaipur (RJ)", "consignee": "PinkCity Craft Logistics", "service": "Express Surface (PTL)", "pkgs": "18 Cartons", "weight": "490 kg", "status": "In Transit", "statusClass": "in-transit", "createdAt": "2026-10-05T15:20:00Z" },
+    { "awb": "NX-SUR-22819", "origin": "Surat (GJ)", "dest": "Indore (MP)", "consignee": "Malwa Textile Syndicate", "service": "Express Surface (PTL)", "pkgs": "25 Boxes", "weight": "550 kg", "status": "In Transit", "statusClass": "in-transit", "createdAt": "2026-10-05T17:10:00Z" },
+    { "awb": "NX-BLR-44102", "origin": "Peenya (KA)", "dest": "Kochi (KL)", "consignee": "Kerala Spice Traders", "service": "Express Surface (PTL)", "pkgs": "15 Bags", "weight": "380 kg", "status": "Out for Delivery", "statusClass": "out-for-delivery", "createdAt": "2026-10-06T07:45:00Z" }
+  ],
+  "shipments": {
+    "NX-IND-99218": {
+      "awb": "NX-IND-99218",
+      "status": "In Transit",
+      "headline": "Scheduled for Delivery: Tomorrow by 11:30 AM",
+      "subhead": "Last Checkpoint: Pune Expressway Sortation Hub • 45 mins ago",
+      "origin": "Bhiwandi Hub, Mumbai (MH)",
+      "destination": "Peenya Hub, Bengaluru (KA)",
+      "consignor": "Apex FabTex Mills (Surat)",
+      "consignee": "Organica Naturals Hub (Bengaluru)",
+      "cargo": "14 Cartons • 340 kg Textile Cargo",
+      "vehicle": "Ashok Leyland 32ft MXL (HR-55-AJ-9014)",
+      "ewb": "8819-2041-9921",
+      "progress": 72,
+      "deliveredTime": "Pending Delivery",
+      "isDelivered": false,
+      "telematics": {
+        "speedKmh": 62,
+        "temperature": "Ambient (26.4°C)",
+        "gpsLat": "18.5204° N",
+        "gpsLng": "73.8567° E",
+        "battery": "98%",
+        "eSealStatus": "Tamper-Proof Locked"
+      },
+      "milestones": [
+        { "title": "Consignment Picked Up", "location": "Surat Cluster Dock", "time": "Oct 05, 14:20", "done": true, "note": "Weight & volumetric scan certified" },
+        { "title": "Arrived at Mumbai Central Gateway", "location": "Bhiwandi Sorting Complex", "time": "Oct 06, 02:15", "done": true, "note": "Container sealed & scanned" },
+        { "title": "Departed on South Line-Haul", "location": "Pune Expressway Checkpoint", "time": "Oct 06, 08:45", "done": true, "note": "Telemetry active @ 62 km/h" },
+        { "title": "Inward at Destination Sortation", "location": "Bengaluru Peenya Gateway", "time": "Expected Tonight, 23:00", "done": false, "note": "Hub preparation in progress" },
+        { "title": "Out for Consignee Delivery", "location": "Peenya Delivery Van Unit", "time": "Expected Tomorrow, 09:00", "done": false, "note": "Delivery route optimization" },
+        { "title": "Delivered & Signed ePOD", "location": "Organica Naturals Receiving Dock", "time": "Target Tomorrow, 11:30", "done": false, "note": "Digital signature required" }
+      ]
+    },
+    "NX-SUR-40812": {
+      "awb": "NX-SUR-40812",
+      "status": "Delivered",
+      "headline": "Consignment Delivered Successfully",
+      "subhead": "Signed by Receiver: Ramesh Mehra (Dock Supervisor) • Oct 06, 16:45",
+      "origin": "Surat Gateway Hub (GJ)",
+      "destination": "Okhla Hub, Delhi NCR (DL)",
+      "consignor": "Surat Weaves & Garments",
+      "consignee": "TrendCraft Retail Distribution",
+      "cargo": "22 Boxes • 580 kg Garments",
+      "vehicle": "Tata 24ft Container (GJ-05-BX-4112)",
+      "ewb": "4410-9928-1120",
+      "progress": 100,
+      "deliveredTime": "Oct 06, 2026 at 16:45 IST",
+      "isDelivered": true,
+      "telematics": {
+        "speedKmh": 0,
+        "temperature": "Ambient (24.1°C)",
+        "gpsLat": "28.5355° N",
+        "gpsLng": "77.2732° E",
+        "battery": "100%",
+        "eSealStatus": "Delivered & Unlocked"
+      },
+      "epod": {
+        "receiverName": "Ramesh Mehra",
+        "receiverRole": "Dock In-charge",
+        "timestamp": "06-Oct-2026 16:45:12 IST",
+        "condition": "Sound & Sealed (0 Exceptions)"
+      },
+      "milestones": [
+        { "title": "Consignment Picked Up", "location": "Surat Manufacturing Unit", "time": "Oct 04, 11:00", "done": true, "note": "Verified by dispatch agent" },
+        { "title": "Departed on Western Corridor", "location": "Vadodara Checkpoint", "time": "Oct 04, 18:30", "done": true, "note": "Line-haul transit" },
+        { "title": "Passed Jaipur Gateway", "location": "Rajasthan Express Corridor", "time": "Oct 05, 09:15", "done": true, "note": "GPS checkpoint verified" },
+        { "title": "Arrived at Delhi NCR Gateway", "location": "Gurugram Primary Hub", "time": "Oct 06, 03:00", "done": true, "note": "Sortation complete" },
+        { "title": "Out for Final Delivery", "location": "Okhla Industrial Feeder Van", "time": "Oct 06, 10:15", "done": true, "note": "Assigned to Pilot Vikram K." },
+        { "title": "Delivered & Signed ePOD", "location": "TrendCraft Warehouse, Okhla", "time": "Oct 06, 16:45", "done": true, "note": "Received in intact sound condition" }
+      ]
+    },
+    "NX-DEL-88102": {
+      "awb": "NX-DEL-88102",
+      "status": "Out for Delivery",
+      "headline": "Out for Delivery Today by 05:00 PM",
+      "subhead": "Pilot: Manoj Kumar (EV Delivery Van DL-1L-AA-3810) • Call: +91 98112 00192",
+      "origin": "Gurugram Cyber Hub (HR)",
+      "destination": "Noida Sector 63 Logistics Hub (UP)",
+      "consignor": "DynoAuto Industrial Components",
+      "consignee": "SpeedTech Assemblies Pvt Ltd",
+      "cargo": "8 Wooden Crates • 210 kg Machine Spares",
+      "vehicle": "Electric Commercial Van (DL-1L-AA-3810)",
+      "ewb": "9901-3829-5512",
+      "progress": 90,
+      "deliveredTime": "Pending Today",
+      "isDelivered": false,
+      "telematics": {
+        "speedKmh": 28,
+        "temperature": "Ambient (29.2°C)",
+        "gpsLat": "28.6139° N",
+        "gpsLng": "77.3789° E",
+        "battery": "84%",
+        "eSealStatus": "Tamper-Proof Locked"
+      },
+      "milestones": [
+        { "title": "Picked up from Factory Gate", "location": "Manesar Auto Industrial Zone", "time": "Yesterday, 16:00", "done": true, "note": "Quality packaging check passed" },
+        { "title": "Crossed Delhi NCR Arterial Route", "location": "DND Expressway Flyover", "time": "Today, 06:30", "done": true, "note": "Intra-NCR feeder transit" },
+        { "title": "Loaded on Last-Mile EV Van", "location": "Noida Distribution Center", "time": "Today, 11:00", "done": true, "note": "Out for delivery" },
+        { "title": "Destination Delivery", "location": "SpeedTech Assembly Dock, Sector 63", "time": "Expected Today by 17:00", "done": false, "note": "Pilot approaching location" }
+      ]
+    }
+  },
+  "inquiries": []
+}

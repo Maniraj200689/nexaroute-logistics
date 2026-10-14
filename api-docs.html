@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Explorer & Documentation | NexaRoute Logistics</title>
+  <meta name="description" content="Interactive REST & GraphQL API Explorer for NexaRoute Express Logistics.">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: { 500: '#f97316', 600: '#ea580c' },
+            navy: { 800: '#1e293b', 900: '#0f172a', 950: '#020617' }
+          },
+          fontFamily: {
+            heading: ['Poppins', 'sans-serif'],
+            body: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts & Custom CSS -->
+  <link rel="stylesheet" href="css/custom.css">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-200 flex flex-col min-h-screen antialiased transition-colors duration-200">
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="bg-slate-900 border-b border-slate-800 text-white sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center gap-6">
+          <a href="index.html" class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-lg bg-orange-500 flex items-center justify-center text-white">
+              <i data-lucide="truck" class="w-5 h-5"></i>
+            </div>
+            <span class="text-lg font-bold font-heading text-white">NexaRoute <span class="text-xs font-normal text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/30">API v2.5</span></span>
+          </a>
+
+          <nav class="hidden md:flex items-center space-x-1 text-xs">
+            <a href="index.html" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 transition-colors">Home</a>
+            <a href="about.html" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 transition-colors">About</a>
+            <a href="services.html" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 transition-colors">Services</a>
+            <a href="track.html" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 transition-colors">Tracking</a>
+            <a href="portal.html" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 transition-colors">Shipper Portal</a>
+            <a href="api-docs.html" class="px-3 py-1.5 rounded-lg bg-slate-800 text-white font-semibold">API Explorer</a>
+            <a href="contact.html" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 transition-colors">Contact</a>
+          </nav>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <button class="theme-toggle-btn p-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 transition-colors" title="Toggle Theme">
+            <i data-lucide="moon" class="w-4 h-4"></i>
+          </button>
+          <a href="/api/health" target="_blank" class="px-3 py-1.5 bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 rounded-lg text-xs font-mono font-semibold flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+            <span>API Online</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN API EXPLORER ==================== -->
+  <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full space-y-10">
+    
+    <!-- Hero Banner -->
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 shadow-sm">
+      <div class="max-w-3xl">
+        <span class="text-xs font-bold uppercase tracking-wider text-orange-500 bg-orange-500/10 px-3 py-1 rounded-full border border-orange-500/30">Developer Integration Console</span>
+        <h1 class="text-2xl sm:text-3xl font-extrabold font-heading text-slate-900 dark:text-white mt-3">
+          Interactive REST &amp; GraphQL API Explorer
+        </h1>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mt-2 leading-relaxed">
+          NexaRoute provides instant JSON REST and GraphQL interfaces for automated logistics pipelines, ERP/WMS sync, live telematics polling, and digital ePOD retrieval. Test endpoints in real time below.
+        </p>
+      </div>
+    </div>
+
+    <!-- API Endpoints Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+      <!-- 1. Tracking API Card -->
+      <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="px-2.5 py-1 rounded bg-blue-100 dark:bg-blue-500/20 text-blue-800 dark:text-blue-400 font-mono text-xs font-bold">GET /api/track</span>
+            <span class="text-xs text-slate-400">Consignment Telemetry</span>
+          </div>
+          <h3 class="text-lg font-bold text-slate-900 dark:text-white">Query Live Consignment Tracking</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Fetch real-time milestone checkpoints, driver telemetry, temperature, and ePOD metadata for any waybill.</p>
+          
+          <div class="space-y-2">
+            <label class="block text-xs font-medium text-slate-700 dark:text-slate-300">AWB Number:</label>
+            <div class="flex gap-2">
+              <input type="text" id="api-track-awb" value="NX-IND-99218" class="flex-1 px-3 py-2 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-mono text-slate-900 dark:text-white">
+              <button onclick="executeApiTest('track')" class="px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg text-xs font-bold transition-colors">
+                Send Request
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800">
+          <label class="block text-[11px] font-mono text-slate-400 mb-1">Response Preview:</label>
+          <pre id="res-track" class="p-3 bg-slate-950 text-emerald-400 font-mono text-[11px] rounded-lg max-h-48 overflow-y-auto">// Click 'Send Request' to inspect live JSON</pre>
+        </div>
+      </div>
+
+      <!-- 2. Rate Estimator API Card -->
+      <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="px-2.5 py-1 rounded bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-400 font-mono text-xs font-bold">POST /api/estimate</span>
+            <span class="text-xs text-slate-400">Tariff Engine</span>
+          </div>
+          <h3 class="text-lg font-bold text-slate-900 dark:text-white">Freight Tariff &amp; Transit Estimator</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Calculate corridor distances, guaranteed SLA transit hours, fuel surcharges, and total GST-compliant cost.</p>
+          
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Origin:</label>
+              <input type="text" id="api-est-origin" value="Mumbai" class="w-full px-2.5 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-mono">
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Destination:</label>
+              <input type="text" id="api-est-dest" value="Delhi" class="w-full px-2.5 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-mono">
+            </div>
+          </div>
+
+          <div class="flex gap-2">
+            <button onclick="executeApiTest('estimate')" class="w-full py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg text-xs font-bold transition-colors">
+              Calculate Freight via API
+            </button>
+          </div>
+        </div>
+        
+        <div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800">
+          <label class="block text-[11px] font-mono text-slate-400 mb-1">Response Preview:</label>
+          <pre id="res-estimate" class="p-3 bg-slate-950 text-emerald-400 font-mono text-[11px] rounded-lg max-h-48 overflow-y-auto">// Click button to execute calculation</pre>
+        </div>
+      </div>
+
+      <!-- 3. Consignments Manifest API Card -->
+      <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="px-2.5 py-1 rounded bg-blue-100 dark:bg-blue-500/20 text-blue-800 dark:text-blue-400 font-mono text-xs font-bold">GET /api/consignments</span>
+            <span class="text-xs text-slate-400">Shipper Manifest Feed</span>
+          </div>
+          <h3 class="text-lg font-bold text-slate-900 dark:text-white">Query Shipper Consignments</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Pull active manifests with query filtering by status (all, in-transit, delivered) or free text search.</p>
+          
+          <div class="flex gap-2">
+            <select id="api-cons-status" class="px-3 py-2 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-mono text-slate-900 dark:text-white">
+              <option value="all">status=all</option>
+              <option value="in-transit">status=in-transit</option>
+              <option value="out-for-delivery">status=out-for-delivery</option>
+              <option value="delivered">status=delivered</option>
+            </select>
+            <button onclick="executeApiTest('consignments')" class="flex-1 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg text-xs font-bold transition-colors">
+              Fetch Manifest Feed
+            </button>
+          </div>
+        </div>
+        
+        <div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800">
+          <label class="block text-[11px] font-mono text-slate-400 mb-1">Response Preview:</label>
+          <pre id="res-consignments" class="p-3 bg-slate-950 text-emerald-400 font-mono text-[11px] rounded-lg max-h-48 overflow-y-auto">// Click button to fetch consignments</pre>
+        </div>
+      </div>
+
+      <!-- 4. GraphQL API Card -->
+      <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="px-2.5 py-1 rounded bg-purple-100 dark:bg-purple-500/20 text-purple-800 dark:text-purple-400 font-mono text-xs font-bold">POST /api/graphql</span>
+            <span class="text-xs text-slate-400">Zero-Dependency Resolver</span>
+          </div>
+          <h3 class="text-lg font-bold text-slate-900 dark:text-white">Execute GraphQL Query</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Query multiple entities (tracking, stats, consignments) in a single unified GraphQL round-trip.</p>
+          
+          <div class="space-y-1">
+            <textarea id="api-gql-query" rows="3" class="w-full p-2 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs font-mono text-slate-900 dark:text-white leading-tight">{ tracking(awb: "NX-IND-99218") { awb status origin destination } stats { activeCount deliveredCount } }</textarea>
+            <button onclick="executeApiTest('graphql')" class="w-full py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-xs font-bold transition-colors">
+              Execute GraphQL Query
+            </button>
+          </div>
+        </div>
+        
+        <div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800">
+          <label class="block text-[11px] font-mono text-slate-400 mb-1">Response Preview:</label>
+          <pre id="res-graphql" class="p-3 bg-slate-950 text-purple-300 font-mono text-[11px] rounded-lg max-h-48 overflow-y-auto">// Click button to run GraphQL query</pre>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="bg-slate-900 border-t border-slate-800 text-slate-400 py-6 text-xs text-center">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p>&copy; 2026 NexaRoute Logistics Private Limited. All Rights Reserved.</p>
+      <div class="flex flex-wrap items-center gap-4">
+        <a href="index.html" class="hover:text-white">Home</a>
+        <a href="about.html" class="hover:text-white">About Us</a>
+        <a href="services.html" class="hover:text-white">Services</a>
+        <a href="track.html" class="hover:text-white">Live Tracking</a>
+        <a href="portal.html" class="hover:text-white">Shipper Portal</a>
+        <a href="contact.html" class="hover:text-white">Contact</a>
+        <a href="/api/health" target="_blank" class="hover:text-white text-emerald-400">Health Status</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+  <script>
+    async function executeApiTest(type) {
+      if (type === 'track') {
+        const awb = document.getElementById('api-track-awb').value.trim();
+        const pre = document.getElementById('res-track');
+        pre.textContent = 'Loading...';
+        try {
+          const res = await fetch(`/api/track?awb=${encodeURIComponent(awb)}`);
+          const json = await res.json();
+          pre.textContent = JSON.stringify(json, null, 2);
+        } catch (err) {
+          pre.textContent = 'Error: ' + err.message;
+        }
+      } else if (type === 'estimate') {
+        const origin = document.getElementById('api-est-origin').value.trim();
+        const destination = document.getElementById('api-est-dest').value.trim();
+        const pre = document.getElementById('res-estimate');
+        pre.textContent = 'Calculating...';
+        try {
+          const res = await fetch('/api/estimate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ origin, destination, weight: 250, tier: 'express' })
+          });
+          const json = await res.json();
+          pre.textContent = JSON.stringify(json, null, 2);
+        } catch (err) {
+          pre.textContent = 'Error: ' + err.message;
+        }
+      } else if (type === 'consignments') {
+        const status = document.getElementById('api-cons-status').value;
+        const pre = document.getElementById('res-consignments');
+        pre.textContent = 'Fetching feed...';
+        try {
+          const res = await fetch(`/api/consignments?status=${encodeURIComponent(status)}`);
+          const json = await res.json();
+          pre.textContent = JSON.stringify(json, null, 2);
+        } catch (err) {
+          pre.textContent = 'Error: ' + err.message;
+        }
+      } else if (type === 'graphql') {
+        const query = document.getElementById('api-gql-query').value.trim();
+        const pre = document.getElementById('res-graphql');
+        pre.textContent = 'Executing query...';
+        try {
+          const res = await fetch('/api/graphql', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ query })
+          });
+          const json = await res.json();
+          pre.textContent = JSON.stringify(json, null, 2);
+        } catch (err) {
+          pre.textContent = 'Error: ' + err.message;
+        }
+      }
+    }
+  </script>
+</body>
+</html>
