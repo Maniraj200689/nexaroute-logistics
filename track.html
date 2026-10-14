@@ -215,7 +215,11 @@
             </div>
 
             <!-- Action buttons -->
-            <div class="flex flex-wrap gap-2 w-full md:w-auto">
+            <div class="flex flex-wrap gap-2 w-full md:w-auto items-center">
+              <button id="btn-trigger-otp" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition-all flex items-center gap-2 shadow-sm shadow-emerald-600/30">
+                <i data-lucide="shield-check" class="w-4 h-4"></i>
+                <span id="btn-otp-text">Verify Consignee OTP</span>
+              </button>
               <button id="btn-open-epod" class="px-4 py-2.5 bg-slate-900 hover:bg-slate-800 dark:bg-slate-800 dark:hover:bg-slate-700 text-white rounded-xl text-xs font-semibold transition-colors flex items-center gap-2">
                 <i data-lucide="file-check-2" class="w-4 h-4 text-emerald-400"></i>
                 <span>View Digital ePOD</span>
@@ -432,21 +436,26 @@
         </div>
 
         <!-- Digital Signature & Receiver Seal -->
-        <div class="grid grid-cols-2 gap-4 pt-4 border-t border-slate-200 text-xs items-center">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-slate-200 text-xs items-center">
           <div class="space-y-1">
-            <span class="text-slate-400 block text-[10px] uppercase font-bold">Consignee Declaration</span>
+            <span class="text-slate-400 block text-[10px] uppercase font-bold">Consignee Declaration &amp; Electronic Seal</span>
             <p class="text-slate-600 text-[11px] italic">
-              "Received goods in full and sealed sound condition without loss or damage."
+              "Received cargo consignments in intact and sealed condition without shortfall or damage."
             </p>
-            <div class="pt-2 text-slate-900 text-xs font-semibold">
-              Authorized Signature &bull; Geo-Stamp (12.9716° N, 77.5946° E)
+            <div id="epod-verification-badge" class="mt-2 p-2 bg-emerald-50 border border-emerald-200 rounded-lg text-emerald-800 text-[11px] font-medium flex items-center gap-2">
+              <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600 shrink-0"></i>
+              <div>
+                <span>Signed by: <strong id="epod-signer-name">Authorized Signatory</strong></span>
+                <span class="block text-[10px] text-emerald-600 font-mono" id="epod-timestamp-stamp">Geo-Stamp: 12.9716° N, 77.5946° E</span>
+              </div>
             </div>
           </div>
-          <div class="text-right">
+          <div class="text-right flex flex-col items-end">
             <div class="inline-block p-2 bg-slate-100 border border-slate-200 rounded-lg text-center">
               <i data-lucide="qr-code" class="w-16 h-16 mx-auto text-slate-800"></i>
-              <span class="text-[9px] text-slate-500 font-mono block mt-1">VERIFIED EPOD #99218</span>
+              <span id="epod-qr-code-text" class="text-[9px] text-slate-500 font-mono block mt-1">VERIFIED EPOD #99218</span>
             </div>
+            <span class="text-[10px] text-slate-400 font-mono mt-1">SHA-256 Tamper-Proof Cryptographic Hash</span>
           </div>
         </div>
 
@@ -454,7 +463,7 @@
 
       <!-- Action Footer -->
       <div class="mt-6 pt-4 border-t border-slate-200 flex justify-end gap-3">
-        <button onclick="document.getElementById('epod-modal').classList.add('hidden')" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold">
+        <button onclick="document.getElementById('epod-modal').classList.add('hidden'); document.getElementById('epod-modal').classList.remove('flex');" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold">
           Close Window
         </button>
         <button onclick="window.print()" class="px-5 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-xl text-xs font-bold flex items-center gap-2">
@@ -462,6 +471,117 @@
           <span>Print / Save PDF</span>
         </button>
       </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== CONSIGNEE OTP VERIFICATION MODAL ==================== -->
+  <div id="otp-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white max-w-lg w-full rounded-2xl shadow-2xl p-6 sm:p-7 relative border border-slate-200 dark:border-slate-800 space-y-5">
+      
+      <button id="otp-modal-close" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 dark:hover:text-white p-1 rounded-lg">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <!-- Modal Header -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 flex items-center justify-center">
+          <i data-lucide="shield-check" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <h3 class="text-lg font-bold font-heading text-slate-900 dark:text-white">Consignee Delivery OTP Verification</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Authenticate receiver identity to complete delivery &amp; generate legal ePOD.</p>
+        </div>
+      </div>
+
+      <!-- Consignment Summary Card -->
+      <div class="bg-slate-50 dark:bg-slate-800/60 p-3.5 rounded-xl border border-slate-200 dark:border-slate-700/60 text-xs space-y-1">
+        <div class="flex justify-between">
+          <span class="text-slate-400">Waybill:</span>
+          <strong id="otp-modal-awb" class="font-mono text-orange-500">NX-IND-99218</strong>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-slate-400">Destination Facility:</span>
+          <strong id="otp-modal-dest">Peenya Hub, Bengaluru</strong>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-slate-400">Registered Receiver:</span>
+          <strong id="otp-modal-consignee">Organica Naturals Hub</strong>
+        </div>
+      </div>
+
+      <!-- Step 1: Send OTP -->
+      <div class="space-y-3">
+        <div class="flex items-center justify-between text-xs">
+          <label class="font-semibold text-slate-700 dark:text-slate-300">Registered Consignee Phone</label>
+          <span class="text-emerald-600 dark:text-emerald-400 font-mono text-[11px] flex items-center gap-1">
+            <i data-lucide="message-square" class="w-3.5 h-3.5"></i> WhatsApp &amp; SMS
+          </span>
+        </div>
+        
+        <div class="flex gap-2">
+          <input type="text" id="otp-phone-input" value="+91 98112-99218" class="flex-1 px-3 py-2 text-xs bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-900 dark:text-white font-mono focus:ring-2 focus:ring-emerald-500 focus:outline-none" />
+          <button id="btn-send-otp" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold transition-all shrink-0 flex items-center gap-1.5 shadow-sm shadow-emerald-600/30">
+            <i data-lucide="send" class="w-3.5 h-3.5"></i>
+            <span>Send OTP</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Simulated WhatsApp Notification Box (Appears when OTP sent) -->
+      <div id="otp-simulated-box" class="hidden bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-300 dark:border-emerald-600/40 p-3 rounded-xl text-xs space-y-1.5 animate-fadeIn">
+        <div class="flex items-center justify-between text-emerald-800 dark:text-emerald-300 font-bold text-[11px]">
+          <span class="flex items-center gap-1.5">
+            <i data-lucide="smartphone" class="w-4 h-4 text-emerald-600"></i>
+            Simulated WhatsApp &amp; SMS Dispatch
+          </span>
+          <span class="text-[10px] font-mono bg-emerald-200 dark:bg-emerald-800 px-1.5 py-0.5 rounded text-emerald-900 dark:text-emerald-200">Just Now</span>
+        </div>
+        <p class="text-slate-700 dark:text-slate-300 text-[11px] leading-relaxed">
+          &ldquo;NexaRoute Express: Security PIN for delivery of AWB <span id="toast-awb" class="font-mono font-bold">NX-IND-99218</span> is <span id="toast-otp-code" class="text-sm font-black font-mono text-emerald-600 dark:text-emerald-400 bg-emerald-100 dark:bg-emerald-900/60 px-1.5 py-0.5 rounded">4821</span>. Share this code with pilot only after verifying package seals.&rdquo;
+        </p>
+      </div>
+
+      <!-- Step 2: Enter OTP & Signer Details -->
+      <form id="otp-verify-form" class="space-y-4 pt-1 border-t border-slate-100 dark:border-slate-800">
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+            Enter 4-Digit Security PIN <span class="text-orange-500">*</span>
+          </label>
+          <input type="text" id="otp-code-input" maxlength="4" placeholder="e.g. 4821 or 9921" class="w-full text-center tracking-[0.5em] text-xl font-bold font-mono py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:outline-none" required />
+          <p class="text-[10px] text-slate-400 mt-1">For instant live simulation testing, enter the code from the WhatsApp alert or <strong>9921</strong>.</p>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+            Authorized Receiver Full Name &amp; Designation <span class="text-orange-500">*</span>
+          </label>
+          <input type="text" id="otp-signer-input" value="R. S. Narayanan (Warehouse Dock Manager)" class="w-full px-3 py-2 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:outline-none" required />
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+            Cargo Condition &amp; Seal Verification
+          </label>
+          <select id="otp-remarks-input" class="w-full px-3 py-2 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+            <option value="All cartons received intact and sound condition. Electronic seal verified.">All cartons received intact and sound condition. Electronic seal verified.</option>
+            <option value="Packaging verified undamaged. Consignee accepted complete delivery.">Packaging verified undamaged. Consignee accepted complete delivery.</option>
+            <option value="Partial delivery accepted with supervisor approval.">Partial delivery accepted with supervisor approval.</option>
+          </select>
+        </div>
+
+        <div id="otp-status-msg" class="hidden text-xs p-2.5 rounded-lg"></div>
+
+        <div class="flex gap-2 pt-2">
+          <button type="button" id="btn-cancel-otp" class="w-1/3 py-2.5 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-xl text-xs font-semibold transition-colors">
+            Cancel
+          </button>
+          <button type="submit" id="btn-submit-otp" class="w-2/3 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-md shadow-emerald-600/30">
+            <i data-lucide="check-circle" class="w-4 h-4"></i>
+            <span>Verify &amp; Complete Delivery</span>
+          </button>
+        </div>
+      </form>
 
     </div>
   </div>

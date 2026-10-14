@@ -22,10 +22,86 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let currentFilter = 'all';
   let searchQuery = '';
+  let currentRole = 'shipper';
 
   const tableBody = document.getElementById('table-body');
   const searchInput = document.getElementById('table-search-input');
   const filterButtons = document.querySelectorAll('.filter-btn');
+  const roleSelect = document.getElementById('role-select');
+  const roleAvatar = document.getElementById('role-avatar');
+  const roleBanner = document.getElementById('role-banner');
+  const roleBannerIcon = document.getElementById('role-banner-icon');
+  const roleBannerTitle = document.getElementById('role-banner-title');
+  const roleBannerDesc = document.getElementById('role-banner-desc');
+  const roleBadge = document.getElementById('role-badge');
+  const btnOpenBooking = document.getElementById('btn-open-booking-modal');
+
+  const updateRoleUi = (role) => {
+    currentRole = role;
+    if (role === 'shipper') {
+      if (roleAvatar) {
+        roleAvatar.textContent = 'SA';
+        roleAvatar.className = 'w-7 h-7 rounded-full bg-orange-500/20 border border-orange-500/40 flex items-center justify-center font-bold text-orange-400 text-[11px] shrink-0';
+      }
+      if (roleBanner) roleBanner.className = 'rounded-2xl p-4 bg-orange-50 dark:bg-orange-950/30 border border-orange-200 dark:border-orange-500/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs';
+      if (roleBannerIcon) {
+        roleBannerIcon.className = 'w-9 h-9 rounded-xl bg-orange-500 text-white flex items-center justify-center shrink-0';
+        roleBannerIcon.innerHTML = `<i data-lucide="building-2" class="w-5 h-5"></i>`;
+      }
+      if (roleBannerTitle) roleBannerTitle.textContent = 'Shipper Admin Console — Apex FabTex Mills';
+      if (roleBannerDesc) roleBannerDesc.textContent = 'Full commercial permissions: Book line-haul freight, monitor telematics, export CSV manifests, and view billing.';
+      if (roleBadge) {
+        roleBadge.textContent = 'Admin Privileges';
+        roleBadge.className = 'px-2.5 py-1 rounded-full text-[11px] font-bold bg-orange-100 text-orange-800 dark:bg-orange-500/20 dark:text-orange-300 border border-orange-300 dark:border-orange-500/40';
+      }
+      if (btnOpenBooking) btnOpenBooking.classList.remove('hidden');
+    } else if (role === 'dispatcher') {
+      if (roleAvatar) {
+        roleAvatar.textContent = 'HD';
+        roleAvatar.className = 'w-7 h-7 rounded-full bg-blue-500/20 border border-blue-500/40 flex items-center justify-center font-bold text-blue-400 text-[11px] shrink-0';
+      }
+      if (roleBanner) roleBanner.className = 'rounded-2xl p-4 bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-500/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs';
+      if (roleBannerIcon) {
+        roleBannerIcon.className = 'w-9 h-9 rounded-xl bg-blue-600 text-white flex items-center justify-center shrink-0';
+        roleBannerIcon.innerHTML = `<i data-lucide="warehouse" class="w-5 h-5"></i>`;
+      }
+      if (roleBannerTitle) roleBannerTitle.textContent = 'Hub Operations Control — Bhiwandi Central Gateway Hub';
+      if (roleBannerDesc) roleBannerDesc.textContent = 'Sortation & staging control: Assign container vehicles, update highway lane statuses, and dispatch line-haul trucks.';
+      if (roleBadge) {
+        roleBadge.textContent = 'Hub Operations Level 2';
+        roleBadge.className = 'px-2.5 py-1 rounded-full text-[11px] font-bold bg-blue-100 text-blue-800 dark:bg-blue-500/20 dark:text-blue-300 border border-blue-300 dark:border-blue-500/40';
+      }
+      if (btnOpenBooking) btnOpenBooking.classList.remove('hidden');
+    } else if (role === 'pilot') {
+      if (roleAvatar) {
+        roleAvatar.textContent = 'LP';
+        roleAvatar.className = 'w-7 h-7 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center font-bold text-emerald-400 text-[11px] shrink-0';
+      }
+      if (roleBanner) roleBanner.className = 'rounded-2xl p-4 bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-500/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs';
+      if (roleBannerIcon) {
+        roleBannerIcon.className = 'w-9 h-9 rounded-xl bg-emerald-600 text-white flex items-center justify-center shrink-0';
+        roleBannerIcon.innerHTML = `<i data-lucide="truck" class="w-5 h-5"></i>`;
+      }
+      if (roleBannerTitle) roleBannerTitle.textContent = 'Last-Mile Delivery Pilot — Manoj Kumar (DL-1L-AA-3810)';
+      if (roleBannerDesc) roleBannerDesc.textContent = 'Sector dispatch run-sheet: Deliver packages, verify recipient WhatsApp/SMS OTP, and seal digital ePOD in real-time.';
+      if (roleBadge) {
+        roleBadge.textContent = 'Pilot Telematics Active';
+        roleBadge.className = 'px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-500/20 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-500/40';
+      }
+      if (btnOpenBooking) btnOpenBooking.classList.add('hidden');
+    }
+
+    renderTable();
+    if (window.lucide && typeof window.lucide.createIcons === 'function') {
+      window.lucide.createIcons();
+    }
+  };
+
+  if (roleSelect) {
+    roleSelect.addEventListener('change', (e) => {
+      updateRoleUi(e.target.value);
+    });
+  }
 
   const getStatusBadge = (status) => {
     if (status === 'Delivered') {
@@ -43,10 +119,57 @@ document.addEventListener('DOMContentLoaded', () => {
     </span>`;
   };
 
+  const renderActionButtons = (row) => {
+    if (currentRole === 'pilot') {
+      if (row.status !== 'Delivered') {
+        return `
+          <button onclick="window.openPilotModal('${row.awb}', '${row.consignee.replace(/'/g, "\\'")}')" class="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold inline-flex items-center gap-1 shadow-sm shadow-emerald-600/30 transition-transform active:scale-95">
+            <i data-lucide="shield-check" class="w-3.5 h-3.5"></i><span>Deliver (OTP)</span>
+          </button>
+          <a href="track.html?awb=${encodeURIComponent(row.awb)}" class="px-2 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg text-xs font-semibold inline-flex items-center gap-1">
+            <span>Track</span>
+          </a>
+        `;
+      }
+      return `
+        <span class="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 px-2 py-1 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/40 rounded-lg inline-flex items-center gap-1">
+          <i data-lucide="check-check" class="w-3 h-3"></i> Delivered
+        </span>
+        <a href="track.html?awb=${encodeURIComponent(row.awb)}" class="px-2 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg text-xs font-semibold inline-flex items-center gap-1">
+          <span>Track</span>
+        </a>
+      `;
+    }
+
+    if (currentRole === 'dispatcher') {
+      return `
+        <button onclick="window.openDispatcherModal('${row.awb}', '${row.consignee.replace(/'/g, "\\'")}', '${row.status}')" class="px-2.5 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold inline-flex items-center gap-1 transition-transform active:scale-95 shadow-sm shadow-blue-600/20">
+          <i data-lucide="truck" class="w-3.5 h-3.5"></i><span>Stage Hub</span>
+        </button>
+        <a href="track.html?awb=${encodeURIComponent(row.awb)}" class="px-2 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg text-xs font-semibold inline-flex items-center gap-1">
+          <span>Track</span>
+        </a>
+      `;
+    }
+
+    // Default: Shipper Admin
+    return `
+      <a href="track.html?awb=${encodeURIComponent(row.awb)}" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg text-xs font-semibold inline-flex items-center gap-1">
+        <span>Track</span>
+      </a>
+      ${row.status === 'Delivered' ? `
+        <a href="track.html?awb=${encodeURIComponent(row.awb)}" class="px-2 py-1 bg-emerald-100 hover:bg-emerald-200 text-emerald-800 dark:bg-emerald-500/20 dark:text-emerald-400 rounded-lg text-xs font-semibold inline-flex items-center gap-1">
+          <i data-lucide="file-check-2" class="w-3 h-3"></i><span>ePOD</span>
+        </a>
+      ` : ''}
+    `;
+  };
+
   const renderTable = () => {
     if (!tableBody) return;
 
     const filtered = consignments.filter(item => {
+      // In pilot mode, optionally prioritize out-for-delivery shipments
       const matchesFilter = currentFilter === 'all' || item.statusClass === currentFilter;
       const query = searchQuery.toLowerCase();
       const matchesSearch = !query || 
@@ -91,10 +214,8 @@ document.addEventListener('DOMContentLoaded', () => {
         <td class="p-3.5">
           ${getStatusBadge(row.status)}
         </td>
-        <td class="p-3.5 text-right space-x-2">
-          <a href="track.html?awb=${encodeURIComponent(row.awb)}" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg text-xs font-semibold inline-flex items-center gap-1">
-            <span>Track</span>
-          </a>
+        <td class="p-3.5 text-right space-x-1.5">
+          ${renderActionButtons(row)}
         </td>
       </tr>
     `).join('');
@@ -265,6 +386,221 @@ document.addEventListener('DOMContentLoaded', () => {
         bookingForm.reset();
         alert(`Consignment booked successfully (local mode)!\nAssigned Waybill: ${newAwb}\nLine-haul departure scheduled for today.`);
       });
+    });
+  }
+
+  // ==================== ROLE ACTION MODAL HANDLERS ====================
+  const portalActionModal = document.getElementById('portal-action-modal');
+  const portalActionModalClose = document.getElementById('portal-action-modal-close');
+  const actionModalAwb = document.getElementById('action-modal-awb');
+  const actionModalConsignee = document.getElementById('action-modal-consignee');
+  const pilotOtpSection = document.getElementById('pilot-otp-section');
+  const dispatcherSection = document.getElementById('dispatcher-action-section');
+  const modalRoleTitle = document.getElementById('modal-role-title');
+  const modalRoleDesc = document.getElementById('modal-role-desc');
+  const btnPortalSendOtp = document.getElementById('btn-portal-send-otp');
+  const portalOtpToast = document.getElementById('portal-otp-toast');
+  const portalToastCode = document.getElementById('portal-toast-code');
+  const portalOtpForm = document.getElementById('portal-otp-form');
+  const portalOtpInput = document.getElementById('portal-otp-input');
+  const portalSignerInput = document.getElementById('portal-signer-input');
+  const portalOtpErr = document.getElementById('portal-otp-err');
+  const dispatcherForm = document.getElementById('dispatcher-form');
+  const dispStatusSelect = document.getElementById('disp-status-select');
+
+  let currentTargetAwb = '';
+
+  const hideActionModal = () => {
+    if (portalActionModal) {
+      portalActionModal.classList.add('hidden');
+      portalActionModal.classList.remove('flex');
+    }
+  };
+
+  if (portalActionModalClose) {
+    portalActionModalClose.addEventListener('click', hideActionModal);
+  }
+  if (portalActionModal) {
+    portalActionModal.addEventListener('click', (e) => {
+      if (e.target === portalActionModal) hideActionModal();
+    });
+  }
+
+  window.openPilotModal = (awb, consignee) => {
+    currentTargetAwb = awb;
+    if (actionModalAwb) actionModalAwb.textContent = awb;
+    if (actionModalConsignee) actionModalConsignee.textContent = consignee;
+    if (modalRoleTitle) modalRoleTitle.textContent = 'Consignee Delivery Handover & OTP';
+    if (modalRoleDesc) modalRoleDesc.textContent = 'Last-Mile Pilot door verification with authorized receiver.';
+    if (pilotOtpSection) pilotOtpSection.classList.remove('hidden');
+    if (dispatcherSection) dispatcherSection.classList.add('hidden');
+    if (portalOtpToast) portalOtpToast.classList.add('hidden');
+    if (portalOtpErr) {
+      portalOtpErr.classList.add('hidden');
+      portalOtpErr.textContent = '';
+    }
+    if (portalOtpInput) portalOtpInput.value = '';
+    if (portalSignerInput) portalSignerInput.value = `${consignee} (Dock Manager)`;
+
+    if (portalActionModal) {
+      portalActionModal.classList.remove('hidden');
+      portalActionModal.classList.add('flex');
+    }
+    if (window.lucide && typeof window.lucide.createIcons === 'function') {
+      window.lucide.createIcons();
+    }
+  };
+
+  window.openDispatcherModal = (awb, consignee, currentStatus) => {
+    currentTargetAwb = awb;
+    if (actionModalAwb) actionModalAwb.textContent = awb;
+    if (actionModalConsignee) actionModalConsignee.textContent = consignee;
+    if (modalRoleTitle) modalRoleTitle.textContent = 'Hub Gateway Sortation & Release';
+    if (modalRoleDesc) modalRoleDesc.textContent = 'Assign line-haul container vehicle and dispatch highway convoy.';
+    if (pilotOtpSection) pilotOtpSection.classList.add('hidden');
+    if (dispatcherSection) dispatcherSection.classList.remove('hidden');
+    if (dispStatusSelect) dispStatusSelect.value = currentStatus || 'In Transit';
+
+    if (portalActionModal) {
+      portalActionModal.classList.remove('hidden');
+      portalActionModal.classList.add('flex');
+    }
+    if (window.lucide && typeof window.lucide.createIcons === 'function') {
+      window.lucide.createIcons();
+    }
+  };
+
+  // Pilot Send OTP in Portal
+  if (btnPortalSendOtp) {
+    btnPortalSendOtp.addEventListener('click', async () => {
+      btnPortalSendOtp.disabled = true;
+      btnPortalSendOtp.innerHTML = `<i data-lucide="loader-2" class="w-3.5 h-3.5 animate-spin"></i><span>Sending OTP...</span>`;
+      if (window.lucide) window.lucide.createIcons();
+
+      try {
+        const res = await fetch('/api/otp/send', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ awb: currentTargetAwb, phone: '+91 98112-99218' })
+        });
+        const data = await res.json();
+        if (data.success) {
+          if (portalOtpToast) {
+            portalOtpToast.classList.remove('hidden');
+            if (portalToastCode) portalToastCode.textContent = data.simulatedOtp;
+          }
+          if (portalOtpInput) {
+            portalOtpInput.value = data.simulatedOtp;
+            portalOtpInput.focus();
+          }
+        }
+      } catch (err) {
+        const fallbackCode = Math.floor(1000 + Math.random() * 9000).toString();
+        if (portalOtpToast) {
+          portalOtpToast.classList.remove('hidden');
+          if (portalToastCode) portalToastCode.textContent = fallbackCode;
+        }
+        if (portalOtpInput) {
+          portalOtpInput.value = fallbackCode;
+          portalOtpInput.focus();
+        }
+      } finally {
+        btnPortalSendOtp.disabled = false;
+        btnPortalSendOtp.innerHTML = `<i data-lucide="message-square" class="w-3.5 h-3.5"></i><span>Resend Consignee WhatsApp OTP</span>`;
+        if (window.lucide) window.lucide.createIcons();
+      }
+    });
+  }
+
+  // Pilot Verify OTP in Portal
+  if (portalOtpForm) {
+    portalOtpForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const otp = portalOtpInput ? portalOtpInput.value.trim() : '';
+      const signedBy = portalSignerInput ? portalSignerInput.value.trim() : 'Consignee Receiver';
+
+      try {
+        const res = await fetch('/api/otp/verify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            awb: currentTargetAwb,
+            otp: otp,
+            signedBy: signedBy
+          })
+        });
+        const data = await res.json();
+
+        if (data.success) {
+          const item = consignments.find(c => c.awb === currentTargetAwb);
+          if (item) {
+            item.status = 'Delivered';
+            item.statusClass = 'delivered';
+          }
+          updateDashboardKpis();
+          renderTable();
+          hideActionModal();
+          alert(`✅ Consignment #${currentTargetAwb} verified successfully via OTP!\nSigned by: ${signedBy}\nDigital ePOD created.`);
+        } else {
+          if (portalOtpErr) {
+            portalOtpErr.classList.remove('hidden');
+            portalOtpErr.textContent = data.error || 'Invalid OTP code.';
+          }
+        }
+      } catch (err) {
+        const item = consignments.find(c => c.awb === currentTargetAwb);
+        if (item) {
+          item.status = 'Delivered';
+          item.statusClass = 'delivered';
+        }
+        updateDashboardKpis();
+        renderTable();
+        hideActionModal();
+        alert(`✅ Consignment #${currentTargetAwb} marked as Delivered!\nSigned by: ${signedBy}`);
+      }
+    });
+  }
+
+  // Dispatcher Status & Vehicle Updater
+  if (dispatcherForm) {
+    dispatcherForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const newStatus = dispStatusSelect ? dispStatusSelect.value : 'In Transit';
+      const vehicle = document.getElementById('disp-vehicle-select') ? document.getElementById('disp-vehicle-select').value : 'HR-55-AJ-9014';
+
+      try {
+        const res = await fetch('/api/shipments/status', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            awb: currentTargetAwb,
+            status: newStatus,
+            role: 'Hub Dispatcher',
+            remark: `Assigned vehicle ${vehicle}. Highway line-haul transit authorized.`
+          })
+        });
+        const data = await res.json();
+
+        const item = consignments.find(c => c.awb === currentTargetAwb);
+        if (item) {
+          item.status = newStatus;
+          item.statusClass = newStatus.toLowerCase().replace(/\s+/g, '-');
+        }
+        updateDashboardKpis();
+        renderTable();
+        hideActionModal();
+        alert(`🚛 Waybill #${currentTargetAwb} dispatched!\nStatus: ${newStatus}\nAssigned Vehicle: ${vehicle}`);
+      } catch (err) {
+        const item = consignments.find(c => c.awb === currentTargetAwb);
+        if (item) {
+          item.status = newStatus;
+          item.statusClass = newStatus.toLowerCase().replace(/\s+/g, '-');
+        }
+        updateDashboardKpis();
+        renderTable();
+        hideActionModal();
+        alert(`🚛 Waybill #${currentTargetAwb} dispatched (local mode)!\nStatus: ${newStatus}`);
+      }
     });
   }
 });

@@ -1,12 +1,17 @@
 const http = require('http');
+const https = require('https');
 const fs = require('fs');
 const path = require('path');
 const url = require('url');
+const crypto = require('crypto');
 
 const PORT = process.env.PORT || 3000;
 const PUBLIC_DIR = __dirname;
 const DB_FILE = path.join(__dirname, 'data', 'database.json');
 const SEED_FILE = path.join(__dirname, 'data', 'seed-data.json');
+
+// In-memory OTP Store for Consignee Verification
+const otpStore = {};
 
 // MIME types dictionary
 const MIME_TYPES = {
@@ -446,6 +451,316 @@ async function handleApiRequest(req, res, parsedUrl) {
       });
     } catch (err) {
       return sendJson(res, 400, { errors: [{ message: err.message }] });
+    }
+  }
+
+  // 9. Consignee Delivery OTP Dispatch: POST /api/otp/send
+  if (pathname === '/api/otp/send' && method === 'POST') {
+    try {
+      const data = await parseJsonBody(req);
+      const awb = (data.awb || '').trim().toUpperCase();
+      if (!awb) {
+        return sendJson(res, 400, { success: false, error: 'Field "awb" is required.' });
+      }
+
+      // Generate secure 4-digit OTP
+      const otp = Math.floor(1000 + Math.random() * 9000).toString();
+      const phone = data.phone || '+91 98112-99218';
+      const channel = data.channel || 'all';
+
+      otpStore[awb] = {
+        otp,
+        phone,
+        createdAt: Date.now(),
+        expiresAt: Date.now() + 15 * 60 * 1000 // 15 mins expiry
+      };
+
+      const maskedPhone = phone.replace(/(\+?\d{2,4})\d{4,6}(\d{3,4})/, '$1-XXXX-$2');
+
+      return sendJson(res, 200, {
+        success: true,
+        awb,
+        phone: maskedPhone,
+        channel: channel === 'all' ? 'WhatsApp & SMS' : channel,
+        simulatedOtp: otp,
+        message: `Security OTP ${otp} dispatched via WhatsApp & SMS to consignee at ${maskedPhone}. Valid for 15 minutes.`
+      });
+    } catch (err) {
+      return sendJson(res, 500, { success: false, error: err.message });
+    }
+  }
+
+  // 10. Consignee Delivery OTP Verification & ePOD Seal: POST /api/otp/verify
+  if (pathname === '/api/otp/verify' && method === 'POST') {
+    try {
+      const data = await parseJsonBody(req);
+      const awb = (data.awb || '').trim().toUpperCase();
+      const inputOtp = (data.otp || '').trim();
+      const signedBy = (data.signedBy || '').trim() || 'R. S. Narayanan (Store Incharge)';
+      const remarks = data.remarks || 'Cargo cartons verified intact & sound condition.';
+
+      if (!awb || !inputOtp) {
+        return sendJson(res, 400, { success: false, error: 'Both "awb" and "otp" are required.' });
+      }
+
+      const stored = otpStore[awb];
+      // Allow stored OTP match OR master testing OTP "9921" or "4821"
+      const isValid = (stored && stored.otp === inputOtp) || inputOtp === '9921' || inputOtp === '4821';
+
+      if (!isValid) {
+        return sendJson(res, 400, {
+          success: false,
+          error: 'Invalid or expired OTP. Please verify the code received via WhatsApp/SMS.'
+        });
+      }
+
+      const nowIso = new Date().toISOString();
+      const nowFormatted = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', dateStyle: 'medium', timeStyle: 'short' }) + ' IST';
+
+      // Update in db.shipments
+      let shipment = db.shipments[awb];
+      if (!shipment) {
+        shipment = {
+          awb,
+          origin: 'Origin Hub',
+          destination: 'Consignee Premise',
+          consignor: 'Shipper Account',
+          consignee: signedBy,
+          cargo: 'Commercial B2B Freight',
+          vehicle: 'NexaRoute EV Fleet',
+          ewb: '8819-' + Math.floor(1000 + Math.random() * 9000),
+          milestones: []
+        };
+        db.shipments[awb] = shipment;
+      }
+
+      shipment.status = 'Delivered';
+      shipment.progress = 100;
+      shipment.isDelivered = true;
+      shipment.deliveredTime = nowFormatted;
+      shipment.headline = 'Consignment Delivered Successfully';
+      shipment.subhead = `Digitally signed & OTP verified by: ${signedBy} • ${nowFormatted}`;
+      shipment.epodVerified = true;
+      shipment.epodSignedBy = signedBy;
+      shipment.epodVerifiedAt = nowIso;
+      shipment.epodRemarks = remarks;
+
+      // Mark all milestones as done, and append / update delivery milestone
+      if (Array.isArray(shipment.milestones)) {
+        shipment.milestones.forEach(m => { m.done = true; });
+        const lastMilestone = shipment.milestones[shipment.milestones.length - 1];
+        if (lastMilestone && lastMilestone.title.toLowerCase().includes('delivered')) {
+          lastMilestone.done = true;
+          lastMilestone.time = nowFormatted;
+          lastMilestone.note = `OTP verified via WhatsApp/SMS. Digitally signed by ${signedBy}.`;
+        } else {
+          shipment.milestones.push({
+            title: 'Delivered & Signed ePOD (OTP Verified)',
+            location: shipment.destination || 'Consignee Receiving Dock',
+            time: nowFormatted,
+            done: true,
+            note: `OTP verified via WhatsApp/SMS. Signed by ${signedBy}.`
+          });
+        }
+      }
+
+      // Update in db.consignments
+      const cons = db.consignments.find(c => c.awb === awb);
+      if (cons) {
+        cons.status = 'Delivered';
+        cons.statusClass = 'delivered';
+      }
+
+      saveDatabase();
+      delete otpStore[awb];
+
+      return sendJson(res, 200, {
+        success: true,
+        message: 'Consignment successfully delivered and digital ePOD sealed.',
+        awb,
+        status: 'Delivered',
+        deliveredTime: nowFormatted,
+        signedBy,
+        epodVerified: true,
+        shipment
+      });
+    } catch (err) {
+      return sendJson(res, 500, { success: false, error: err.message });
+    }
+  }
+
+  // 11. Webhook Dispatch Simulator: POST /api/webhooks/test
+  if (pathname === '/api/webhooks/test' && method === 'POST') {
+    try {
+      const data = await parseJsonBody(req);
+      const targetUrl = (data.targetUrl || 'https://webhook.site/simulate-nexaroute').trim();
+      const event = data.event || 'consignment.delivered';
+      const awb = data.awb || 'NX-IND-99218';
+      const secret = data.secret || 'nexaroute_wh_sec_2026';
+
+      const deliveryId = 'del_' + crypto.randomBytes(8).toString('hex');
+      const timestamp = new Date().toISOString();
+
+      const payload = {
+        event,
+        deliveryId,
+        timestamp,
+        producer: 'NexaRoute Logistics Event Bus v2.5',
+        data: {
+          awb,
+          status: event === 'consignment.delivered' ? 'Delivered' : 'In Transit',
+          origin: 'Bhiwandi Hub, Mumbai (MH)',
+          destination: 'Peenya Hub, Bengaluru (KA)',
+          vehicle: 'Ashok Leyland 32ft MXL (HR-55-AJ-9014)',
+          telematics: {
+            speedKmh: event === 'consignment.delivered' ? 0 : 58,
+            tempC: 24.2,
+            tamperSensor: 'Clean'
+          },
+          consignee: 'Organica Naturals Hub',
+          customData: data.customData || {}
+        }
+      };
+
+      const payloadString = JSON.stringify(payload);
+      const signature = 'sha256=' + crypto.createHmac('sha256', secret).update(payloadString).digest('hex');
+
+      const startMs = Date.now();
+      let liveResponse = null;
+
+      if (targetUrl.startsWith('http') && !targetUrl.includes('simulate-nexaroute')) {
+        try {
+          const parsed = new URL(targetUrl);
+          const isHttps = parsed.protocol === 'https:';
+          const client = isHttps ? https : http;
+
+          liveResponse = await new Promise((resolve) => {
+            const reqOut = client.request(parsed, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'X-NexaRoute-Event': event,
+                'X-NexaRoute-Delivery-Id': deliveryId,
+                'X-NexaRoute-Signature': signature,
+                'User-Agent': 'NexaRoute-WebhookEngine/2.5'
+              },
+              timeout: 4000
+            }, (resOut) => {
+              let resData = '';
+              resOut.on('data', c => { resData += c; });
+              resOut.on('end', () => {
+                resolve({
+                  statusCode: resOut.statusCode,
+                  durationMs: Date.now() - startMs,
+                  bodyPreview: resData.slice(0, 300) || 'OK'
+                });
+              });
+            });
+
+            reqOut.on('error', (e) => {
+              resolve({
+                statusCode: 0,
+                durationMs: Date.now() - startMs,
+                error: e.message
+              });
+            });
+
+            reqOut.on('timeout', () => {
+              reqOut.destroy();
+              resolve({
+                statusCode: 408,
+                durationMs: Date.now() - startMs,
+                error: 'Request timed out after 4000ms'
+              });
+            });
+
+            reqOut.write(payloadString);
+            reqOut.end();
+          });
+        } catch (e) {
+          liveResponse = { statusCode: 0, error: e.message, durationMs: Date.now() - startMs };
+        }
+      } else {
+        liveResponse = {
+          statusCode: 200,
+          durationMs: 38,
+          bodyPreview: '{"status":"received","ack_timestamp":"' + new Date().toISOString() + '"}'
+        };
+      }
+
+      return sendJson(res, 200, {
+        success: true,
+        deliveryId,
+        event,
+        targetUrl,
+        signature,
+        durationMs: liveResponse.durationMs || 35,
+        httpStatus: liveResponse.statusCode || 200,
+        responsePreview: liveResponse.bodyPreview || (liveResponse.error ? 'Dispatch error: ' + liveResponse.error : 'Acknowledged 200 OK'),
+        headersSent: {
+          'Content-Type': 'application/json',
+          'X-NexaRoute-Event': event,
+          'X-NexaRoute-Delivery-Id': deliveryId,
+          'X-NexaRoute-Signature': signature,
+          'User-Agent': 'NexaRoute-WebhookEngine/2.5'
+        },
+        payload
+      });
+    } catch (err) {
+      return sendJson(res, 500, { success: false, error: err.message });
+    }
+  }
+
+  // 12. Consignment Status Mutation: POST /api/shipments/status
+  if (pathname === '/api/shipments/status' && method === 'POST') {
+    try {
+      const data = await parseJsonBody(req);
+      const awb = (data.awb || '').trim().toUpperCase();
+      const newStatus = (data.status || '').trim();
+      const role = data.role || 'Dispatcher';
+      const remark = data.remark || 'Status updated via Shipper Central';
+
+      if (!awb || !newStatus) {
+        return sendJson(res, 400, { success: false, error: 'Both "awb" and "status" are required.' });
+      }
+
+      const cons = db.consignments.find(c => c.awb === awb);
+      if (cons) {
+        cons.status = newStatus;
+        cons.statusClass = newStatus.toLowerCase().replace(/\s+/g, '-');
+      }
+
+      let shipment = db.shipments[awb];
+      if (shipment) {
+        shipment.status = newStatus;
+        if (newStatus === 'Delivered') {
+          shipment.isDelivered = true;
+          shipment.progress = 100;
+        } else if (newStatus === 'Out for Delivery') {
+          shipment.progress = 90;
+        } else if (newStatus === 'In Transit') {
+          shipment.progress = 60;
+        }
+        if (Array.isArray(shipment.milestones)) {
+          shipment.milestones.push({
+            title: `Status: ${newStatus}`,
+            location: data.location || 'Regional Operations Hub',
+            time: 'Just now',
+            done: true,
+            note: `${remark} (Updated by ${role})`
+          });
+        }
+      }
+
+      saveDatabase();
+      return sendJson(res, 200, {
+        success: true,
+        message: `Consignment #${awb} updated to status "${newStatus}"`,
+        awb,
+        status: newStatus
+      });
+    } catch (err) {
+      return sendJson(res, 500, { success: false, error: err.message });
     }
   }
 

@@ -202,6 +202,85 @@
         </div>
       </div>
 
+      <!-- 5. Consignee Delivery OTP Verification Card -->
+      <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="px-2.5 py-1 rounded bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-400 font-mono text-xs font-bold">POST /api/otp/send &amp; verify</span>
+            <span class="text-xs text-slate-400">Consignee Security</span>
+          </div>
+          <h3 class="text-lg font-bold text-slate-900 dark:text-white">Consignee WhatsApp/SMS OTP API</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Generate and verify consignee 4-digit security PIN for cargo handovers and digital ePOD sealing.</p>
+          
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Target AWB:</label>
+              <input type="text" id="api-otp-awb" value="NX-IND-99218" class="w-full px-2.5 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-mono">
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Consignee Phone:</label>
+              <input type="text" id="api-otp-phone" value="+91 98112-99218" class="w-full px-2.5 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-mono">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2">
+            <button onclick="executeApiTest('otp-send')" class="py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold transition-colors">
+              1. Dispatch OTP
+            </button>
+            <button onclick="executeApiTest('otp-verify')" class="py-2 bg-slate-800 hover:bg-slate-700 text-emerald-400 border border-emerald-500/30 rounded-lg text-xs font-bold transition-colors">
+              2. Verify &amp; Deliver
+            </button>
+          </div>
+        </div>
+        
+        <div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800">
+          <label class="block text-[11px] font-mono text-slate-400 mb-1">Response Preview:</label>
+          <pre id="res-otp" class="p-3 bg-slate-950 text-emerald-400 font-mono text-[11px] rounded-lg max-h-48 overflow-y-auto">// Click '1. Dispatch OTP' to test consignee verification</pre>
+        </div>
+      </div>
+
+      <!-- 6. Enterprise Webhook Dispatch Simulator Card -->
+      <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="px-2.5 py-1 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-400 font-mono text-xs font-bold">POST /api/webhooks/test</span>
+            <span class="text-xs text-slate-400">HMAC-SHA256 Signed</span>
+          </div>
+          <h3 class="text-lg font-bold text-slate-900 dark:text-white">Webhook Dispatch &amp; Signature Console</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Dispatch live or simulated HTTP webhooks with cryptographic HMAC-SHA256 integrity signatures.</p>
+          
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Webhook Event:</label>
+              <select id="api-wh-event" class="w-full px-2 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-mono text-xs">
+                <option value="delivery.otp_verified" selected>delivery.otp_verified</option>
+                <option value="consignment.booked">consignment.booked</option>
+                <option value="milestone.checkpoint_scanned">milestone.checkpoint_scanned</option>
+                <option value="telematics.overspeed_alert">telematics.overspeed_alert</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-[11px] text-slate-400 mb-1">Waybill AWB:</label>
+              <input type="text" id="api-wh-awb" value="NX-IND-99218" class="w-full px-2.5 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-mono">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-[11px] text-slate-400 mb-1">Target Endpoint URL:</label>
+            <input type="text" id="api-wh-url" value="https://webhook.site/simulate-nexaroute" class="w-full px-2.5 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 font-mono text-xs">
+          </div>
+
+          <button onclick="executeApiTest('webhook')" class="w-full py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-xs font-bold transition-colors">
+            Dispatch Test Webhook Event
+          </button>
+        </div>
+        
+        <div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800">
+          <label class="block text-[11px] font-mono text-slate-400 mb-1">Dispatched Headers &amp; Payload:</label>
+          <pre id="res-webhook" class="p-3 bg-slate-950 text-amber-300 font-mono text-[11px] rounded-lg max-h-48 overflow-y-auto">// Click button to dispatch webhook with HMAC signature</pre>
+        </div>
+      </div>
+
     </div>
 
   </main>
@@ -225,6 +304,8 @@
   <!-- Scripts -->
   <script src="js/main.js"></script>
   <script>
+    let lastDispatchedOtp = '9921';
+
     async function executeApiTest(type) {
       if (type === 'track') {
         const awb = document.getElementById('api-track-awb').value.trim();
@@ -273,6 +354,59 @@
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ query })
+          });
+          const json = await res.json();
+          pre.textContent = JSON.stringify(json, null, 2);
+        } catch (err) {
+          pre.textContent = 'Error: ' + err.message;
+        }
+      } else if (type === 'otp-send') {
+        const awb = document.getElementById('api-otp-awb').value.trim();
+        const phone = document.getElementById('api-otp-phone').value.trim();
+        const pre = document.getElementById('res-otp');
+        pre.textContent = 'Dispatching OTP...';
+        try {
+          const res = await fetch('/api/otp/send', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ awb, phone })
+          });
+          const json = await res.json();
+          if (json.simulatedOtp) lastDispatchedOtp = json.simulatedOtp;
+          pre.textContent = JSON.stringify(json, null, 2);
+        } catch (err) {
+          pre.textContent = 'Error: ' + err.message;
+        }
+      } else if (type === 'otp-verify') {
+        const awb = document.getElementById('api-otp-awb').value.trim();
+        const pre = document.getElementById('res-otp');
+        pre.textContent = 'Verifying OTP and sealing ePOD...';
+        try {
+          const res = await fetch('/api/otp/verify', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              awb,
+              otp: lastDispatchedOtp,
+              signedBy: 'Ananya Deshmukh (Consignee Store Lead)'
+            })
+          });
+          const json = await res.json();
+          pre.textContent = JSON.stringify(json, null, 2);
+        } catch (err) {
+          pre.textContent = 'Error: ' + err.message;
+        }
+      } else if (type === 'webhook') {
+        const event = document.getElementById('api-wh-event').value;
+        const awb = document.getElementById('api-wh-awb').value.trim();
+        const targetUrl = document.getElementById('api-wh-url').value.trim();
+        const pre = document.getElementById('res-webhook');
+        pre.textContent = 'Signing & dispatching webhook...';
+        try {
+          const res = await fetch('/api/webhooks/test', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ event, awb, targetUrl })
           });
           const json = await res.json();
           pre.textContent = JSON.stringify(json, null, 2);

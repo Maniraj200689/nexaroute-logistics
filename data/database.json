@@ -20,8 +20,8 @@
       "service": "Express Surface (PTL)",
       "pkgs": "14 Boxes",
       "weight": "340 kg",
-      "status": "In Transit",
-      "statusClass": "in-transit",
+      "status": "Delivered",
+      "statusClass": "delivered",
       "createdAt": "2026-10-05T14:20:00Z"
     },
     {
@@ -184,9 +184,9 @@
   "shipments": {
     "NX-IND-99218": {
       "awb": "NX-IND-99218",
-      "status": "In Transit",
-      "headline": "Scheduled for Delivery: Tomorrow by 11:30 AM",
-      "subhead": "Last Checkpoint: Pune Expressway Sortation Hub • 45 mins ago",
+      "status": "Delivered",
+      "headline": "Consignment Delivered Successfully",
+      "subhead": "Digitally signed & OTP verified by: Priya Sharma (Store Manager) • 14 Oct 2026, 10:06 am IST",
       "origin": "Bhiwandi Hub, Mumbai (MH)",
       "destination": "Peenya Hub, Bengaluru (KA)",
       "consignor": "Apex FabTex Mills (Surat)",
@@ -194,9 +194,9 @@
       "cargo": "14 Cartons • 340 kg Textile Cargo",
       "vehicle": "Ashok Leyland 32ft MXL (HR-55-AJ-9014)",
       "ewb": "8819-2041-9921",
-      "progress": 72,
-      "deliveredTime": "Pending Delivery",
-      "isDelivered": false,
+      "progress": 100,
+      "deliveredTime": "14 Oct 2026, 10:06 am IST",
+      "isDelivered": true,
       "telematics": {
         "speedKmh": 62,
         "temperature": "Ambient (26.4°C)",
@@ -231,24 +231,28 @@
           "title": "Inward at Destination Sortation",
           "location": "Bengaluru Peenya Gateway",
           "time": "Expected Tonight, 23:00",
-          "done": false,
+          "done": true,
           "note": "Hub preparation in progress"
         },
         {
           "title": "Out for Consignee Delivery",
           "location": "Peenya Delivery Van Unit",
           "time": "Expected Tomorrow, 09:00",
-          "done": false,
+          "done": true,
           "note": "Delivery route optimization"
         },
         {
           "title": "Delivered & Signed ePOD",
           "location": "Organica Naturals Receiving Dock",
-          "time": "Target Tomorrow, 11:30",
-          "done": false,
-          "note": "Digital signature required"
+          "time": "14 Oct 2026, 10:06 am IST",
+          "done": true,
+          "note": "OTP verified via WhatsApp/SMS. Digitally signed by Priya Sharma (Store Manager)."
         }
-      ]
+      ],
+      "epodVerified": true,
+      "epodSignedBy": "Priya Sharma (Store Manager)",
+      "epodVerifiedAt": "2026-10-14T04:36:18.976Z",
+      "epodRemarks": "Cargo cartons verified intact & sound condition."
     },
     "NX-SUR-40812": {
       "awb": "NX-SUR-40812",
