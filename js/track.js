@@ -200,13 +200,16 @@ document.addEventListener('DOMContentLoaded', () => {
       .then(data => {
         if (data.success && data.shipment) {
           applyShipmentData(data.shipment);
+          triggerDeepLinks(data.shipment);
         } else {
           fallbackRender(awbKey);
+          triggerDeepLinks(shipmentsData[awbKey]);
         }
       })
       .catch(err => {
         console.warn('Live tracking API fetch failed, falling back to local dataset:', err);
         fallbackRender(awbKey);
+        triggerDeepLinks(shipmentsData[awbKey]);
       });
   };
 
@@ -236,11 +239,10 @@ document.addEventListener('DOMContentLoaded', () => {
     applyShipmentData(data);
   };
 
-  // Initial load from URL query
+  // Initial load variables
   const initialAwb = getQueryAwb();
   const trackInput = document.getElementById('track-page-input');
   if (trackInput) trackInput.value = initialAwb;
-  renderShipment(initialAwb);
 
   // Form submit handler
   const trackPageForm = document.getElementById('track-page-form');
@@ -491,4 +493,26 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // Handle URL deep-linking for OTP verification or ePOD modal
+  function triggerDeepLinks(shipment) {
+    const params = new URLSearchParams(window.location.search);
+    const wantsOtp = params.get('verify') === '1' || params.get('otp') === '1';
+    const wantsEpod = params.get('epod') === '1';
+    const isDelivered = shipment && shipment.isDelivered;
+
+    if (wantsOtp && !isDelivered) {
+      const btn = document.getElementById('btn-trigger-otp');
+      if (btn) btn.click();
+    } else if (wantsEpod || (wantsOtp && isDelivered)) {
+      const modal = document.getElementById('epod-modal');
+      if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+    }
+  }
+
+  // Execute initial shipment render with deep-link support
+  renderShipment(initialAwb);
 });
