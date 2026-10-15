@@ -1,6 +1,6 @@
-# NexaRoute Logistics - Modern Marketing Website
+# Vahana Supply Co - Modern Marketing Website & Logistics Platform
 
-A high-performance, fully responsive, modern multi-page marketing website built for **NexaRoute Logistics**, a B2B express freight and supply chain company serving MSMEs and enterprise businesses across India.
+A high-performance, fully responsive, modern multi-page marketing website and supply chain portal built for **Vahana Supply Co**, a B2B express freight and supply chain company serving MSMEs and enterprise businesses across India.
 
 ---
 
@@ -29,7 +29,7 @@ Then open your browser at **[http://localhost:3000](http://localhost:3000)**.
 ## 📁 Project Architecture & Clean Folder Structure
 
 ```
-nexaroute-logistics/
+vahana-supply-co/
 ├── index.html              # Home: Hero, stats, live tracking bar, services overview, why us, testimonials, CTA
 ├── about.html              # About: Our story, mission/vision, core values, leadership team, infrastructure stats
 ├── services.html           # Services: 6 service cards, fleet specs, interactive rate & transit estimator
@@ -134,7 +134,7 @@ The Node.js server (`server.js`) includes a zero-dependency REST & GraphQL API l
   ```json
   {
     "status": "healthy",
-    "service": "NexaRoute Logistics Express API",
+    "service": "Vahana Supply Co Express API",
     "version": "2.5.0",
     "uptimeSeconds": 142
   }

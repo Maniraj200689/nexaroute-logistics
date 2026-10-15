@@ -1,5 +1,5 @@
 /**
- * NexaRoute Logistics - Contact Page Validation & Submission Handling
+ * Vahana Supply Co - Contact Page Validation & Submission Handling
  */
 
 document.addEventListener('DOMContentLoaded', () => {

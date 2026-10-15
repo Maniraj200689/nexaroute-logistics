@@ -1,5 +1,5 @@
 {
-  "name": "nexaroute-logistics",
+  "name": "vahana-supply-co",
   "version": "2.5.0",
   "description": "High-performance marketing website and tech-enabled B2B express freight platform for Indian MSMEs and enterprises.",
   "main": "server.js",
@@ -20,7 +20,7 @@
     "dashboard",
     "tracking"
   ],
-  "author": "NexaRoute Logistics Private Limited",
+  "author": "Vahana Supply Co Private Limited",
   "license": "MIT",
   "engines": {
     "node": ">=18.0.0"

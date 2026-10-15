@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shipper Central Dashboard | NexaRoute Logistics</title>
-  <meta name="description" content="Manage your B2B freight, track active consignments, download manifests, and book express pickups on NexaRoute Shipper Central.">
+  <title>Shipper Central Dashboard | Vahana Supply Co</title>
+  <meta name="description" content="Manage your B2B freight, track active consignments, download manifests, and book express pickups on Vahana Supply Co Shipper Central.">
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -51,7 +51,7 @@
             <div class="w-8 h-8 rounded-lg bg-orange-500 flex items-center justify-center text-white">
               <i data-lucide="truck" class="w-5 h-5"></i>
             </div>
-            <span class="text-lg font-bold font-heading text-white">NexaRoute <span class="text-xs font-normal text-orange-400 bg-orange-500/10 px-2 py-0.5 rounded border border-orange-500/30">Shipper Central</span></span>
+            <span class="text-lg font-bold font-heading text-white">Vahana<span class="text-orange-500"> Supply Co</span> <span class="text-xs font-normal text-orange-400 bg-orange-500/10 px-2 py-0.5 rounded border border-orange-500/30">Shipper Central</span></span>
           </a>
 
           <nav class="hidden md:flex items-center space-x-1 text-xs">
@@ -418,11 +418,251 @@
     </div>
   </div>
 
+  <!-- ==================== RAZORPAY / UPI FREIGHT PAYMENT MODAL ==================== -->
+  <div id="payment-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white max-w-lg w-full rounded-2xl shadow-2xl p-6 sm:p-7 relative border border-slate-200 dark:border-slate-800 space-y-4 max-h-[92vh] overflow-y-auto">
+      
+      <button id="payment-modal-close" class="absolute top-4 right-4 text-slate-400 hover:text-white p-1 rounded-lg">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <!-- Header with Razorpay & UPI Badges -->
+      <div class="flex items-start justify-between pr-8">
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">Instant Settlement</span>
+            <span class="text-[10px] font-semibold text-slate-400 flex items-center gap-1">
+              <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-500"></i> NPCI &amp; RBI Compliant
+            </span>
+          </div>
+          <h3 class="text-lg font-bold font-heading">Advance Freight Payment</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Vahana Supply Co &bull; GSTIN: 06AABCV9921B1ZM</p>
+        </div>
+        <div class="flex items-center gap-1.5 shrink-0">
+          <span class="px-2 py-1 bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 rounded-md font-mono font-bold text-[10px] border border-blue-200 dark:border-blue-800">UPI 2.0</span>
+          <span class="px-2 py-1 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 rounded-md font-mono font-bold text-[10px] border border-indigo-200 dark:border-indigo-800">Razorpay</span>
+        </div>
+      </div>
+
+      <!-- Consignment & Amount Summary -->
+      <div class="bg-slate-50 dark:bg-slate-800/60 p-3.5 rounded-xl border border-slate-200 dark:border-slate-700/60 space-y-2 text-xs">
+        <div class="flex justify-between items-center pb-2 border-b border-slate-200 dark:border-slate-700">
+          <div>
+            <span class="text-slate-400 text-[11px] block">Waybill / Consignment</span>
+            <strong id="pay-modal-awb" class="font-mono text-orange-500 font-bold text-sm">VH-SUR-40812</strong>
+          </div>
+          <div class="text-right">
+            <span class="text-slate-400 text-[11px] block">Total Payable (incl. 18% GST)</span>
+            <strong id="pay-modal-amount-display" class="font-bold text-base text-slate-900 dark:text-white">₹3,363</strong>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-2 text-[11px] text-slate-500 dark:text-slate-400">
+          <div><span class="text-slate-400">Consignee:</span> <span id="pay-modal-consignee" class="font-medium text-slate-700 dark:text-slate-200">TrendCraft Retail</span></div>
+          <div><span class="text-slate-400">Route:</span> <span id="pay-modal-route" class="font-medium text-slate-700 dark:text-slate-200">Surat &rarr; Okhla (DL)</span></div>
+        </div>
+      </div>
+
+      <!-- Payment Tabs -->
+      <div class="flex border-b border-slate-200 dark:border-slate-700 text-xs">
+        <button id="tab-btn-upi" type="button" class="py-2 px-4 font-bold border-b-2 border-orange-500 text-orange-500 transition-colors flex items-center gap-1.5">
+          <i data-lucide="qr-code" class="w-4 h-4"></i>
+          <span>UPI QR &amp; Apps</span>
+        </button>
+        <button id="tab-btn-razorpay" type="button" class="py-2 px-4 font-semibold text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white transition-colors flex items-center gap-1.5">
+          <i data-lucide="credit-card" class="w-4 h-4"></i>
+          <span>Razorpay / NetBanking</span>
+        </button>
+      </div>
+
+      <!-- TAB 1: UPI Section -->
+      <div id="section-upi" class="space-y-3.5">
+        <div class="bg-orange-50 dark:bg-orange-950/20 border border-orange-200 dark:border-orange-500/20 rounded-xl p-3 flex items-center justify-between text-xs">
+          <div>
+            <span class="text-slate-500 dark:text-slate-400 text-[10px] block">Official Merchant VPA</span>
+            <strong id="pay-modal-vpa" class="font-mono text-orange-600 dark:text-orange-400 font-bold">vahana.express@icici</strong>
+          </div>
+          <button id="btn-copy-vpa" type="button" class="px-2.5 py-1 bg-white dark:bg-slate-800 border border-orange-300 dark:border-orange-500/40 rounded-lg text-[11px] font-semibold text-slate-700 dark:text-slate-200 hover:bg-orange-500 hover:text-white transition-colors flex items-center gap-1">
+            <i data-lucide="copy" class="w-3 h-3"></i>
+            <span id="copy-vpa-text">Copy</span>
+          </button>
+        </div>
+
+        <!-- Simulated Dynamic QR Code -->
+        <div class="flex flex-col items-center justify-center p-3 bg-white dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/60 rounded-xl space-y-2">
+          <div class="relative p-2 bg-white rounded-xl shadow-inner border border-slate-200">
+            <svg id="pay-qr-svg" class="w-36 h-36" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="100" height="100" fill="white"/>
+              <rect x="5" y="5" width="28" height="28" rx="4" fill="#0f172a"/>
+              <rect x="9" y="9" width="20" height="20" rx="2" fill="white"/>
+              <rect x="13" y="13" width="12" height="12" rx="1" fill="#ea580c"/>
+              <rect x="67" y="5" width="28" height="28" rx="4" fill="#0f172a"/>
+              <rect x="71" y="9" width="20" height="20" rx="2" fill="white"/>
+              <rect x="75" y="13" width="12" height="12" rx="1" fill="#ea580c"/>
+              <rect x="5" y="67" width="28" height="28" rx="4" fill="#0f172a"/>
+              <rect x="9" y="71" width="20" height="20" rx="2" fill="white"/>
+              <rect x="13" y="75" width="12" height="12" rx="1" fill="#ea580c"/>
+              <rect x="40" y="40" width="20" height="20" rx="4" fill="#0f172a"/>
+              <text x="50" y="53" text-anchor="middle" font-size="10" font-weight="900" fill="#f97316" font-family="sans-serif">VH</text>
+              <circle cx="42" cy="12" r="2.5" fill="#0f172a"/>
+              <circle cx="50" cy="18" r="2.5" fill="#0f172a"/>
+              <circle cx="58" cy="10" r="2.5" fill="#0f172a"/>
+              <circle cx="48" cy="28" r="2.5" fill="#0f172a"/>
+              <circle cx="12" cy="42" r="2.5" fill="#0f172a"/>
+              <circle cx="24" cy="50" r="2.5" fill="#0f172a"/>
+              <circle cx="16" cy="58" r="2.5" fill="#0f172a"/>
+              <circle cx="42" cy="72" r="2.5" fill="#0f172a"/>
+              <circle cx="52" cy="80" r="2.5" fill="#0f172a"/>
+              <circle cx="40" cy="88" r="2.5" fill="#0f172a"/>
+              <circle cx="72" cy="42" r="2.5" fill="#0f172a"/>
+              <circle cx="84" cy="52" r="2.5" fill="#0f172a"/>
+              <circle cx="76" cy="62" r="2.5" fill="#0f172a"/>
+              <circle cx="88" cy="74" r="2.5" fill="#0f172a"/>
+              <circle cx="68" cy="84" r="2.5" fill="#0f172a"/>
+              <circle cx="82" cy="88" r="2.5" fill="#0f172a"/>
+            </svg>
+          </div>
+          <div class="text-center">
+            <span class="text-[11px] text-slate-500 dark:text-slate-400 block">Scan with any UPI App (GPay &bull; PhonePe &bull; Paytm)</span>
+            <span class="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 flex items-center justify-center gap-1 font-semibold">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Dynamic Session Active &bull; Expires in <span id="qr-timer">09:59</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Simulated UPI Apps Row -->
+        <div>
+          <span class="text-[10px] font-semibold text-slate-400 block mb-1.5 uppercase tracking-wider">Fast-Pay via Installed Apps</span>
+          <div class="grid grid-cols-4 gap-2">
+            <button onclick="window.simulateUpiAppPayment('PhonePe')" type="button" class="p-2 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-purple-500 hover:bg-purple-500/10 text-center transition-all">
+              <div class="w-6 h-6 mx-auto rounded-full bg-purple-600 text-white font-bold text-xs flex items-center justify-center">Pe</div>
+              <span class="text-[10px] font-semibold mt-1 block">PhonePe</span>
+            </button>
+            <button onclick="window.simulateUpiAppPayment('Google Pay')" type="button" class="p-2 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:bg-blue-500/10 text-center transition-all">
+              <div class="w-6 h-6 mx-auto rounded-full bg-blue-600 text-white font-bold text-xs flex items-center justify-center">G</div>
+              <span class="text-[10px] font-semibold mt-1 block">GPay</span>
+            </button>
+            <button onclick="window.simulateUpiAppPayment('Paytm UPI')" type="button" class="p-2 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-sky-500 hover:bg-sky-500/10 text-center transition-all">
+              <div class="w-6 h-6 mx-auto rounded-full bg-sky-500 text-white font-bold text-xs flex items-center justify-center">Pt</div>
+              <span class="text-[10px] font-semibold mt-1 block">Paytm</span>
+            </button>
+            <button onclick="window.simulateUpiAppPayment('BHIM UPI')" type="button" class="p-2 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-emerald-500 hover:bg-emerald-500/10 text-center transition-all">
+              <div class="w-6 h-6 mx-auto rounded-full bg-emerald-600 text-white font-bold text-xs flex items-center justify-center">B</div>
+              <span class="text-[10px] font-semibold mt-1 block">BHIM</span>
+            </button>
+          </div>
+        </div>
+
+        <button id="btn-simulate-upi-success" type="button" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-md shadow-emerald-600/30">
+          <i data-lucide="check-circle" class="w-4 h-4"></i>
+          <span>Simulate Instant UPI Authorization</span>
+        </button>
+      </div>
+
+      <!-- TAB 2: Razorpay Commercial Section -->
+      <div id="section-razorpay" class="hidden space-y-3.5">
+        <form id="razorpay-form" class="space-y-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Corporate NetBanking Portal</label>
+            <select id="rzp-bank" class="w-full p-2 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-xs">
+              <option value="HDFC Bank Corporate">HDFC Bank Corporate NetBanking</option>
+              <option value="ICICI Bank Corporate" selected>ICICI Bank Corporate Internet Banking</option>
+              <option value="State Bank of India (CINB)">SBI Corporate Banking</option>
+              <option value="Axis Bank Corporate">Axis Bank Corporate Portal</option>
+              <option value="Kotak Corporate Gateway">Kotak Mahindra Corporate</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Corporate Credit Card / Line-Haul TMS Card</label>
+            <input type="text" id="rzp-card" placeholder="4532 •••• •••• 9921" class="w-full p-2 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-xs font-mono" value="4532 9921 4402 1892" />
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-700 dark:text-slate-300 mb-1">Expiry</label>
+              <input type="text" value="08/29" class="w-full p-2 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-xs font-mono" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-700 dark:text-slate-300 mb-1">CVV</label>
+              <input type="password" value="882" class="w-full p-2 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-xs font-mono" />
+            </div>
+          </div>
+          <button type="submit" id="btn-razorpay-submit" class="w-full py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-md shadow-indigo-600/30">
+            <i data-lucide="lock" class="w-4 h-4"></i>
+            <span>Pay &amp; Verify via Razorpay Gateway</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- RECEIPT / SUCCESS SECTION (Shown after payment verified) -->
+      <div id="section-payment-success" class="hidden space-y-4">
+        <div class="text-center p-4 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-300 dark:border-emerald-600/40 rounded-2xl">
+          <div class="w-12 h-12 mx-auto rounded-full bg-emerald-600 text-white flex items-center justify-center mb-2 shadow-lg shadow-emerald-600/30">
+            <i data-lucide="check" class="w-7 h-7"></i>
+          </div>
+          <h4 class="text-base font-bold font-heading text-emerald-800 dark:text-emerald-300">Advance Freight Payment Received</h4>
+          <p class="text-xs text-emerald-700 dark:text-emerald-400">Electronic Tax Invoice &amp; TMS Receipt generated.</p>
+        </div>
+
+        <!-- Official Tax Invoice Card -->
+        <div class="p-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl space-y-3 text-xs" id="printable-receipt">
+          <div class="flex justify-between items-start border-b border-slate-200 dark:border-slate-700 pb-2">
+            <div>
+              <strong class="font-heading font-bold text-slate-900 dark:text-white text-sm">Vahana Supply Co</strong>
+              <span class="text-[10px] text-slate-400 block">Express Freight &amp; Supply Chain Ltd</span>
+              <span class="text-[10px] text-slate-400 block font-mono">GSTIN: 06AABCV9921B1ZM</span>
+            </div>
+            <div class="text-right">
+              <span class="text-[10px] font-bold text-orange-500 uppercase tracking-wider block">GST Tax Invoice</span>
+              <strong id="receipt-invoice-no" class="font-mono text-slate-900 dark:text-white text-xs">INV-2026-992180</strong>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2 text-[11px]">
+            <div>
+              <span class="text-slate-400 block">Waybill Docket:</span>
+              <strong id="receipt-awb" class="font-mono text-orange-500 font-bold">VH-SUR-40812</strong>
+            </div>
+            <div class="text-right">
+              <span class="text-slate-400 block">Payment Method:</span>
+              <span id="receipt-method" class="font-medium text-slate-700 dark:text-slate-300">UPI Instant Settlement</span>
+            </div>
+            <div>
+              <span class="text-slate-400 block">Transaction Ref (UTR):</span>
+              <span id="receipt-utr" class="font-mono font-medium text-slate-700 dark:text-slate-300">UTR992817263541</span>
+            </div>
+            <div class="text-right">
+              <span class="text-slate-400 block">Payment ID:</span>
+              <span id="receipt-payment-id" class="font-mono text-slate-700 dark:text-slate-300">pay_vhn_7a8109bf</span>
+            </div>
+            <div>
+              <span class="text-slate-400 block">Paid At (IST):</span>
+              <span id="receipt-timestamp" class="text-slate-700 dark:text-slate-300">Just Now</span>
+            </div>
+            <div class="text-right">
+              <span class="text-slate-400 block">Amount Settled:</span>
+              <strong id="receipt-amount" class="text-sm font-bold text-emerald-600 dark:text-emerald-400 font-mono">₹3,363</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex gap-2">
+          <button id="btn-print-receipt" type="button" class="flex-1 py-2.5 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors">
+            <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+            <span>Print Receipt</span>
+          </button>
+          <button id="btn-close-payment-success" type="button" class="flex-1 py-2.5 bg-orange-500 hover:bg-orange-600 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors shadow-md shadow-orange-500/20">
+            <span>Done &bull; Return to Portal</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <!-- ==================== FOOTER ==================== -->
   <footer class="bg-slate-900 border-t border-slate-800 text-slate-400 py-6 text-xs mt-auto">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
       <div class="flex items-center gap-3">
-        <span class="text-white font-bold font-heading">NexaRoute Shipper Central</span>
+        <span class="text-white font-bold font-heading">Vahana Supply Co Shipper Central</span>
         <span class="text-slate-600">|</span>
         <span class="text-slate-500">Connected to Line-Haul TMS v2.5</span>
       </div>

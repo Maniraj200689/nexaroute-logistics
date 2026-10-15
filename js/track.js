@@ -1,5 +1,5 @@
 /**
- * NexaRoute Logistics - Dedicated Tracking & ePOD Logic
+ * Vahana Supply Co - Dedicated Tracking & ePOD Logic
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -214,7 +214,8 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const fallbackRender = (awbKey) => {
-    const data = shipmentsData[awbKey] || {
+    const altKey = awbKey.startsWith('VH-') ? awbKey.replace(/^VH-/, 'NX-') : (awbKey.startsWith('NX-') ? awbKey.replace(/^NX-/, 'VH-') : awbKey);
+    const data = shipmentsData[awbKey] || shipmentsData[altKey] || {
       awb: awbKey,
       status: 'In Transit',
       headline: `Consignment Waybill #${awbKey} Active in Transit`,
@@ -224,7 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
       consignor: 'Registered Commercial Shipper',
       consignee: 'Authorized Consignee Facility',
       cargo: 'Standard Commercial B2B Freight',
-      vehicle: 'NexaRoute Container Fleet',
+      vehicle: 'Vahana Supply Co Container Fleet',
       ewb: 'EWB-' + Math.floor(1000000000 + Math.random() * 9000000000),
       progress: 55,
       deliveredTime: 'Pending Delivery',

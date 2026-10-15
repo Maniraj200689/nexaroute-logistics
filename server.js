@@ -43,7 +43,8 @@ const DISTANCES = {
 let db = {
   consignments: [],
   shipments: {},
-  inquiries: []
+  inquiries: [],
+  payments: []
 };
 
 function loadDatabase() {
@@ -51,9 +52,11 @@ function loadDatabase() {
     if (fs.existsSync(DB_FILE)) {
       const raw = fs.readFileSync(DB_FILE, 'utf-8');
       db = JSON.parse(raw);
+      if (!Array.isArray(db.payments)) db.payments = [];
     } else if (fs.existsSync(SEED_FILE)) {
       const raw = fs.readFileSync(SEED_FILE, 'utf-8');
       db = JSON.parse(raw);
+      if (!Array.isArray(db.payments)) db.payments = [];
       fs.writeFileSync(DB_FILE, JSON.stringify(db, null, 2));
     }
   } catch (err) {
@@ -125,7 +128,7 @@ async function handleApiRequest(req, res, parsedUrl) {
   if (pathname === '/api/health' && method === 'GET') {
     return sendJson(res, 200, {
       status: 'healthy',
-      service: 'NexaRoute Logistics Express API',
+      service: 'Vahana Supply Co Express API',
       version: '2.5.0',
       uptimeSeconds: Math.floor(process.uptime()),
       timestamp: new Date().toISOString()
@@ -144,13 +147,14 @@ async function handleApiRequest(req, res, parsedUrl) {
     }
 
     const cleanAwb = decodeURIComponent(awb).trim().toUpperCase();
-    const shipment = db.shipments[cleanAwb];
+    const altAwb = cleanAwb.startsWith('VH-') ? cleanAwb.replace(/^VH-/, 'NX-') : (cleanAwb.startsWith('NX-') ? cleanAwb.replace(/^NX-/, 'VH-') : cleanAwb);
+    const shipment = db.shipments[cleanAwb] || db.shipments[altAwb];
 
     if (shipment) {
-      return sendJson(res, 200, { success: true, awb: cleanAwb, shipment });
+      return sendJson(res, 200, { success: true, awb: shipment.awb || cleanAwb, shipment });
     }
 
-    // Dynamic fallback for any valid formatted NexaRoute waybill
+    // Dynamic fallback for any valid formatted Vahana Supply Co waybill
     const dynamicShipment = {
       awb: cleanAwb,
       status: 'In Transit',
@@ -161,7 +165,7 @@ async function handleApiRequest(req, res, parsedUrl) {
       consignor: 'Registered Commercial Shipper',
       consignee: 'Authorized Business Consignee',
       cargo: 'Standard Commercial Line-Haul Freight',
-      vehicle: 'NexaRoute Container Fleet (GPS Monitored)',
+      vehicle: 'Vahana Supply Co Container Fleet (GPS Monitored)',
       ewb: '8810-' + Math.floor(1000 + Math.random() * 9000) + '-' + Math.floor(1000 + Math.random() * 9000),
       progress: 60,
       deliveredTime: 'Pending Delivery',
@@ -226,7 +230,7 @@ async function handleApiRequest(req, res, parsedUrl) {
       // Generate realistic AWB prefix based on destination or random letters
       const prefix = data.dest.slice(0, 3).toUpperCase().replace(/[^A-Z]/g, 'DEL');
       const randomNum = Math.floor(10000 + Math.random() * 90000);
-      const newAwb = `NX-${prefix}-${randomNum}`;
+      const newAwb = `VH-${prefix}-${randomNum}`;
 
       const newConsignment = {
         awb: newAwb,
@@ -238,6 +242,7 @@ async function handleApiRequest(req, res, parsedUrl) {
         weight: data.weight ? `${data.weight} kg` : '50 kg',
         status: 'In Transit',
         statusClass: 'in-transit',
+        paymentStatus: data.paymentStatus || 'PENDING',
         createdAt: new Date().toISOString()
       };
 
@@ -252,9 +257,10 @@ async function handleApiRequest(req, res, parsedUrl) {
         consignor: 'Apex FabTex Mills (Verified Shipper)',
         consignee: data.consignee,
         cargo: `${newConsignment.pkgs} • ${newConsignment.weight}`,
-        vehicle: 'NexaRoute Express Line-Haul',
+        vehicle: 'Vahana Express Line-Haul',
         ewb: '8820-' + Math.floor(1000 + Math.random() * 9000) + '-' + Math.floor(1000 + Math.random() * 9000),
         progress: 15,
+        paymentStatus: data.paymentStatus || 'PENDING',
         deliveredTime: 'Scheduled',
         isDelivered: false,
         telematics: {
@@ -463,17 +469,21 @@ async function handleApiRequest(req, res, parsedUrl) {
         return sendJson(res, 400, { success: false, error: 'Field "awb" is required.' });
       }
 
+      const altAwb = awb.startsWith('VH-') ? awb.replace(/^VH-/, 'NX-') : (awb.startsWith('NX-') ? awb.replace(/^NX-/, 'VH-') : awb);
+
       // Generate secure 4-digit OTP
       const otp = Math.floor(1000 + Math.random() * 9000).toString();
       const phone = data.phone || '+91 98112-99218';
       const channel = data.channel || 'all';
 
-      otpStore[awb] = {
+      const entry = {
         otp,
         phone,
         createdAt: Date.now(),
         expiresAt: Date.now() + 15 * 60 * 1000 // 15 mins expiry
       };
+      otpStore[awb] = entry;
+      otpStore[altAwb] = entry;
 
       const maskedPhone = phone.replace(/(\+?\d{2,4})\d{4,6}(\d{3,4})/, '$1-XXXX-$2');
 
@@ -495,6 +505,7 @@ async function handleApiRequest(req, res, parsedUrl) {
     try {
       const data = await parseJsonBody(req);
       const awb = (data.awb || '').trim().toUpperCase();
+      const altAwb = awb.startsWith('VH-') ? awb.replace(/^VH-/, 'NX-') : (awb.startsWith('NX-') ? awb.replace(/^NX-/, 'VH-') : awb);
       const inputOtp = (data.otp || '').trim();
       const signedBy = (data.signedBy || '').trim() || 'R. S. Narayanan (Store Incharge)';
       const remarks = data.remarks || 'Cargo cartons verified intact & sound condition.';
@@ -503,7 +514,7 @@ async function handleApiRequest(req, res, parsedUrl) {
         return sendJson(res, 400, { success: false, error: 'Both "awb" and "otp" are required.' });
       }
 
-      const stored = otpStore[awb];
+      const stored = otpStore[awb] || otpStore[altAwb];
       // Allow stored OTP match OR master testing OTP "9921" or "4821"
       const isValid = (stored && stored.otp === inputOtp) || inputOtp === '9921' || inputOtp === '4821';
 
@@ -518,7 +529,7 @@ async function handleApiRequest(req, res, parsedUrl) {
       const nowFormatted = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', dateStyle: 'medium', timeStyle: 'short' }) + ' IST';
 
       // Update in db.shipments
-      let shipment = db.shipments[awb];
+      let shipment = db.shipments[awb] || db.shipments[altAwb];
       if (!shipment) {
         shipment = {
           awb,
@@ -527,7 +538,7 @@ async function handleApiRequest(req, res, parsedUrl) {
           consignor: 'Shipper Account',
           consignee: signedBy,
           cargo: 'Commercial B2B Freight',
-          vehicle: 'NexaRoute EV Fleet',
+          vehicle: 'Vahana EV Fleet',
           ewb: '8819-' + Math.floor(1000 + Math.random() * 9000),
           milestones: []
         };
@@ -565,7 +576,7 @@ async function handleApiRequest(req, res, parsedUrl) {
       }
 
       // Update in db.consignments
-      const cons = db.consignments.find(c => c.awb === awb);
+      const cons = db.consignments.find(c => c.awb === awb || c.awb === altAwb);
       if (cons) {
         cons.status = 'Delivered';
         cons.statusClass = 'delivered';
@@ -573,6 +584,7 @@ async function handleApiRequest(req, res, parsedUrl) {
 
       saveDatabase();
       delete otpStore[awb];
+      delete otpStore[altAwb];
 
       return sendJson(res, 200, {
         success: true,
@@ -593,10 +605,10 @@ async function handleApiRequest(req, res, parsedUrl) {
   if (pathname === '/api/webhooks/test' && method === 'POST') {
     try {
       const data = await parseJsonBody(req);
-      const targetUrl = (data.targetUrl || 'https://webhook.site/simulate-nexaroute').trim();
+      const targetUrl = (data.targetUrl || 'https://webhook.site/simulate-vahana').trim();
       const event = data.event || 'consignment.delivered';
-      const awb = data.awb || 'NX-IND-99218';
-      const secret = data.secret || 'nexaroute_wh_sec_2026';
+      const awb = data.awb || 'VH-IND-99218';
+      const secret = data.secret || 'vahana_wh_sec_2026';
 
       const deliveryId = 'del_' + crypto.randomBytes(8).toString('hex');
       const timestamp = new Date().toISOString();
@@ -605,7 +617,7 @@ async function handleApiRequest(req, res, parsedUrl) {
         event,
         deliveryId,
         timestamp,
-        producer: 'NexaRoute Logistics Event Bus v2.5',
+        producer: 'Vahana Supply Co Event Bus v2.5',
         data: {
           awb,
           status: event === 'consignment.delivered' ? 'Delivered' : 'In Transit',
@@ -628,7 +640,7 @@ async function handleApiRequest(req, res, parsedUrl) {
       const startMs = Date.now();
       let liveResponse = null;
 
-      if (targetUrl.startsWith('http') && !targetUrl.includes('simulate-nexaroute')) {
+      if (targetUrl.startsWith('http') && !targetUrl.includes('simulate-vahana')) {
         try {
           const parsed = new URL(targetUrl);
           const isHttps = parsed.protocol === 'https:';
@@ -639,10 +651,10 @@ async function handleApiRequest(req, res, parsedUrl) {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
-                'X-NexaRoute-Event': event,
-                'X-NexaRoute-Delivery-Id': deliveryId,
-                'X-NexaRoute-Signature': signature,
-                'User-Agent': 'NexaRoute-WebhookEngine/2.5'
+                'X-Vahana-Event': event,
+                'X-Vahana-Delivery-Id': deliveryId,
+                'X-Vahana-Signature': signature,
+                'User-Agent': 'VahanaSupply-WebhookEngine/2.5'
               },
               timeout: 4000
             }, (resOut) => {
@@ -699,10 +711,10 @@ async function handleApiRequest(req, res, parsedUrl) {
         responsePreview: liveResponse.bodyPreview || (liveResponse.error ? 'Dispatch error: ' + liveResponse.error : 'Acknowledged 200 OK'),
         headersSent: {
           'Content-Type': 'application/json',
-          'X-NexaRoute-Event': event,
-          'X-NexaRoute-Delivery-Id': deliveryId,
-          'X-NexaRoute-Signature': signature,
-          'User-Agent': 'NexaRoute-WebhookEngine/2.5'
+          'X-Vahana-Event': event,
+          'X-Vahana-Delivery-Id': deliveryId,
+          'X-Vahana-Signature': signature,
+          'User-Agent': 'VahanaSupply-WebhookEngine/2.5'
         },
         payload
       });
@@ -716,6 +728,7 @@ async function handleApiRequest(req, res, parsedUrl) {
     try {
       const data = await parseJsonBody(req);
       const awb = (data.awb || '').trim().toUpperCase();
+      const altAwb = awb.startsWith('VH-') ? awb.replace(/^VH-/, 'NX-') : (awb.startsWith('NX-') ? awb.replace(/^NX-/, 'VH-') : awb);
       const newStatus = (data.status || '').trim();
       const role = data.role || 'Dispatcher';
       const remark = data.remark || 'Status updated via Shipper Central';
@@ -724,13 +737,13 @@ async function handleApiRequest(req, res, parsedUrl) {
         return sendJson(res, 400, { success: false, error: 'Both "awb" and "status" are required.' });
       }
 
-      const cons = db.consignments.find(c => c.awb === awb);
+      const cons = db.consignments.find(c => c.awb === awb || c.awb === altAwb);
       if (cons) {
         cons.status = newStatus;
         cons.statusClass = newStatus.toLowerCase().replace(/\s+/g, '-');
       }
 
-      let shipment = db.shipments[awb];
+      let shipment = db.shipments[awb] || db.shipments[altAwb];
       if (shipment) {
         shipment.status = newStatus;
         if (newStatus === 'Delivered') {
@@ -762,6 +775,176 @@ async function handleApiRequest(req, res, parsedUrl) {
     } catch (err) {
       return sendJson(res, 500, { success: false, error: err.message });
     }
+  }
+
+  // 13. Create Payment Order: POST /api/payments/create-order
+  if (pathname === '/api/payments/create-order' && method === 'POST') {
+    try {
+      const data = await parseJsonBody(req);
+      const awb = (data.awb || 'VH-SUR-40812').trim().toUpperCase();
+      const amount = Number(data.amount) || 3363;
+      const currency = data.currency || 'INR';
+      const consignor = data.consignor || 'Apex FabTex Mills (Verified Shipper)';
+      const consignee = data.consignee || 'Authorized Commercial Consignee';
+      const description = data.description || `Advance Freight Settlement - Docket #${awb}`;
+
+      const orderId = 'order_vhn_' + Date.now().toString().slice(-6) + Math.floor(1000 + Math.random() * 9000);
+      const receiptNumber = 'VHN-RCPT-' + Date.now().toString().slice(-6);
+      const upiVpa = 'vahana.express@icici';
+      const upiString = `upi://pay?pa=${upiVpa}&pn=Vahana%20Supply%20Co&am=${amount}&cu=INR&tn=Freight%20${awb}`;
+
+      const paymentOrder = {
+        orderId,
+        receiptNumber,
+        awb,
+        amount,
+        currency,
+        consignor,
+        consignee,
+        description,
+        status: 'created',
+        upiVpa,
+        upiString,
+        createdAt: new Date().toISOString()
+      };
+
+      if (!Array.isArray(db.payments)) db.payments = [];
+      db.payments.unshift(paymentOrder);
+      saveDatabase();
+
+      return sendJson(res, 201, {
+        success: true,
+        order: {
+          id: orderId,
+          orderId,
+          amountPaise: amount * 100,
+          amountInr: amount,
+          currency,
+          receipt: receiptNumber,
+          receiptNumber,
+          awb,
+          consignor,
+          consignee,
+          description,
+          keyId: 'rzp_live_vhn_supply_9921',
+          companyName: 'Vahana Supply Co',
+          upiVpa,
+          upiString
+        }
+      });
+    } catch (err) {
+      return sendJson(res, 500, { success: false, error: err.message });
+    }
+  }
+
+  // 14. Verify Payment & Generate GST Receipt: POST /api/payments/verify
+  if (pathname === '/api/payments/verify' && method === 'POST') {
+    try {
+      const data = await parseJsonBody(req);
+      const orderId = (data.orderId || data.razorpay_order_id || '').trim();
+      const awb = (data.awb || '').trim().toUpperCase();
+      const method = data.method || 'UPI (Instant QR)';
+      const paymentId = data.paymentId || data.razorpay_payment_id || ('pay_vhn_' + crypto.randomBytes(6).toString('hex'));
+      const amount = Number(data.amount) || 3363;
+      const signature = data.signature || data.razorpay_signature || ('sig_vhn_' + crypto.createHmac('sha256', 'vahana_sec_2026').update(`${orderId}|${paymentId}`).digest('hex'));
+      const bankRef = 'UTR' + Math.floor(100000000000 + Math.random() * 900000000000);
+      const nowIso = new Date().toISOString();
+      const nowFormatted = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', dateStyle: 'medium', timeStyle: 'short' }) + ' IST';
+
+      if (!Array.isArray(db.payments)) db.payments = [];
+      let paymentRecord = db.payments.find(p => p.orderId === orderId);
+
+      if (!paymentRecord) {
+        paymentRecord = {
+          orderId: orderId || ('order_vhn_' + Date.now().toString().slice(-6)),
+          receiptNumber: 'VHN-RCPT-' + Date.now().toString().slice(-6),
+          awb: awb || 'VH-SUR-40812',
+          amount,
+          currency: 'INR',
+          createdAt: nowIso
+        };
+        db.payments.unshift(paymentRecord);
+      }
+
+      paymentRecord.status = 'paid';
+      paymentRecord.paymentId = paymentId;
+      paymentRecord.method = method;
+      paymentRecord.signature = signature;
+      paymentRecord.bankRef = bankRef;
+      paymentRecord.paidAt = nowIso;
+      paymentRecord.paidAtFormatted = nowFormatted;
+
+      const targetAwb = awb || paymentRecord.awb;
+      if (targetAwb) {
+        const altAwb = targetAwb.startsWith('VH-') ? targetAwb.replace(/^VH-/, 'NX-') : targetAwb.replace(/^NX-/, 'VH-');
+        const cons = db.consignments.find(c => c.awb === targetAwb || c.awb === altAwb);
+        if (cons) {
+          cons.paymentStatus = 'PAID';
+          cons.paymentId = paymentId;
+          cons.paidAmount = amount;
+        }
+
+        const shipment = db.shipments[targetAwb] || db.shipments[altAwb];
+        if (shipment) {
+          shipment.paymentStatus = 'PAID';
+          shipment.paymentDetails = {
+            paymentId,
+            orderId: paymentRecord.orderId,
+            receiptNumber: paymentRecord.receiptNumber,
+            amount,
+            method,
+            bankRef,
+            paidAt: nowFormatted
+          };
+          if (Array.isArray(shipment.milestones)) {
+            shipment.milestones.push({
+              title: `Advance Freight Payment Received (₹${amount.toLocaleString('en-IN')})`,
+              location: 'Vahana Gateway Billing Node',
+              time: 'Just now',
+              done: true,
+              note: `Ref: ${bankRef} • ${method} • Receipt #${paymentRecord.receiptNumber}`
+            });
+          }
+        }
+      }
+
+      saveDatabase();
+
+      return sendJson(res, 200, {
+        success: true,
+        message: 'Payment verified and advance freight receipt generated successfully.',
+        payment: {
+          ...paymentRecord,
+          taxInvoiceNumber: 'INV-2026-' + paymentRecord.receiptNumber.replace('VHN-RCPT-', ''),
+          gstin: '06AABCV9921B1ZM',
+          company: 'Vahana Supply Co'
+        }
+      });
+    } catch (err) {
+      return sendJson(res, 500, { success: false, error: err.message });
+    }
+  }
+
+  // 15. Payments List: GET /api/payments
+  if (pathname === '/api/payments' && method === 'GET') {
+    const awbFilter = (parsedUrl.query.awb || '').trim().toUpperCase();
+    const statusFilter = (parsedUrl.query.status || '').trim().toLowerCase();
+
+    let list = db.payments || [];
+    if (awbFilter) {
+      const altAwb = awbFilter.startsWith('VH-') ? awbFilter.replace(/^VH-/, 'NX-') : awbFilter.replace(/^NX-/, 'VH-');
+      list = list.filter(p => p.awb === awbFilter || p.awb === altAwb);
+    }
+    if (statusFilter) {
+      list = list.filter(p => (p.status || '').toLowerCase() === statusFilter);
+    }
+
+    return sendJson(res, 200, {
+      success: true,
+      totalCount: (db.payments || []).length,
+      filteredCount: list.length,
+      payments: list
+    });
   }
 
   // 404 for unmatched API routes
@@ -807,7 +990,7 @@ const server = http.createServer((req, res) => {
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>404 Not Found - NexaRoute Logistics</title>
+  <title>404 Not Found - Vahana Supply Co</title>
   <style>
     body { font-family: system-ui, sans-serif; background: #0f172a; color: white; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
     .box { text-align: center; max-width: 480px; padding: 2rem; background: #1e293b; border-radius: 12px; }
@@ -821,7 +1004,7 @@ const server = http.createServer((req, res) => {
     <h1>404</h1>
     <h2>Page Not Found</h2>
     <p>The page <code>${reqPath}</code> could not be found. Please check the URL or return to home.</p>
-    <a href="/index.html">Return to NexaRoute Home</a>
+    <a href="/index.html">Return to Vahana Supply Co Home</a>
   </div>
 </body>
 </html>`);
@@ -843,7 +1026,7 @@ const server = http.createServer((req, res) => {
 
 if (require.main === module) {
   server.listen(PORT, () => {
-    console.log(`NexaRoute Logistics Express API & Server running at http://localhost:${PORT}`);
+    console.log(`Vahana Supply Co Express API & Server running at http://localhost:${PORT}`);
   });
 }
 

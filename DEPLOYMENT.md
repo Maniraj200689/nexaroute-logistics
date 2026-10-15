@@ -1,6 +1,6 @@
-# 🚀 NexaRoute Logistics — Production Deployment Guide
+# 🚀 Vahana Supply Co — Production Deployment Guide
 
-This guide covers how to deploy the **NexaRoute Logistics** platform to various cloud providers and hosting environments. All configuration files have already been prepared in this repository.
+This guide covers how to deploy the **Vahana Supply Co** platform to various cloud providers and hosting environments. All configuration files have already been prepared in this repository.
 
 ---
 
@@ -24,7 +24,7 @@ Vercel provides instant global deployment with automated HTTPS and serverless AP
    ```bash
    git init
    git add .
-   git commit -m "feat: initial commit of NexaRoute Logistics platform"
+   git commit -m "feat: initial commit of Vahana Supply Co platform"
    git branch -M main
    git remote add origin https://github.com/<your-username>/nexaroute-logistics.git
    git push -u origin main
@@ -51,7 +51,7 @@ vercel --prod
 
 ### Option A: Drag & Drop (Instant Preview)
 1. Go to **[app.netlify.com/drop](https://app.netlify.com/drop)**.
-2. Drag and drop the `nexaroute-logistics` project directory into the browser window.
+2. Drag and drop the `vahana-supply-co` project directory into the browser window.
 3. Your site will be live instantly with a free `*.netlify.app` domain.
 
 ### Option B: Via Netlify CLI
@@ -83,10 +83,10 @@ The project includes an optimized `Dockerfile` based on `node:20-alpine` with bu
 ### Local or VPS Docker Run
 ```bash
 # Build the Docker container image
-docker build -t nexaroute-logistics:latest .
+docker build -t vahana-supply-co:latest .
 
 # Run the container exposing port 3000
-docker run -d -p 3000:3000 --name nexaroute nexaroute-logistics:latest
+docker run -d -p 3000:3000 --name vahana-supply vahana-supply-co:latest
 ```
 
 ### With Docker Compose
@@ -130,7 +130,7 @@ Once deployed, you can verify your production instance at:
   ```json
   {
     "status": "healthy",
-    "service": "NexaRoute Logistics Express API",
+    "service": "Vahana Supply Co Express API",
     "version": "2.5.0",
     "uptimeSeconds": 481
   }

@@ -1,4 +1,4 @@
-name: Deploy NexaRoute to GitHub Pages
+name: Deploy Vahana Supply Co to GitHub Pages
 
 on:
   push:

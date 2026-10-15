@@ -10,7 +10,8 @@
       "weight": "9500 kg",
       "status": "In Transit",
       "statusClass": "in-transit",
-      "createdAt": "2026-10-13T17:45:27.026Z"
+      "createdAt": "2026-10-13T17:45:27.026Z",
+      "paymentStatus": "PENDING"
     },
     {
       "awb": "NX-IND-99218",
@@ -22,7 +23,10 @@
       "weight": "340 kg",
       "status": "Delivered",
       "statusClass": "delivered",
-      "createdAt": "2026-10-05T14:20:00Z"
+      "createdAt": "2026-10-05T14:20:00Z",
+      "paymentStatus": "PAID",
+      "paymentId": "pay_vhn_b05388e3ccb8",
+      "paidAmount": 3363
     },
     {
       "awb": "NX-SUR-40812",
@@ -34,7 +38,10 @@
       "weight": "580 kg",
       "status": "Delivered",
       "statusClass": "delivered",
-      "createdAt": "2026-10-04T11:00:00Z"
+      "createdAt": "2026-10-04T11:00:00Z",
+      "paymentStatus": "PAID",
+      "paymentId": "pay_vhn_9046ffd0785d",
+      "paidAmount": 3363
     },
     {
       "awb": "NX-DEL-88102",
@@ -46,7 +53,10 @@
       "weight": "210 kg",
       "status": "Out for Delivery",
       "statusClass": "out-for-delivery",
-      "createdAt": "2026-10-06T09:30:00Z"
+      "createdAt": "2026-10-06T09:30:00Z",
+      "paymentStatus": "PAID",
+      "paymentId": "pay_vhn_449210aa",
+      "paidAmount": 1850
     },
     {
       "awb": "NX-PUN-77291",
@@ -58,7 +68,8 @@
       "weight": "9,200 kg",
       "status": "In Transit",
       "statusClass": "in-transit",
-      "createdAt": "2026-10-05T08:00:00Z"
+      "createdAt": "2026-10-05T08:00:00Z",
+      "paymentStatus": "PENDING"
     },
     {
       "awb": "NX-AMD-33921",
@@ -70,7 +81,8 @@
       "weight": "750 kg",
       "status": "In Transit",
       "statusClass": "in-transit",
-      "createdAt": "2026-10-05T16:45:00Z"
+      "createdAt": "2026-10-05T16:45:00Z",
+      "paymentStatus": "PENDING"
     },
     {
       "awb": "NX-BLR-66512",
@@ -82,7 +94,8 @@
       "weight": "420 kg",
       "status": "Out for Delivery",
       "statusClass": "out-for-delivery",
-      "createdAt": "2026-10-06T06:15:00Z"
+      "createdAt": "2026-10-06T06:15:00Z",
+      "paymentStatus": "PENDING"
     },
     {
       "awb": "NX-KOL-11029",
@@ -94,7 +107,8 @@
       "weight": "1,100 kg",
       "status": "In Transit",
       "statusClass": "in-transit",
-      "createdAt": "2026-10-05T19:00:00Z"
+      "createdAt": "2026-10-05T19:00:00Z",
+      "paymentStatus": "PENDING"
     },
     {
       "awb": "NX-CHE-88219",
@@ -106,7 +120,8 @@
       "weight": "310 kg",
       "status": "Delivered",
       "statusClass": "delivered",
-      "createdAt": "2026-10-03T10:00:00Z"
+      "createdAt": "2026-10-03T10:00:00Z",
+      "paymentStatus": "PENDING"
     },
     {
       "awb": "NX-LUD-90412",
@@ -118,7 +133,8 @@
       "weight": "640 kg",
       "status": "In Transit",
       "statusClass": "in-transit",
-      "createdAt": "2026-10-05T21:30:00Z"
+      "createdAt": "2026-10-05T21:30:00Z",
+      "paymentStatus": "PENDING"
     },
     {
       "awb": "NX-HYD-55102",
@@ -130,7 +146,8 @@
       "weight": "180 kg",
       "status": "Out for Delivery",
       "statusClass": "out-for-delivery",
-      "createdAt": "2026-10-06T08:00:00Z"
+      "createdAt": "2026-10-06T08:00:00Z",
+      "paymentStatus": "PENDING"
     },
     {
       "awb": "NX-BOM-88741",
@@ -142,7 +159,8 @@
       "weight": "290 kg",
       "status": "In Transit",
       "statusClass": "in-transit",
-      "createdAt": "2026-10-05T12:00:00Z"
+      "createdAt": "2026-10-05T12:00:00Z",
+      "paymentStatus": "PENDING"
     },
     {
       "awb": "NX-DEL-66291",
@@ -154,7 +172,8 @@
       "weight": "490 kg",
       "status": "In Transit",
       "statusClass": "in-transit",
-      "createdAt": "2026-10-05T15:20:00Z"
+      "createdAt": "2026-10-05T15:20:00Z",
+      "paymentStatus": "PENDING"
     },
     {
       "awb": "NX-SUR-22819",
@@ -166,7 +185,8 @@
       "weight": "550 kg",
       "status": "In Transit",
       "statusClass": "in-transit",
-      "createdAt": "2026-10-05T17:10:00Z"
+      "createdAt": "2026-10-05T17:10:00Z",
+      "paymentStatus": "PENDING"
     },
     {
       "awb": "NX-BLR-44102",
@@ -178,7 +198,8 @@
       "weight": "380 kg",
       "status": "Out for Delivery",
       "statusClass": "out-for-delivery",
-      "createdAt": "2026-10-06T07:45:00Z"
+      "createdAt": "2026-10-06T07:45:00Z",
+      "paymentStatus": "PENDING"
     }
   ],
   "shipments": {
@@ -392,7 +413,295 @@
       "consignor": "Apex FabTex Mills (Verified Shipper)",
       "consignee": "Western Textile Hub Pvt Ltd",
       "cargo": "32ft Container • 9500 kg",
-      "vehicle": "NexaRoute Express Line-Haul",
+      "vehicle": "Vahana Supply Co Express Line-Haul",
+      "ewb": "8820-2961-9707",
+      "progress": 15,
+      "deliveredTime": "Scheduled",
+      "isDelivered": false,
+      "telematics": {
+        "speedKmh": 45,
+        "temperature": "Ambient (25.5°C)",
+        "gpsLat": "19.0760° N",
+        "gpsLng": "72.8777° E",
+        "battery": "100%",
+        "eSealStatus": "Tamper-Proof Locked"
+      },
+      "milestones": [
+        {
+          "title": "Manifest Created & Docket Assigned",
+          "location": "Peenya (KA)",
+          "time": "Just Now",
+          "done": true,
+          "note": "Electronic booking confirmed"
+        },
+        {
+          "title": "Inwarded at Origin Sortation Dock",
+          "location": "Peenya (KA) Gateway",
+          "time": "Scheduled +2 hrs",
+          "done": false,
+          "note": "Line-haul staging"
+        },
+        {
+          "title": "Line-haul Transit to Destination",
+          "location": "Express Corridor",
+          "time": "Scheduled +12 hrs",
+          "done": false,
+          "note": "Interstate transport"
+        },
+        {
+          "title": "Out for Final Delivery",
+          "location": "Bhiwandi (MH)",
+          "time": "Target Tomorrow",
+          "done": false,
+          "note": "Assigned to delivery pilot"
+        }
+      ]
+    },
+    "VH-IND-99218": {
+      "awb": "VH-IND-99218",
+      "status": "Delivered",
+      "headline": "Consignment Delivered Successfully",
+      "subhead": "Digitally signed & OTP verified by: Priya Sharma (Store Manager) • 14 Oct 2026, 10:06 am IST",
+      "origin": "Bhiwandi Hub, Mumbai (MH)",
+      "destination": "Peenya Hub, Bengaluru (KA)",
+      "consignor": "Apex FabTex Mills (Surat)",
+      "consignee": "Organica Naturals Hub (Bengaluru)",
+      "cargo": "14 Cartons • 340 kg Textile Cargo",
+      "vehicle": "Ashok Leyland 32ft MXL (HR-55-AJ-9014)",
+      "ewb": "8819-2041-9921",
+      "progress": 100,
+      "deliveredTime": "14 Oct 2026, 10:06 am IST",
+      "isDelivered": true,
+      "telematics": {
+        "speedKmh": 62,
+        "temperature": "Ambient (26.4°C)",
+        "gpsLat": "18.5204° N",
+        "gpsLng": "73.8567° E",
+        "battery": "98%",
+        "eSealStatus": "Tamper-Proof Locked"
+      },
+      "milestones": [
+        {
+          "title": "Consignment Picked Up",
+          "location": "Surat Cluster Dock",
+          "time": "Oct 05, 14:20",
+          "done": true,
+          "note": "Weight & volumetric scan certified"
+        },
+        {
+          "title": "Arrived at Mumbai Central Gateway",
+          "location": "Bhiwandi Sorting Complex",
+          "time": "Oct 06, 02:15",
+          "done": true,
+          "note": "Container sealed & scanned"
+        },
+        {
+          "title": "Departed on South Line-Haul",
+          "location": "Pune Expressway Checkpoint",
+          "time": "Oct 06, 08:45",
+          "done": true,
+          "note": "Telemetry active @ 62 km/h"
+        },
+        {
+          "title": "Inward at Destination Sortation",
+          "location": "Bengaluru Peenya Gateway",
+          "time": "Expected Tonight, 23:00",
+          "done": true,
+          "note": "Hub preparation in progress"
+        },
+        {
+          "title": "Out for Consignee Delivery",
+          "location": "Peenya Delivery Van Unit",
+          "time": "Expected Tomorrow, 09:00",
+          "done": true,
+          "note": "Delivery route optimization"
+        },
+        {
+          "title": "Delivered & Signed ePOD",
+          "location": "Organica Naturals Receiving Dock",
+          "time": "14 Oct 2026, 10:06 am IST",
+          "done": true,
+          "note": "OTP verified via WhatsApp/SMS. Digitally signed by Priya Sharma (Store Manager)."
+        },
+        {
+          "title": "Advance Freight Payment Received (₹3,363)",
+          "location": "Vahana Gateway Billing Node",
+          "time": "Just now",
+          "done": true,
+          "note": "Ref: UTR906686611346 • UPI (Instant QR) • Receipt #VHN-RCPT-285853"
+        }
+      ],
+      "epodVerified": true,
+      "epodSignedBy": "Priya Sharma (Store Manager)",
+      "epodVerifiedAt": "2026-10-14T04:36:18.976Z",
+      "epodRemarks": "Cargo cartons verified intact & sound condition.",
+      "paymentStatus": "PAID",
+      "paymentDetails": {
+        "paymentId": "pay_vhn_b05388e3ccb8",
+        "orderId": "order_vhn_2858537731",
+        "receiptNumber": "VHN-RCPT-285853",
+        "amount": 3363,
+        "method": "UPI (Instant QR)",
+        "bankRef": "UTR906686611346",
+        "paidAt": "15 Oct 2026, 11:14 pm IST"
+      }
+    },
+    "VH-SUR-40812": {
+      "awb": "VH-SUR-40812",
+      "status": "Delivered",
+      "headline": "Consignment Delivered Successfully",
+      "subhead": "Signed by Receiver: Ramesh Mehra (Dock Supervisor) • Oct 06, 16:45",
+      "origin": "Surat Gateway Hub (GJ)",
+      "destination": "Okhla Hub, Delhi NCR (DL)",
+      "consignor": "Surat Weaves & Garments",
+      "consignee": "TrendCraft Retail Distribution",
+      "cargo": "22 Boxes • 580 kg Garments",
+      "vehicle": "Tata 24ft Container (GJ-05-BX-4112)",
+      "ewb": "4410-9928-1120",
+      "progress": 100,
+      "deliveredTime": "Oct 06, 2026 at 16:45 IST",
+      "isDelivered": true,
+      "telematics": {
+        "speedKmh": 0,
+        "temperature": "Ambient (24.1°C)",
+        "gpsLat": "28.5355° N",
+        "gpsLng": "77.2732° E",
+        "battery": "100%",
+        "eSealStatus": "Delivered & Unlocked"
+      },
+      "epod": {
+        "receiverName": "Ramesh Mehra",
+        "receiverRole": "Dock In-charge",
+        "timestamp": "06-Oct-2026 16:45:12 IST",
+        "condition": "Sound & Sealed (0 Exceptions)"
+      },
+      "milestones": [
+        {
+          "title": "Consignment Picked Up",
+          "location": "Surat Manufacturing Unit",
+          "time": "Oct 04, 11:00",
+          "done": true,
+          "note": "Verified by dispatch agent"
+        },
+        {
+          "title": "Departed on Western Corridor",
+          "location": "Vadodara Checkpoint",
+          "time": "Oct 04, 18:30",
+          "done": true,
+          "note": "Line-haul transit"
+        },
+        {
+          "title": "Passed Jaipur Gateway",
+          "location": "Rajasthan Express Corridor",
+          "time": "Oct 05, 09:15",
+          "done": true,
+          "note": "GPS checkpoint verified"
+        },
+        {
+          "title": "Arrived at Delhi NCR Gateway",
+          "location": "Gurugram Primary Hub",
+          "time": "Oct 06, 03:00",
+          "done": true,
+          "note": "Sortation complete"
+        },
+        {
+          "title": "Out for Final Delivery",
+          "location": "Okhla Industrial Feeder Van",
+          "time": "Oct 06, 10:15",
+          "done": true,
+          "note": "Assigned to Pilot Vikram K."
+        },
+        {
+          "title": "Delivered & Signed ePOD",
+          "location": "TrendCraft Warehouse, Okhla",
+          "time": "Oct 06, 16:45",
+          "done": true,
+          "note": "Received in intact sound condition"
+        },
+        {
+          "title": "Advance Freight Payment Received (₹3,363)",
+          "location": "Vahana Gateway Billing Node",
+          "time": "Just now",
+          "done": true,
+          "note": "Ref: UTR162995893086 • upi_qr • Receipt #VHN-RCPT-232106"
+        }
+      ],
+      "paymentStatus": "PAID",
+      "paymentDetails": {
+        "paymentId": "pay_vhn_9046ffd0785d",
+        "orderId": "order_vhn_232105",
+        "receiptNumber": "VHN-RCPT-232106",
+        "amount": 3363,
+        "method": "upi_qr",
+        "bankRef": "UTR162995893086",
+        "paidAt": "15 Oct 2026, 11:13 pm IST"
+      }
+    },
+    "VH-DEL-88102": {
+      "awb": "VH-DEL-88102",
+      "status": "Out for Delivery",
+      "headline": "Out for Delivery Today by 05:00 PM",
+      "subhead": "Pilot: Manoj Kumar (EV Delivery Van DL-1L-AA-3810) • Call: +91 98112 00192",
+      "origin": "Gurugram Cyber Hub (HR)",
+      "destination": "Noida Sector 63 Logistics Hub (UP)",
+      "consignor": "DynoAuto Industrial Components",
+      "consignee": "SpeedTech Assemblies Pvt Ltd",
+      "cargo": "8 Wooden Crates • 210 kg Machine Spares",
+      "vehicle": "Electric Commercial Van (DL-1L-AA-3810)",
+      "ewb": "9901-3829-5512",
+      "progress": 90,
+      "deliveredTime": "Pending Today",
+      "isDelivered": false,
+      "telematics": {
+        "speedKmh": 28,
+        "temperature": "Ambient (29.2°C)",
+        "gpsLat": "28.6139° N",
+        "gpsLng": "77.3789° E",
+        "battery": "84%",
+        "eSealStatus": "Tamper-Proof Locked"
+      },
+      "milestones": [
+        {
+          "title": "Picked up from Factory Gate",
+          "location": "Manesar Auto Industrial Zone",
+          "time": "Yesterday, 16:00",
+          "done": true,
+          "note": "Quality packaging check passed"
+        },
+        {
+          "title": "Crossed Delhi NCR Arterial Route",
+          "location": "DND Expressway Flyover",
+          "time": "Today, 06:30",
+          "done": true,
+          "note": "Intra-NCR feeder transit"
+        },
+        {
+          "title": "Loaded on Last-Mile EV Van",
+          "location": "Noida Distribution Center",
+          "time": "Today, 11:00",
+          "done": true,
+          "note": "Out for delivery"
+        },
+        {
+          "title": "Destination Delivery",
+          "location": "SpeedTech Assembly Dock, Sector 63",
+          "time": "Expected Today by 17:00",
+          "done": false,
+          "note": "Pilot approaching location"
+        }
+      ]
+    },
+    "VH-BHI-43474": {
+      "awb": "VH-BHI-43474",
+      "status": "In Transit",
+      "headline": "Consignment Booked & Dispatched for Bhiwandi (MH)",
+      "subhead": "Consignee: Western Textile Hub Pvt Ltd • Weight: 9500 kg",
+      "origin": "Peenya (KA)",
+      "destination": "Bhiwandi (MH)",
+      "consignor": "Apex FabTex Mills (Verified Shipper)",
+      "consignee": "Western Textile Hub Pvt Ltd",
+      "cargo": "32ft Container • 9500 kg",
+      "vehicle": "Vahana Supply Co Express Line-Haul",
       "ewb": "8820-2961-9707",
       "progress": 15,
       "deliveredTime": "Scheduled",
@@ -459,6 +768,93 @@
       "message": "We require weekly bulk dispatches from Bhiwandi to Peenya Bengaluru.",
       "createdAt": "2026-10-13T17:42:33.354Z",
       "status": "Open - Assigned to KAM"
+    }
+  ],
+  "payments": [
+    {
+      "orderId": "order_vhn_2858537731",
+      "receiptNumber": "VHN-RCPT-285853",
+      "awb": "VH-IND-99218",
+      "amount": 14750,
+      "currency": "INR",
+      "consignor": "Apex FabTex Mills (Verified Shipper)",
+      "consignee": "Apex FabTex Mills",
+      "description": "Advance Freight Settlement - Docket #VH-IND-99218",
+      "status": "paid",
+      "upiVpa": "vahana.express@icici",
+      "upiString": "upi://pay?pa=vahana.express@icici&pn=Vahana%20Supply%20Co&am=14750&cu=INR&tn=Freight%20VH-IND-99218",
+      "createdAt": "2026-10-15T17:44:45.853Z",
+      "paymentId": "pay_vhn_b05388e3ccb8",
+      "method": "UPI (Instant QR)",
+      "signature": "sig_vhn_a2d9d80d0c3086c69c11b48fa2225b84a1cc4736eda73bd56a4219d21224a308",
+      "bankRef": "UTR906686611346",
+      "paidAt": "2026-10-15T17:44:45.857Z",
+      "paidAtFormatted": "15 Oct 2026, 11:14 pm IST"
+    },
+    {
+      "orderId": "order_vhn_232105",
+      "receiptNumber": "VHN-RCPT-232106",
+      "awb": "VH-SUR-40812",
+      "amount": 3363,
+      "currency": "INR",
+      "createdAt": "2026-10-15T17:43:52.095Z",
+      "status": "paid",
+      "paymentId": "pay_vhn_9046ffd0785d",
+      "method": "upi_qr",
+      "signature": "sig_vhn_61faa122e0e74a2f2cb675d582cb65270d4a2a85e71dbe36728ea0d5c6a81dfe",
+      "bankRef": "UTR162995893086",
+      "paidAt": "2026-10-15T17:43:52.095Z",
+      "paidAtFormatted": "15 Oct 2026, 11:13 pm IST"
+    },
+    {
+      "orderId": "order_vhn_2320918882",
+      "receiptNumber": "VHN-RCPT-232091",
+      "awb": "VH-IND-99218",
+      "amount": 14750,
+      "currency": "INR",
+      "consignor": "Apex FabTex Mills (Verified Shipper)",
+      "consignee": "Apex FabTex Mills",
+      "description": "Advance Freight Settlement - Docket #VH-IND-99218",
+      "status": "created",
+      "upiVpa": "vahana.express@icici",
+      "upiString": "upi://pay?pa=vahana.express@icici&pn=Vahana%20Supply%20Co&am=14750&cu=INR&tn=Freight%20VH-IND-99218",
+      "createdAt": "2026-10-15T17:43:52.091Z"
+    },
+    {
+      "orderId": "order_vhn_992180",
+      "receiptNumber": "VHN-RCPT-992180",
+      "awb": "VH-IND-99218",
+      "amount": 3363,
+      "currency": "INR",
+      "consignor": "Apex FabTex Mills (Verified Shipper)",
+      "consignee": "Organica Naturals Hub (Bengaluru)",
+      "description": "Advance Freight Settlement - Express Surface (PTL)",
+      "status": "paid",
+      "paymentId": "pay_vhn_7a8109bf",
+      "method": "UPI (PhonePe / GPay QR)",
+      "bankRef": "UTR992817263541",
+      "paidAt": "2026-10-05T14:25:00Z",
+      "paidAtFormatted": "05 Oct 2026, 07:55 pm IST",
+      "signature": "sig_vhn_verified_sha256_992180",
+      "createdAt": "2026-10-05T14:15:00Z"
+    },
+    {
+      "orderId": "order_vhn_408120",
+      "receiptNumber": "VHN-RCPT-408120",
+      "awb": "VH-SUR-40812",
+      "amount": 4720,
+      "currency": "INR",
+      "consignor": "Surat Weaves & Garments",
+      "consignee": "TrendCraft Retail Distribution",
+      "description": "Commercial Line-Haul Advance Freight Settlement",
+      "status": "paid",
+      "paymentId": "pay_vhn_6c2918ae",
+      "method": "Razorpay Corporate NetBanking",
+      "bankRef": "UTR883920194829",
+      "paidAt": "2026-10-04T11:10:00Z",
+      "paidAtFormatted": "04 Oct 2026, 04:40 pm IST",
+      "signature": "sig_vhn_verified_sha256_408120",
+      "createdAt": "2026-10-04T11:00:00Z"
     }
   ]
 }

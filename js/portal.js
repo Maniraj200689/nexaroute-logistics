@@ -1,23 +1,23 @@
 /**
- * NexaRoute Logistics - Shipper Central Dashboard Logic
+ * Vahana Supply Co - Shipper Central Dashboard Logic
  */
 
 document.addEventListener('DOMContentLoaded', () => {
   let consignments = [
-    { awb: 'NX-IND-99218', origin: 'Bhiwandi (MH)', dest: 'Peenya (KA)', consignee: 'Organica Naturals Hub', service: 'Express Surface (PTL)', pkgs: '14 Boxes', weight: '340 kg', status: 'In Transit', statusClass: 'in-transit' },
-    { awb: 'NX-SUR-40812', origin: 'Surat (GJ)', dest: 'Okhla (DL)', consignee: 'TrendCraft Retail', service: 'Express Surface (PTL)', pkgs: '22 Boxes', weight: '580 kg', status: 'Delivered', statusClass: 'delivered' },
-    { awb: 'NX-DEL-88102', origin: 'Gurugram (HR)', dest: 'Noida Sec 63 (UP)', consignee: 'SpeedTech Assemblies', service: 'Hyperlocal EV Van', pkgs: '8 Crates', weight: '210 kg', status: 'Out for Delivery', statusClass: 'out-for-delivery' },
-    { awb: 'NX-PUN-77291', origin: 'Pune (MH)', dest: 'Sriperumbudur (TN)', consignee: 'DynoParts Tamil Nadu', service: 'Full Truckload (FTL)', pkgs: '32ft Container', weight: '9,200 kg', status: 'In Transit', statusClass: 'in-transit' },
-    { awb: 'NX-AMD-33921', origin: 'Ahmedabad (GJ)', dest: 'Bhiwandi (MH)', consignee: 'WestCoast Logistics Park', service: 'Express Surface (PTL)', pkgs: '30 Boxes', weight: '750 kg', status: 'In Transit', statusClass: 'in-transit' },
-    { awb: 'NX-BLR-66512', origin: 'Peenya (KA)', dest: 'Hyderabad (TG)', consignee: 'Deccan Retailers Pvt Ltd', service: 'Express Surface (PTL)', pkgs: '16 Cartons', weight: '420 kg', status: 'Out for Delivery', statusClass: 'out-for-delivery' },
-    { awb: 'NX-KOL-11029', origin: 'Dankuni (WB)', dest: 'Patna (BR)', consignee: 'Bihar FastFreight Hub', service: 'Express Surface (PTL)', pkgs: '45 Cartons', weight: '1,100 kg', status: 'In Transit', statusClass: 'in-transit' },
-    { awb: 'NX-CHE-88219', origin: 'Chennai (TN)', dest: 'Coimbatore (TN)', consignee: 'Kovai Industrial Spares', service: 'Express Surface (PTL)', pkgs: '12 Crates', weight: '310 kg', status: 'Delivered', statusClass: 'delivered' },
-    { awb: 'NX-LUD-90412', origin: 'Ludhiana (PB)', dest: 'Gurugram (HR)', consignee: 'NorthStar Garments', service: 'Express Surface (PTL)', pkgs: '28 Boxes', weight: '640 kg', status: 'In Transit', statusClass: 'in-transit' },
-    { awb: 'NX-HYD-55102', origin: 'Hyderabad (TG)', dest: 'Vijayawada (AP)', consignee: 'Krishna Valley Dealers', service: 'Hyperlocal Feeder', pkgs: '6 Crates', weight: '180 kg', status: 'Out for Delivery', statusClass: 'out-for-delivery' },
-    { awb: 'NX-BOM-88741', origin: 'Bhiwandi (MH)', dest: 'Ahmedabad (GJ)', consignee: 'Gujarat Pharma Distrib.', service: 'Cold Chain (2-8°C)', pkgs: '10 Reefers', weight: '290 kg', status: 'In Transit', statusClass: 'in-transit' },
-    { awb: 'NX-DEL-66291', origin: 'Okhla (DL)', dest: 'Jaipur (RJ)', consignee: 'PinkCity Craft Logistics', service: 'Express Surface (PTL)', pkgs: '18 Cartons', weight: '490 kg', status: 'In Transit', statusClass: 'in-transit' },
-    { awb: 'NX-SUR-22819', origin: 'Surat (GJ)', dest: 'Indore (MP)', consignee: 'Malwa Textile Syndicate', service: 'Express Surface (PTL)', pkgs: '25 Boxes', weight: '550 kg', status: 'In Transit', statusClass: 'in-transit' },
-    { awb: 'NX-BLR-44102', origin: 'Peenya (KA)', dest: 'Kochi (KL)', consignee: 'Kerala Spice Traders', service: 'Express Surface (PTL)', pkgs: '15 Bags', weight: '380 kg', status: 'Out for Delivery', statusClass: 'out-for-delivery' }
+    { awb: 'VH-IND-99218', origin: 'Bhiwandi (MH)', dest: 'Peenya (KA)', consignee: 'Organica Naturals Hub', service: 'Express Surface (PTL)', pkgs: '14 Boxes', weight: '340 kg', status: 'In Transit', statusClass: 'in-transit', paymentStatus: 'PAID' },
+    { awb: 'VH-SUR-40812', origin: 'Surat (GJ)', dest: 'Okhla (DL)', consignee: 'TrendCraft Retail', service: 'Express Surface (PTL)', pkgs: '22 Boxes', weight: '580 kg', status: 'Delivered', statusClass: 'delivered', paymentStatus: 'PAID' },
+    { awb: 'VH-DEL-88102', origin: 'Gurugram (HR)', dest: 'Noida Sec 63 (UP)', consignee: 'SpeedTech Assemblies', service: 'Hyperlocal EV Van', pkgs: '8 Crates', weight: '210 kg', status: 'Out for Delivery', statusClass: 'out-for-delivery', paymentStatus: 'PAID' },
+    { awb: 'VH-PUN-77291', origin: 'Pune (MH)', dest: 'Sriperumbudur (TN)', consignee: 'DynoParts Tamil Nadu', service: 'Full Truckload (FTL)', pkgs: '32ft Container', weight: '9,200 kg', status: 'In Transit', statusClass: 'in-transit', paymentStatus: 'PENDING' },
+    { awb: 'VH-AMD-33921', origin: 'Ahmedabad (GJ)', dest: 'Bhiwandi (MH)', consignee: 'WestCoast Logistics Park', service: 'Express Surface (PTL)', pkgs: '30 Boxes', weight: '750 kg', status: 'In Transit', statusClass: 'in-transit', paymentStatus: 'PENDING' },
+    { awb: 'VH-BLR-66512', origin: 'Peenya (KA)', dest: 'Hyderabad (TG)', consignee: 'Deccan Retailers Pvt Ltd', service: 'Express Surface (PTL)', pkgs: '16 Cartons', weight: '420 kg', status: 'Out for Delivery', statusClass: 'out-for-delivery', paymentStatus: 'PENDING' },
+    { awb: 'VH-KOL-11029', origin: 'Dankuni (WB)', dest: 'Patna (BR)', consignee: 'Bihar FastFreight Hub', service: 'Express Surface (PTL)', pkgs: '45 Cartons', weight: '1,100 kg', status: 'In Transit', statusClass: 'in-transit', paymentStatus: 'PENDING' },
+    { awb: 'VH-CHE-88219', origin: 'Chennai (TN)', dest: 'Coimbatore (TN)', consignee: 'Kovai Industrial Spares', service: 'Express Surface (PTL)', pkgs: '12 Crates', weight: '310 kg', status: 'Delivered', statusClass: 'delivered', paymentStatus: 'PAID' },
+    { awb: 'VH-LUD-90412', origin: 'Ludhiana (PB)', dest: 'Gurugram (HR)', consignee: 'NorthStar Garments', service: 'Express Surface (PTL)', pkgs: '28 Boxes', weight: '640 kg', status: 'In Transit', statusClass: 'in-transit', paymentStatus: 'PENDING' },
+    { awb: 'VH-HYD-55102', origin: 'Hyderabad (TG)', dest: 'Vijayawada (AP)', consignee: 'Krishna Valley Dealers', service: 'Hyperlocal Feeder', pkgs: '6 Crates', weight: '180 kg', status: 'Out for Delivery', statusClass: 'out-for-delivery', paymentStatus: 'PENDING' },
+    { awb: 'VH-BOM-88741', origin: 'Bhiwandi (MH)', dest: 'Ahmedabad (GJ)', consignee: 'Gujarat Pharma Distrib.', service: 'Cold Chain (2-8°C)', pkgs: '10 Reefers', weight: '290 kg', status: 'In Transit', statusClass: 'in-transit', paymentStatus: 'PENDING' },
+    { awb: 'VH-DEL-66291', origin: 'Okhla (DL)', dest: 'Jaipur (RJ)', consignee: 'PinkCity Craft Logistics', service: 'Express Surface (PTL)', pkgs: '18 Cartons', weight: '490 kg', status: 'In Transit', statusClass: 'in-transit', paymentStatus: 'PENDING' },
+    { awb: 'VH-SUR-22819', origin: 'Surat (GJ)', dest: 'Indore (MP)', consignee: 'Malwa Textile Syndicate', service: 'Express Surface (PTL)', pkgs: '25 Boxes', weight: '550 kg', status: 'In Transit', statusClass: 'in-transit', paymentStatus: 'PENDING' },
+    { awb: 'VH-BLR-44102', origin: 'Peenya (KA)', dest: 'Kochi (KL)', consignee: 'Kerala Spice Traders', service: 'Express Surface (PTL)', pkgs: '15 Bags', weight: '380 kg', status: 'Out for Delivery', statusClass: 'out-for-delivery', paymentStatus: 'PENDING' }
   ];
 
   let currentFilter = 'all';
@@ -153,7 +153,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Default: Shipper Admin
+    const isPaid = row.paymentStatus === 'PAID';
+    const paymentButton = isPaid ? `
+      <span class="px-2 py-1 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-700/50 rounded-lg text-xs font-semibold inline-flex items-center gap-1" title="Advance Freight Settled">
+        <i data-lucide="check-circle-2" class="w-3 h-3"></i><span>Paid</span>
+      </span>
+    ` : `
+      <button onclick="window.openPaymentModal('${row.awb}', '${row.consignee.replace(/'/g, "\\'")}', '${row.origin.replace(/'/g, "\\'")}', '${row.dest.replace(/'/g, "\\'")}')" class="px-2.5 py-1 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white rounded-lg text-xs font-bold inline-flex items-center gap-1 shadow-sm transition-transform active:scale-95" title="Pay via UPI or Razorpay">
+        <i data-lucide="credit-card" class="w-3.5 h-3.5"></i><span>Pay Freight</span>
+      </button>
+    `;
+
     return `
+      ${paymentButton}
       <a href="track.html?awb=${encodeURIComponent(row.awb)}" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg text-xs font-semibold inline-flex items-center gap-1">
         <span>Track</span>
       </a>
@@ -287,7 +299,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const encodedUri = encodeURI(csvContent);
       const link = document.createElement('a');
       link.setAttribute('href', encodedUri);
-      link.setAttribute('download', `nexaroute_manifest_${new Date().toISOString().slice(0, 10)}.csv`);
+      link.setAttribute('download', `vahana_supply_manifest_${new Date().toISOString().slice(0, 10)}.csv`);
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -359,14 +371,16 @@ document.addEventListener('DOMContentLoaded', () => {
           bookingModal.classList.add('hidden');
           bookingModal.classList.remove('flex');
           bookingForm.reset();
-          alert(`Consignment booked and registered on NexaRoute Express API!\nAssigned Waybill: ${data.consignment.awb}\nStatus: In Line-Haul Transit`);
+          if (confirm(`🎉 Consignment #${data.consignment.awb} booked and registered on Vahana Supply Co Express API!\n\nWould you like to settle the advance freight payment (UPI / Razorpay) now?`)) {
+            window.openPaymentModal(data.consignment.awb, data.consignment.consignee, data.consignment.origin, data.consignment.dest);
+          }
         } else {
           throw new Error(data.error || 'Booking error');
         }
       })
       .catch(err => {
         console.warn('Booking API offline fallback:', err);
-        const newAwb = 'NX-BOM-' + Math.floor(10000 + Math.random() * 90000);
+        const newAwb = 'VH-BOM-' + Math.floor(10000 + Math.random() * 90000);
         const newEntry = {
           awb: newAwb,
           origin: newBookingPayload.origin,
@@ -376,7 +390,8 @@ document.addEventListener('DOMContentLoaded', () => {
           pkgs: pkgs,
           weight: weight + ' kg',
           status: 'In Transit',
-          statusClass: 'in-transit'
+          statusClass: 'in-transit',
+          paymentStatus: 'PENDING'
         };
         consignments.unshift(newEntry);
         updateDashboardKpis();
@@ -384,7 +399,9 @@ document.addEventListener('DOMContentLoaded', () => {
         bookingModal.classList.add('hidden');
         bookingModal.classList.remove('flex');
         bookingForm.reset();
-        alert(`Consignment booked successfully (local mode)!\nAssigned Waybill: ${newAwb}\nLine-haul departure scheduled for today.`);
+        if (confirm(`🎉 Consignment booked successfully!\nAssigned Waybill: ${newAwb}\n\nWould you like to settle advance freight payment now?`)) {
+          window.openPaymentModal(newAwb, consignee, newBookingPayload.origin, newBookingPayload.dest);
+        }
       });
     });
   }
@@ -601,6 +618,239 @@ document.addEventListener('DOMContentLoaded', () => {
         hideActionModal();
         alert(`🚛 Waybill #${currentTargetAwb} dispatched (local mode)!\nStatus: ${newStatus}`);
       }
+    });
+  }
+
+  // ==================== RAZORPAY & UPI FREIGHT PAYMENT LOGIC ====================
+  const paymentModal = document.getElementById('payment-modal');
+  const paymentModalClose = document.getElementById('payment-modal-close');
+  const payModalAwb = document.getElementById('pay-modal-awb');
+  const payModalAmountDisplay = document.getElementById('pay-modal-amount-display');
+  const payModalConsignee = document.getElementById('pay-modal-consignee');
+  const payModalRoute = document.getElementById('pay-modal-route');
+  const tabBtnUpi = document.getElementById('tab-btn-upi');
+  const tabBtnRazorpay = document.getElementById('tab-btn-razorpay');
+  const sectionUpi = document.getElementById('section-upi');
+  const sectionRazorpay = document.getElementById('section-razorpay');
+  const sectionPaymentSuccess = document.getElementById('section-payment-success');
+  const btnCopyVpa = document.getElementById('btn-copy-vpa');
+  const copyVpaText = document.getElementById('copy-vpa-text');
+  const btnSimulateUpiSuccess = document.getElementById('btn-simulate-upi-success');
+  const razorpayForm = document.getElementById('razorpay-form');
+  const btnPrintReceipt = document.getElementById('btn-print-receipt');
+  const btnClosePaymentSuccess = document.getElementById('btn-close-payment-success');
+  const qrTimer = document.getElementById('qr-timer');
+
+  let currentPayAwb = '';
+  let currentPayOrderId = '';
+  let currentPayAmount = 3363;
+  let qrCountdownTimer = null;
+
+  const hidePaymentModal = () => {
+    if (paymentModal) {
+      paymentModal.classList.add('hidden');
+      paymentModal.classList.remove('flex');
+    }
+    if (qrCountdownTimer) {
+      clearInterval(qrCountdownTimer);
+      qrCountdownTimer = null;
+    }
+  };
+
+  if (paymentModalClose) {
+    paymentModalClose.addEventListener('click', hidePaymentModal);
+  }
+  if (paymentModal) {
+    paymentModal.addEventListener('click', (e) => {
+      if (e.target === paymentModal) hidePaymentModal();
+    });
+  }
+
+  // Switch tabs
+  if (tabBtnUpi && tabBtnRazorpay && sectionUpi && sectionRazorpay) {
+    tabBtnUpi.addEventListener('click', () => {
+      tabBtnUpi.className = 'py-2 px-4 font-bold border-b-2 border-orange-500 text-orange-500 transition-colors flex items-center gap-1.5';
+      tabBtnRazorpay.className = 'py-2 px-4 font-semibold text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white transition-colors flex items-center gap-1.5';
+      sectionUpi.classList.remove('hidden');
+      sectionRazorpay.classList.add('hidden');
+    });
+
+    tabBtnRazorpay.addEventListener('click', () => {
+      tabBtnRazorpay.className = 'py-2 px-4 font-bold border-b-2 border-indigo-600 text-indigo-600 transition-colors flex items-center gap-1.5';
+      tabBtnUpi.className = 'py-2 px-4 font-semibold text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white transition-colors flex items-center gap-1.5';
+      sectionRazorpay.classList.remove('hidden');
+      sectionUpi.classList.add('hidden');
+    });
+  }
+
+  // Copy VPA
+  if (btnCopyVpa && copyVpaText) {
+    btnCopyVpa.addEventListener('click', () => {
+      navigator.clipboard.writeText('vahana.express@icici').then(() => {
+        copyVpaText.textContent = 'Copied!';
+        setTimeout(() => { copyVpaText.textContent = 'Copy'; }, 2000);
+      }).catch(() => {
+        copyVpaText.textContent = 'Copied!';
+        setTimeout(() => { copyVpaText.textContent = 'Copy'; }, 2000);
+      });
+    });
+  }
+
+  const startQrCountdown = () => {
+    if (qrCountdownTimer) clearInterval(qrCountdownTimer);
+    let secondsLeft = 600;
+    const updateDisplay = () => {
+      const mins = Math.floor(secondsLeft / 60).toString().padStart(2, '0');
+      const secs = (secondsLeft % 60).toString().padStart(2, '0');
+      if (qrTimer) qrTimer.textContent = `${mins}:${secs}`;
+      if (secondsLeft <= 0) {
+        clearInterval(qrCountdownTimer);
+        if (qrTimer) qrTimer.textContent = 'Expired';
+      }
+      secondsLeft--;
+    };
+    updateDisplay();
+    qrCountdownTimer = setInterval(updateDisplay, 1000);
+  };
+
+  window.openPaymentModal = async (awb, consignee, origin, dest, amount = 3363) => {
+    currentPayAwb = awb;
+    currentPayAmount = amount;
+
+    if (payModalAwb) payModalAwb.textContent = awb;
+    if (payModalAmountDisplay) payModalAmountDisplay.textContent = `₹${amount.toLocaleString('en-IN')}`;
+    if (payModalConsignee) payModalConsignee.textContent = consignee;
+    if (payModalRoute) payModalRoute.innerHTML = `${origin} &rarr; <strong>${dest}</strong>`;
+
+    // Reset sections
+    if (sectionUpi) sectionUpi.classList.remove('hidden');
+    if (sectionRazorpay) sectionRazorpay.classList.add('hidden');
+    if (sectionPaymentSuccess) sectionPaymentSuccess.classList.add('hidden');
+    if (tabBtnUpi) tabBtnUpi.click();
+
+    // Call create order endpoint
+    try {
+      const res = await fetch('/api/payments/create-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          awb: awb,
+          amount: amount,
+          consignee: consignee,
+          consignor: 'Apex FabTex Mills (Verified Shipper)'
+        })
+      });
+      const data = await res.json();
+      if (data.success && data.order) {
+        currentPayOrderId = data.order.orderId;
+      }
+    } catch (err) {
+      currentPayOrderId = 'order_vhn_' + Date.now().toString().slice(-6);
+    }
+
+    startQrCountdown();
+
+    if (paymentModal) {
+      paymentModal.classList.remove('hidden');
+      paymentModal.classList.add('flex');
+    }
+    if (window.lucide && typeof window.lucide.createIcons === 'function') {
+      window.lucide.createIcons();
+    }
+  };
+
+  const completePaymentFlow = async (methodName) => {
+    const paymentId = 'pay_vhn_' + Math.floor(10000000 + Math.random() * 90000000).toString(16);
+    try {
+      const res = await fetch('/api/payments/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          orderId: currentPayOrderId,
+          awb: currentPayAwb,
+          amount: currentPayAmount,
+          method: methodName,
+          paymentId: paymentId
+        })
+      });
+      const data = await res.json();
+      const p = data.payment || {};
+
+      // Update table item status
+      const item = consignments.find(c => c.awb === currentPayAwb);
+      if (item) {
+        item.paymentStatus = 'PAID';
+        item.paymentId = p.paymentId || paymentId;
+      }
+      renderTable();
+
+      // Show receipt view
+      if (sectionUpi) sectionUpi.classList.add('hidden');
+      if (sectionRazorpay) sectionRazorpay.classList.add('hidden');
+      if (sectionPaymentSuccess) sectionPaymentSuccess.classList.remove('hidden');
+
+      const receiptInv = document.getElementById('receipt-invoice-no');
+      const receiptAwb = document.getElementById('receipt-awb');
+      const receiptMethod = document.getElementById('receipt-method');
+      const receiptUtr = document.getElementById('receipt-utr');
+      const receiptPaymentId = document.getElementById('receipt-payment-id');
+      const receiptTimestamp = document.getElementById('receipt-timestamp');
+      const receiptAmount = document.getElementById('receipt-amount');
+
+      if (receiptInv) receiptInv.textContent = p.taxInvoiceNumber || `INV-2026-${Date.now().toString().slice(-6)}`;
+      if (receiptAwb) receiptAwb.textContent = currentPayAwb;
+      if (receiptMethod) receiptMethod.textContent = methodName;
+      if (receiptUtr) receiptUtr.textContent = p.bankRef || ('UTR' + Math.floor(100000000000 + Math.random() * 900000000000));
+      if (receiptPaymentId) receiptPaymentId.textContent = p.paymentId || paymentId;
+      if (receiptTimestamp) receiptTimestamp.textContent = p.paidAtFormatted || (new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', dateStyle: 'medium', timeStyle: 'short' }) + ' IST');
+      if (receiptAmount) receiptAmount.textContent = `₹${currentPayAmount.toLocaleString('en-IN')}`;
+
+      if (window.lucide && typeof window.lucide.createIcons === 'function') {
+        window.lucide.createIcons();
+      }
+    } catch (err) {
+      console.error('Payment verification failed:', err);
+      const item = consignments.find(c => c.awb === currentPayAwb);
+      if (item) item.paymentStatus = 'PAID';
+      renderTable();
+      if (sectionUpi) sectionUpi.classList.add('hidden');
+      if (sectionRazorpay) sectionRazorpay.classList.add('hidden');
+      if (sectionPaymentSuccess) sectionPaymentSuccess.classList.remove('hidden');
+    }
+  };
+
+  // Simulate Instant UPI button
+  if (btnSimulateUpiSuccess) {
+    btnSimulateUpiSuccess.addEventListener('click', () => {
+      completePaymentFlow('UPI (Instant QR Scanner)');
+    });
+  }
+
+  // UPI App click simulation
+  window.simulateUpiAppPayment = (appName) => {
+    completePaymentFlow(`UPI App Intent (${appName})`);
+  };
+
+  // Razorpay form submission
+  if (razorpayForm) {
+    razorpayForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const bank = document.getElementById('rzp-bank') ? document.getElementById('rzp-bank').value : 'Corporate NetBanking';
+      completePaymentFlow(`Razorpay Commercial (${bank})`);
+    });
+  }
+
+  // Print Receipt
+  if (btnPrintReceipt) {
+    btnPrintReceipt.addEventListener('click', () => {
+      window.print();
+    });
+  }
+
+  // Close payment success
+  if (btnClosePaymentSuccess) {
+    btnClosePaymentSuccess.addEventListener('click', () => {
+      hidePaymentModal();
     });
   }
 });

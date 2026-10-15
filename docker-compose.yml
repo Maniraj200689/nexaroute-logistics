@@ -1,11 +1,11 @@
 version: '3.8'
 
 services:
-  nexaroute:
+  vahana-supply:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: nexaroute-logistics
+    container_name: vahana-supply-co
     restart: always
     ports:
       - "3000:3000"

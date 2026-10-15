@@ -1,5 +1,5 @@
 /**
- * NexaRoute Logistics - Interactive Rate & Transit Estimator
+ * Vahana Supply Co - Interactive Rate & Transit Estimator
  */
 
 document.addEventListener('DOMContentLoaded', () => {

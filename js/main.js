@@ -1,5 +1,5 @@
 /**
- * NexaRoute Logistics - Main Shared JavaScript
+ * Vahana Supply Co - Main Shared JavaScript
  * Handles navigation, mobile menu drawer, scroll behaviors, and interactive widgets.
  */
 
@@ -22,17 +22,17 @@ document.addEventListener('DOMContentLoaded', () => {
  * Dark / Light Mode Theme Switcher
  */
 function initThemeToggle() {
-  const savedTheme = localStorage.getItem('nexaroute_theme');
+  const savedTheme = localStorage.getItem('vahana_theme');
   const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
   const isDark = savedTheme === 'dark' || (!savedTheme && prefersDark);
 
   const applyTheme = (dark) => {
     if (dark) {
       document.documentElement.classList.add('dark');
-      localStorage.setItem('nexaroute_theme', 'dark');
+      localStorage.setItem('vahana_theme', 'dark');
     } else {
       document.documentElement.classList.remove('dark');
-      localStorage.setItem('nexaroute_theme', 'light');
+      localStorage.setItem('vahana_theme', 'light');
     }
     updateToggleIcons(dark);
   };
